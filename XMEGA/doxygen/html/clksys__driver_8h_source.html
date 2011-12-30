@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>Minikombajn Pomiarowy: Plik źródłowy /home/arek/Dokumenty/AVRprograms/MKP_3_7/clksys_driver.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Wygenerowano przez Doxygen 1.7.3 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+--></script>
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minikombajn Pomiarowy&#160;<span id="projectnumber">1.0</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+<div class="header">
+  <div class="headertitle">
+<h1>/home/arek/Dokumenty/AVRprograms/MKP_3_7/clksys_driver.h</h1>  </div>
+</div>
+<div class="contents">
+<a href="clksys__driver_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/* This file has been prepared for Doxygen automatic documentation generation.*/</span>
+<a name="l00059"></a>00059 <span class="preprocessor">#ifndef CLKSYS_DRIVER_H</span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span><span class="preprocessor">#define CLKSYS_DRIVER_H</span>
+<a name="l00061"></a>00061 <span class="preprocessor"></span>
+<a name="l00062"></a>00062 <span class="preprocessor">#include &quot;<a class="code" href="avr__compiler_8h.html" title="This file implements some macros that makes the IAR C-compiler and avr-gcc work with the same code ba...">avr_compiler.h</a>&quot;</span>
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065 <span class="comment">/* Definitions of macros. */</span>
+<a name="l00066"></a>00066 
+<a name="l00078"></a><a class="code" href="clksys__driver_8h.html#a0894c64562c3b1c309bab97a83382267">00078</a> <span class="preprocessor">#define CLKSYS_Enable( _oscSel ) ( OSC.CTRL |= (_oscSel) )</span>
+<a name="l00079"></a>00079 <span class="preprocessor"></span>
+<a name="l00091"></a><a class="code" href="clksys__driver_8h.html#a2cd92dbb89e4051b9385a61273d19dc6">00091</a> <span class="preprocessor">#define CLKSYS_IsReady( _oscSel ) ( OSC.STATUS &amp; (_oscSel) )</span>
+<a name="l00092"></a>00092 <span class="preprocessor"></span>
+<a name="l00098"></a><a class="code" href="clksys__driver_8h.html#a2ace04e605910a306c6f65102e76c046">00098</a> <span class="preprocessor">#define CLKSYS_RTC_ClockSource_Disable() ( CLK.RTCCTRL &amp;= ~CLK_RTCEN_bm )</span>
+<a name="l00099"></a>00099 <span class="preprocessor"></span>
+<a name="l00105"></a><a class="code" href="clksys__driver_8h.html#ab06829d3775b72351cbb2cb65dbc4dc7">00105</a> <span class="preprocessor">#define CLKSYS_AutoCalibration_Disable( _clk ) ( (_clk).CTRL &amp;= ~DFLL_ENABLE_bm )</span>
+<a name="l00106"></a>00106 <span class="preprocessor"></span>
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108 <span class="comment">/* Prototyping of function. Detailed information is found in source file. */</span>
+<a name="l00109"></a>00109 <span class="keywordtype">void</span> <a class="code" href="clksys__driver_8c.html#aad4e162434c2cc7e0087bbc0ddfe266c" title="CCP write helper function written in assembly.">CCPWrite</a>( <span class="keyword">volatile</span> uint8_t * address, uint8_t value );
+<a name="l00110"></a>00110 <span class="comment">/*void CLKSYS_XOSC_Config( OSC_FRQRANGE_t freqRange,</span>
+<a name="l00111"></a>00111 <span class="comment">                         bool lowPower32kHz,</span>
+<a name="l00112"></a>00112 <span class="comment">                         OSC_XOSCSEL_t xoscModeSelection );</span>
+<a name="l00113"></a>00113 <span class="comment">void CLKSYS_PLL_Config( OSC_PLLSRC_t clockSource, uint8_t factor );</span>
+<a name="l00114"></a>00114 <span class="comment">uint8_t CLKSYS_Disable( uint8_t oscSel );</span>
+<a name="l00115"></a>00115 <span class="comment">void CLKSYS_Prescalers_Config( CLK_PSADIV_t PSAfactor,</span>
+<a name="l00116"></a>00116 <span class="comment">                               CLK_PSBCDIV_t PSBCfactor );</span>
+<a name="l00117"></a>00117 <span class="comment">uint8_t CLKSYS_Main_ClockSource_Select( CLK_SCLKSEL_t clockSource );</span>
+<a name="l00118"></a>00118 <span class="comment">void CLKSYS_RTC_ClockSource_Enable( CLK_RTCSRC_t clockSource );</span>
+<a name="l00119"></a>00119 <span class="comment">void CLKSYS_AutoCalibration_Enable( uint8_t clkSource, bool extReference );</span>
+<a name="l00120"></a>00120 <span class="comment">void CLKSYS_XOSC_FailureDetection_Enable( void );</span>
+<a name="l00121"></a>00121 <span class="comment">void CLKSYS_Configuration_Lock( void );*/</span>
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124 <span class="preprocessor">#endif</span>
+</pre></div></div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pliki</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funkcje</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Zmienne</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Definicje</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Wygenerowano Fri Dec 30 2011 17:28:02 dla Minikombajn Pomiarowy programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
+</body>
+</html>

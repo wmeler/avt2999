@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>Minikombajn Pomiarowy: Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/usart_driver.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Wygenerowano przez Doxygen 1.7.3 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+--></script>
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minikombajn Pomiarowy&#160;<span id="projectnumber">1.0</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definicje</a>  </div>
+  <div class="headertitle">
+<h1>Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/usart_driver.h</h1>  </div>
+</div>
+<div class="contents">
+
+<p>XMEGA USART driver header file.  
+<a href="#_details">Więcej...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="avr__compiler_8h_source.html">avr_compiler.h</a>&quot;</code><br/>
+</div>
+<p><a href="usart__driver_8h_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Definicje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0999c0821d14cfab43e6f3c778c2b95"></a><!-- doxytag: member="usart_driver.h::USART_RX_BUFFER_SIZE" ref="ac0999c0821d14cfab43e6f3c778c2b95" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>USART_RX_BUFFER_SIZE</b>&#160;&#160;&#160;4</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21d527450b438bba8dab02e03f021ee3"></a><!-- doxytag: member="usart_driver.h::USART_TX_BUFFER_SIZE" ref="a21d527450b438bba8dab02e03f021ee3" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>USART_TX_BUFFER_SIZE</b>&#160;&#160;&#160;4</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a910e51ba6d0a14c09b1e64f42a13d709"></a><!-- doxytag: member="usart_driver.h::USART_RX_BUFFER_MASK" ref="a910e51ba6d0a14c09b1e64f42a13d709" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>USART_RX_BUFFER_MASK</b>&#160;&#160;&#160;( USART_RX_BUFFER_SIZE - 1 )</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33e4c2dff471d7794193a77465f83a23"></a><!-- doxytag: member="usart_driver.h::USART_TX_BUFFER_MASK" ref="a33e4c2dff471d7794193a77465f83a23" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>USART_TX_BUFFER_MASK</b>&#160;&#160;&#160;( USART_TX_BUFFER_SIZE - 1 )</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#acb44ea0800b644f2b62ffdc98bb2a20d">USART_Format_Set</a>(_usart, _charSize, _parityMode, _twoStopBits)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro that sets the USART frame format.  <a href="#acb44ea0800b644f2b62ffdc98bb2a20d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#aa3579b0bb442accdc655f578ba2b98a6">USART_Baudrate_Set</a>(_usart, _bselValue, _bScaleFactor)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set USART baud rate.  <a href="#aa3579b0bb442accdc655f578ba2b98a6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#a00e17fdbc093dda5612b7f78f3cbd00a">USART_Rx_Enable</a>(_usart)&#160;&#160;&#160;((_usart)-&gt;CTRLB |= USART_RXEN_bm)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable USART receiver.  <a href="#a00e17fdbc093dda5612b7f78f3cbd00a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#af128d0543a7ef2942896c11cb7a355ef">USART_Rx_Disable</a>(_usart)&#160;&#160;&#160;((_usart)-&gt;CTRLB &amp;= ~USART_RXEN_bm)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable USART receiver.  <a href="#af128d0543a7ef2942896c11cb7a355ef"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#acc94677022e0a8113e12f494d6b47027">USART_Tx_Enable</a>(_usart)&#160;&#160;&#160;((_usart)-&gt;CTRLB |= USART_TXEN_bm)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable USART transmitter.  <a href="#acc94677022e0a8113e12f494d6b47027"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#a8653dc89f054cffe36dab3717f05d793">USART_Tx_Disable</a>(_usart)&#160;&#160;&#160;((_usart)-&gt;CTRLB &amp;= ~USART_TXEN_bm)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable USART transmitter.  <a href="#a8653dc89f054cffe36dab3717f05d793"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#a7f0150e28b00e9b57b3725e03c8ae845">USART_RxdInterruptLevel_Set</a>(_usart, _rxdIntLevel)&#160;&#160;&#160;((_usart)-&gt;CTRLA = ((_usart)-&gt;CTRLA &amp; ~USART_RXCINTLVL_gm) | _rxdIntLevel)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set USART RXD interrupt level.  <a href="#a7f0150e28b00e9b57b3725e03c8ae845"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#aa3eac7b49352a7439830a3f3d58cf4f4">USART_TxdInterruptLevel_Set</a>(_usart, _txdIntLevel)&#160;&#160;&#160;(_usart)-&gt;CTRLA = ((_usart)-&gt;CTRLA &amp; ~USART_TXCINTLVL_gm) | _txdIntLevel</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set USART TXD interrupt level.  <a href="#aa3eac7b49352a7439830a3f3d58cf4f4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#a9feab6c03a53a35274e3993b9db42453">USART_DreInterruptLevel_Set</a>(_usart, _dreIntLevel)&#160;&#160;&#160;(_usart)-&gt;CTRLA = ((_usart)-&gt;CTRLA &amp; ~USART_DREINTLVL_gm) | _dreIntLevel</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set USART DRE interrupt level.  <a href="#a9feab6c03a53a35274e3993b9db42453"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#a0d2169dba1444c4abc4352868f9134e0">USART_SetMode</a>(_usart, _usartMode)&#160;&#160;&#160;((_usart)-&gt;CTRLC = ((_usart)-&gt;CTRLC &amp; (~USART_CMODE_gm)) | _usartMode)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mode the USART run in.  <a href="#a0d2169dba1444c4abc4352868f9134e0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#a73f335fabf259c7dd976ba1821346a63">USART_IsTXDataRegisterEmpty</a>(_usart)&#160;&#160;&#160;(((_usart)-&gt;STATUS &amp; USART_DREIF_bm) != 0)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if data register empty flag is set.  <a href="#a73f335fabf259c7dd976ba1821346a63"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#a09861522526fb7156f91d80366237557">USART_PutChar</a>(_usart, _data)&#160;&#160;&#160;((_usart)-&gt;DATA = _data)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Put data (5-8 bit character).  <a href="#a09861522526fb7156f91d80366237557"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#a248d1e978ccc59ab18b22576cf105caf">USART_IsRXComplete</a>(_usart)&#160;&#160;&#160;(((_usart)-&gt;STATUS &amp; USART_RXCIF_bm) != 0)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the RX complete interrupt flag is set.  <a href="#a248d1e978ccc59ab18b22576cf105caf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="usart__driver_8h.html#a07265567505916d3b9578b476222e5ae">USART_GetChar</a>(_usart)&#160;&#160;&#160;((_usart)-&gt;DATA)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get received data (5-8 bit character).  <a href="#a07265567505916d3b9578b476222e5ae"></a><br/></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Opis szczegółowy</h2>
+<div class="textblock"><p>XMEGA USART driver header file. </p>
+<p>This file contains the function prototypes and enumerator definitions for various configuration parameters for the XMEGA USART driver.</p>
+<p>The driver is not intended for size and/or speed critical code, since most functions are just a few lines of code, and the function call overhead would decrease code performance. The driver is intended for rapid prototyping and documentation purposes for getting started with the XMEGA ADC module.</p>
+<p>For size and/or speed critical code, it is recommended to copy the function contents directly into your application instead of making a function call.</p>
+<dl class="user"><dt><b>Application note:</b></dt><dd>AVR1307: Using the XMEGA USART</dd></dl>
+<dl class="user"><dt><b>Documentation</b></dt><dd>For comprehensive code documentation, supported compilers, compiler settings and supported devices see readme.html</dd></dl>
+<dl class="author"><dt><b>Autor:</b></dt><dd>Atmel Corporation: <a href="http://www.atmel.com">http://www.atmel.com</a> <br/>
+ Support email: <a href="mailto:avr@atmel.com">avr@atmel.com</a></dd></dl>
+<dl class="rcs"><dt><b>Revision:</b></dt><dd>1694 </dd></dl>
+<dl class="rcs"><dt><b>Date:</b></dt><dd>2008-07-29 14:21:58 +0200 (ti, 29 jul 2008) </dd></dl>
+<p><br/>
+</p>
+<p>Copyright (c) 2008, Atmel Corporation All rights reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+<p>1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.</p>
+<p>2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.</p>
+<p>3. The name of ATMEL may not be used to endorse or promote products derived from this software without specific prior written permission.</p>
+<p>THIS SOFTWARE IS PROVIDED BY ATMEL "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE EXPRESSLY AND SPECIFICALLY DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
+</div><hr/><h2>Dokumentacja definicji</h2>
+<a class="anchor" id="aa3579b0bb442accdc655f578ba2b98a6"></a><!-- doxytag: member="usart_driver.h::USART_Baudrate_Set" ref="aa3579b0bb442accdc655f578ba2b98a6" args="(_usart, _bselValue, _bScaleFactor)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_Baudrate_Set</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_bselValue, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_bScaleFactor&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Wartość:</b><div class="fragment"><pre class="fragment">(_usart)-&gt;BAUDCTRLA =(uint8_t)_bselValue;                                           \
+        (_usart)-&gt;BAUDCTRLB =(_bScaleFactor &lt;&lt; USART_BSCALE0_bp)|(_bselValue &gt;&gt; 8)
+</pre></div>
+<p>Set USART baud rate. </p>
+<p>Sets the USART's baud rate register.</p>
+<p>UBRR_Value : Value written to UBRR ScaleFactor : Time Base Generator Scale Factor</p>
+<p>Equation for calculation of BSEL value in asynchronous normal speed mode: If ScaleFactor &gt;= 0 BSEL = ((I/O clock frequency)/(2^(ScaleFactor)*16*Baudrate))-1 If ScaleFactor &lt; 0 BSEL = (1/(2^(ScaleFactor)*16))*(((I/O clock frequency)/Baudrate)-1)</p>
+<dl class="note"><dt><b>Nota:</b></dt><dd>See XMEGA manual for equations for calculation of BSEL value in other modes.</dd></dl>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module. </td></tr>
+    <tr><td class="paramname">_bselValue</td><td>Value to write to BSEL part of Baud control register. Use uint16_t type. </td></tr>
+    <tr><td class="paramname">_bScaleFactor</td><td>USART baud rate scale factor. Use uint8_t type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9feab6c03a53a35274e3993b9db42453"></a><!-- doxytag: member="usart_driver.h::USART_DreInterruptLevel_Set" ref="a9feab6c03a53a35274e3993b9db42453" args="(_usart, _dreIntLevel)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_DreInterruptLevel_Set</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_dreIntLevel&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(_usart)-&gt;CTRLA = ((_usart)-&gt;CTRLA &amp; ~USART_DREINTLVL_gm) | _dreIntLevel</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set USART DRE interrupt level. </p>
+<p>Sets the interrupt level on Data Register interrupt.</p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module. </td></tr>
+    <tr><td class="paramname">_dreIntLevel</td><td>Interrupt level of the DRE interrupt. Use USART_DREINTLVL_t type. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="acb44ea0800b644f2b62ffdc98bb2a20d"></a><!-- doxytag: member="usart_driver.h::USART_Format_Set" ref="acb44ea0800b644f2b62ffdc98bb2a20d" args="(_usart, _charSize, _parityMode, _twoStopBits)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_Format_Set</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_charSize, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_parityMode, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_twoStopBits&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Wartość:</b><div class="fragment"><pre class="fragment">(_usart)-&gt;CTRLC = (uint8_t) _charSize | _parityMode |                      \
+                          (_twoStopBits ? USART_SBMODE_bm : 0)
+</pre></div>
+<p>Macro that sets the USART frame format. </p>
+<p>Sets the frame format, Frame Size, parity mode and number of stop bits.</p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module </td></tr>
+    <tr><td class="paramname">_charSize</td><td>The character size. Use USART_CHSIZE_t type. </td></tr>
+    <tr><td class="paramname">_parityMode</td><td>The parity Mode. Use USART_PMODE_t type. </td></tr>
+    <tr><td class="paramname">_twoStopBits</td><td>Enable two stop bit mode. Use bool type. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a07265567505916d3b9578b476222e5ae"></a><!-- doxytag: member="usart_driver.h::USART_GetChar" ref="a07265567505916d3b9578b476222e5ae" args="(_usart)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_GetChar</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart</td><td>)</td>
+          <td>&#160;&#160;&#160;((_usart)-&gt;DATA)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get received data (5-8 bit character). </p>
+<p>This macro reads out the RX register. Use the macro USART_RX_Complete to check if anything is received.</p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>The USART module.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl><dt><b>Zwracane wartości:</b></dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Received</td><td>data. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a248d1e978ccc59ab18b22576cf105caf"></a><!-- doxytag: member="usart_driver.h::USART_IsRXComplete" ref="a248d1e978ccc59ab18b22576cf105caf" args="(_usart)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_IsRXComplete</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart</td><td>)</td>
+          <td>&#160;&#160;&#160;(((_usart)-&gt;STATUS &amp; USART_RXCIF_bm) != 0)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Checks if the RX complete interrupt flag is set. </p>
+<p>Checks if the RX complete interrupt flag is set.</p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>The USART module. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a73f335fabf259c7dd976ba1821346a63"></a><!-- doxytag: member="usart_driver.h::USART_IsTXDataRegisterEmpty" ref="a73f335fabf259c7dd976ba1821346a63" args="(_usart)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_IsTXDataRegisterEmpty</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart</td><td>)</td>
+          <td>&#160;&#160;&#160;(((_usart)-&gt;STATUS &amp; USART_DREIF_bm) != 0)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Check if data register empty flag is set. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>The USART module. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a09861522526fb7156f91d80366237557"></a><!-- doxytag: member="usart_driver.h::USART_PutChar" ref="a09861522526fb7156f91d80366237557" args="(_usart, _data)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_PutChar</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_data&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((_usart)-&gt;DATA = _data)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Put data (5-8 bit character). </p>
+<p>Use the macro USART_IsTXDataRegisterEmpty before using this function to put data to the TX register.</p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>The USART module. </td></tr>
+    <tr><td class="paramname">_data</td><td>The data to send. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af128d0543a7ef2942896c11cb7a355ef"></a><!-- doxytag: member="usart_driver.h::USART_Rx_Disable" ref="af128d0543a7ef2942896c11cb7a355ef" args="(_usart)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_Rx_Disable</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart</td><td>)</td>
+          <td>&#160;&#160;&#160;((_usart)-&gt;CTRLB &amp;= ~USART_RXEN_bm)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Disable USART receiver. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a00e17fdbc093dda5612b7f78f3cbd00a"></a><!-- doxytag: member="usart_driver.h::USART_Rx_Enable" ref="a00e17fdbc093dda5612b7f78f3cbd00a" args="(_usart)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_Rx_Enable</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart</td><td>)</td>
+          <td>&#160;&#160;&#160;((_usart)-&gt;CTRLB |= USART_RXEN_bm)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Enable USART receiver. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a7f0150e28b00e9b57b3725e03c8ae845"></a><!-- doxytag: member="usart_driver.h::USART_RxdInterruptLevel_Set" ref="a7f0150e28b00e9b57b3725e03c8ae845" args="(_usart, _rxdIntLevel)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_RxdInterruptLevel_Set</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_rxdIntLevel&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((_usart)-&gt;CTRLA = ((_usart)-&gt;CTRLA &amp; ~USART_RXCINTLVL_gm) | _rxdIntLevel)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set USART RXD interrupt level. </p>
+<p>Sets the interrupt level on RX Complete interrupt.</p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module. </td></tr>
+    <tr><td class="paramname">_rxdIntLevel</td><td>Interrupt level of the RXD interrupt. Use USART_RXCINTLVL_t type. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a0d2169dba1444c4abc4352868f9134e0"></a><!-- doxytag: member="usart_driver.h::USART_SetMode" ref="a0d2169dba1444c4abc4352868f9134e0" args="(_usart, _usartMode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_SetMode</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usartMode&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;((_usart)-&gt;CTRLC = ((_usart)-&gt;CTRLC &amp; (~USART_CMODE_gm)) | _usartMode)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the mode the USART run in. </p>
+<p>Set the mode the USART run in. The default mode is asynchronous mode.</p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module register section. </td></tr>
+    <tr><td class="paramname">_usartMode</td><td>Selects the USART mode. Use USART_CMODE_t type.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>USART modes:</p>
+<ul>
+<li>0x0 : Asynchronous mode.</li>
+<li>0x1 : Synchronous mode.</li>
+<li>0x2 : IrDA mode.</li>
+<li>0x3 : Master SPI mode. </li>
+</ul>
+
+</div>
+</div>
+<a class="anchor" id="a8653dc89f054cffe36dab3717f05d793"></a><!-- doxytag: member="usart_driver.h::USART_Tx_Disable" ref="a8653dc89f054cffe36dab3717f05d793" args="(_usart)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_Tx_Disable</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart</td><td>)</td>
+          <td>&#160;&#160;&#160;((_usart)-&gt;CTRLB &amp;= ~USART_TXEN_bm)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Disable USART transmitter. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="acc94677022e0a8113e12f494d6b47027"></a><!-- doxytag: member="usart_driver.h::USART_Tx_Enable" ref="acc94677022e0a8113e12f494d6b47027" args="(_usart)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_Tx_Enable</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart</td><td>)</td>
+          <td>&#160;&#160;&#160;((_usart)-&gt;CTRLB |= USART_TXEN_bm)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Enable USART transmitter. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa3eac7b49352a7439830a3f3d58cf4f4"></a><!-- doxytag: member="usart_driver.h::USART_TxdInterruptLevel_Set" ref="aa3eac7b49352a7439830a3f3d58cf4f4" args="(_usart, _txdIntLevel)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART_TxdInterruptLevel_Set</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_usart, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">_txdIntLevel&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;(_usart)-&gt;CTRLA = ((_usart)-&gt;CTRLA &amp; ~USART_TXCINTLVL_gm) | _txdIntLevel</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set USART TXD interrupt level. </p>
+<p>Sets the interrupt level on TX Complete interrupt.</p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_usart</td><td>Pointer to the USART module. </td></tr>
+    <tr><td class="paramname">_txdIntLevel</td><td>Interrupt level of the TXD interrupt. Use USART_TXCINTLVL_t type. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pliki</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funkcje</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Zmienne</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Definicje</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Wygenerowano Fri Dec 30 2011 17:28:02 dla Minikombajn Pomiarowy programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
+</body>
+</html>

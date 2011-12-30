@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>Minikombajn Pomiarowy: Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/TransmisjaPC.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Wygenerowano przez Doxygen 1.7.3 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+--></script>
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minikombajn Pomiarowy&#160;<span id="projectnumber">1.0</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definicje</a> &#124;
+<a href="#func-members">Funkcje</a> &#124;
+<a href="#var-members">Zmienne</a>  </div>
+  <div class="headertitle">
+<h1>Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/TransmisjaPC.c</h1>  </div>
+</div>
+<div class="contents">
+
+<p>Plik obslugi transmisji UART.  
+<a href="#_details">Więcej...</a></p>
+<div class="textblock"><code>#include &lt;avr/io.h&gt;</code><br/>
+<code>#include &lt;util/delay.h&gt;</code><br/>
+<code>#include &lt;avr/pgmspace.h&gt;</code><br/>
+<code>#include &lt;avr/eeprom.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="lcd132x64_8h_source.html">lcd132x64.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_grafika_8h_source.html">Grafika.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="clksys__driver_8h_source.html">clksys_driver.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_a_d_c_8h_source.html">ADC.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_d_a_c_8h_source.html">DAC.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_keyboard_8h_source.html">Keyboard.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_oscyloskop_8h_source.html">Oscyloskop.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_generator_8h_source.html">Generator.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_wobuloskop_8h_source.html">Wobuloskop.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_analizator_8h_source.html">Analizator.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_ustawienia_8h_source.html">Ustawienia.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="usart__driver_8h_source.html">usart_driver.h</a>&quot;</code><br/>
+</div><table class="memberdecls">
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Definicje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a240aa7d49ca5880a9c6d12661dc375c1">USE_RS232_MODULE</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#ac851cdac87c607e7a5284828d5862c72">USART</a>&#160;&#160;&#160;USARTE0</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a5415e7b3fc687af7b4555f5e0e0296f8">ISR</a> (USARTE0_RXC_vect)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Przerwanie od UART.  <a href="#a5415e7b3fc687af7b4555f5e0e0296f8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a7ddc495a70970b806566b95cb0adce3e">SetRsSpeed</a> (int8_t speed)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja ustawiajaca predkosc transmisji.  <a href="#a7ddc495a70970b806566b95cb0adce3e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a2208c97c21ded3ef393bd94a27509b69">UARTInit</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja konfigurujaca UART.  <a href="#a2208c97c21ded3ef393bd94a27509b69"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a78d2d671a969348170594b1402d76832">UARTU16</a> (uint16_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wysylajaca zmienna 16-bitowa przez UART.  <a href="#a78d2d671a969348170594b1402d76832"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a070e08618c56697c19c1dd02a0527bf4">UARTC</a> (char c)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wysyjajaca znak przez UART.  <a href="#a070e08618c56697c19c1dd02a0527bf4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#aa781561f3b350036fac60dd61b220ebe">UART_ADCSetGain</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja ustawiajaca wzmocnienie kanalow ADC przez UART.  <a href="#aa781561f3b350036fac60dd61b220ebe"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a5bca56a3183b2ca8f02f2b4a672ed34e">UART_ADCSetPeriod</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja ustawiajaca podstawe czasu ADC przez UART.  <a href="#a5bca56a3183b2ca8f02f2b4a672ed34e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#ab57e40c9059222a88208d9c7583fc77d">UART_DACSetPeriod</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja ustawiajaca podstawe czasu DAC przez UART.  <a href="#ab57e40c9059222a88208d9c7583fc77d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a0fedd7fc57513beb2b19b3ec1357a5a5">UART_ADCGetCh1</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wysylajaca bufor danych ADC przez UART.  <a href="#a0fedd7fc57513beb2b19b3ec1357a5a5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a8ae260c00f0e7ebcf1438c2cb145c639">UARTSendKan1</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja obslugi kanalu 1 ADC przez UART.  <a href="#a8ae260c00f0e7ebcf1438c2cb145c639"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a48c909ca134f143473cde48db8c7a73c">UARTSendKan12</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja obslugi obu kanalow ADC przez UART.  <a href="#a48c909ca134f143473cde48db8c7a73c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a317ae5836697a64cfd9600fb92c679c6">UART_DACGetCh</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja pobierajaca bufor danych DAC przez UART.  <a href="#a317ae5836697a64cfd9600fb92c679c6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a3d58f4eb40f293764bd5bfb3b871cf9c">UARTGetChOut</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja obslugi DAC przez UART.  <a href="#a3d58f4eb40f293764bd5bfb3b871cf9c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a00632a2e8f8057cf7cee2280cd5dd579">ADC_DMA_UART</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja obslugi kanalu 1 ADC przez UART z wykorzystaniem DMA.  <a href="#a00632a2e8f8057cf7cee2280cd5dd579"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_transmisja_p_c_8c.html#a4622fbd65ba8bef833718775e82f83fa">TransmisjaPC</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja glowna obslugi transmisji PC.  <a href="#a4622fbd65ba8bef833718775e82f83fa"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Zmienne</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1156c1c2861a3a001c9c669890a650f2"></a><!-- doxytag: member="TransmisjaPC.c::kan1_in" ref="a1156c1c2861a3a001c9c669890a650f2" args="[512]" -->
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kan1_in</b> [512]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72b278c98e4f0f2326725a7bf09fb2e3"></a><!-- doxytag: member="TransmisjaPC.c::kan2_in" ref="a72b278c98e4f0f2326725a7bf09fb2e3" args="[512]" -->
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kan2_in</b> [512]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a082c4a05e65960fe3934971ea5bf6b20"></a><!-- doxytag: member="TransmisjaPC.c::kan_out" ref="a082c4a05e65960fe3934971ea5bf6b20" args="[512]" -->
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kan_out</b> [512]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a392ddabcad33a0edd3d6842b06dea0b6"></a><!-- doxytag: member="TransmisjaPC.c::e_rsSpeed" ref="a392ddabcad33a0edd3d6842b06dea0b6" args="" -->
+EEMEM uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>e_rsSpeed</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">prog_uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>rsTab</b> [10]</td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Opis szczegółowy</h2>
+<div class="textblock"><p>Plik obslugi transmisji UART. </p>
+<dl class="author"><dt><b>Autor:</b></dt><dd>Arkadiusz Hudzikowski </dd></dl>
+<dl class="version"><dt><b>Wersja:</b></dt><dd>1.0 </dd></dl>
+<dl class="date"><dt><b>Data:</b></dt><dd>22.11.2011 </dd></dl>
+</div><hr/><h2>Dokumentacja definicji</h2>
+<a class="anchor" id="ac851cdac87c607e7a5284828d5862c72"></a><!-- doxytag: member="TransmisjaPC.c::USART" ref="ac851cdac87c607e7a5284828d5862c72" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USART&#160;&#160;&#160;USARTE0</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Wykorzystywany USART </p>
+
+</div>
+</div>
+<a class="anchor" id="a240aa7d49ca5880a9c6d12661dc375c1"></a><!-- doxytag: member="TransmisjaPC.c::USE_RS232_MODULE" ref="a240aa7d49ca5880a9c6d12661dc375c1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USE_RS232_MODULE</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>uzyj podprogramu </p>
+
+</div>
+</div>
+<hr/><h2>Dokumentacja funkcji</h2>
+<a class="anchor" id="a00632a2e8f8057cf7cee2280cd5dd579"></a><!-- doxytag: member="TransmisjaPC.c::ADC_DMA_UART" ref="a00632a2e8f8057cf7cee2280cd5dd579" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ADC_DMA_UART </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja obslugi kanalu 1 ADC przez UART z wykorzystaniem DMA. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5415e7b3fc687af7b4555f5e0e0296f8"></a><!-- doxytag: member="TransmisjaPC.c::ISR" ref="a5415e7b3fc687af7b4555f5e0e0296f8" args="(USARTE0_RXC_vect)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR </td>
+          <td>(</td>
+          <td class="paramtype">USARTE0_RXC_vect&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Przerwanie od UART. </p>
+<p>Tylko do wybudzenia uK </p>
+
+</div>
+</div>
+<a class="anchor" id="a7ddc495a70970b806566b95cb0adce3e"></a><!-- doxytag: member="TransmisjaPC.c::SetRsSpeed" ref="a7ddc495a70970b806566b95cb0adce3e" args="(int8_t speed)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t SetRsSpeed </td>
+          <td>(</td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>speed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja ustawiajaca predkosc transmisji. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">speed</td><td>: wartosc zmiany (-9 - 9) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>uint8_t : aktualna predkosc (0 - 10) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4622fbd65ba8bef833718775e82f83fa"></a><!-- doxytag: member="TransmisjaPC.c::TransmisjaPC" ref="a4622fbd65ba8bef833718775e82f83fa" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TransmisjaPC </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja glowna obslugi transmisji PC. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0fedd7fc57513beb2b19b3ec1357a5a5"></a><!-- doxytag: member="TransmisjaPC.c::UART_ADCGetCh1" ref="a0fedd7fc57513beb2b19b3ec1357a5a5" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART_ADCGetCh1 </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wysylajaca bufor danych ADC przez UART. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa781561f3b350036fac60dd61b220ebe"></a><!-- doxytag: member="TransmisjaPC.c::UART_ADCSetGain" ref="aa781561f3b350036fac60dd61b220ebe" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART_ADCSetGain </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja ustawiajaca wzmocnienie kanalow ADC przez UART. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5bca56a3183b2ca8f02f2b4a672ed34e"></a><!-- doxytag: member="TransmisjaPC.c::UART_ADCSetPeriod" ref="a5bca56a3183b2ca8f02f2b4a672ed34e" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART_ADCSetPeriod </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja ustawiajaca podstawe czasu ADC przez UART. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a317ae5836697a64cfd9600fb92c679c6"></a><!-- doxytag: member="TransmisjaPC.c::UART_DACGetCh" ref="a317ae5836697a64cfd9600fb92c679c6" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART_DACGetCh </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja pobierajaca bufor danych DAC przez UART. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab57e40c9059222a88208d9c7583fc77d"></a><!-- doxytag: member="TransmisjaPC.c::UART_DACSetPeriod" ref="ab57e40c9059222a88208d9c7583fc77d" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART_DACSetPeriod </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja ustawiajaca podstawe czasu DAC przez UART. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a070e08618c56697c19c1dd02a0527bf4"></a><!-- doxytag: member="TransmisjaPC.c::UARTC" ref="a070e08618c56697c19c1dd02a0527bf4" args="(char c)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UARTC </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wysyjajaca znak przez UART. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>: znak do wyslania </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3d58f4eb40f293764bd5bfb3b871cf9c"></a><!-- doxytag: member="TransmisjaPC.c::UARTGetChOut" ref="a3d58f4eb40f293764bd5bfb3b871cf9c" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UARTGetChOut </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja obslugi DAC przez UART. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2208c97c21ded3ef393bd94a27509b69"></a><!-- doxytag: member="TransmisjaPC.c::UARTInit" ref="a2208c97c21ded3ef393bd94a27509b69" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UARTInit </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja konfigurujaca UART. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8ae260c00f0e7ebcf1438c2cb145c639"></a><!-- doxytag: member="TransmisjaPC.c::UARTSendKan1" ref="a8ae260c00f0e7ebcf1438c2cb145c639" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UARTSendKan1 </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja obslugi kanalu 1 ADC przez UART. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a48c909ca134f143473cde48db8c7a73c"></a><!-- doxytag: member="TransmisjaPC.c::UARTSendKan12" ref="a48c909ca134f143473cde48db8c7a73c" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UARTSendKan12 </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja obslugi obu kanalow ADC przez UART. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a78d2d671a969348170594b1402d76832"></a><!-- doxytag: member="TransmisjaPC.c::UARTU16" ref="a78d2d671a969348170594b1402d76832" args="(uint16_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UARTU16 </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wysylajaca zmienna 16-bitowa przez UART. </p>
+<p>Kodowanie little endian </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna 16-bitowa do wyslania </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<hr/><h2>Dokumentacja zmiennych</h2>
+<a class="anchor" id="a08dff146b4d5240111128782d72ceabc"></a><!-- doxytag: member="TransmisjaPC.c::rsTab" ref="a08dff146b4d5240111128782d72ceabc" args="[10]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">prog_uint8_t rsTab[10]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Wartość początkowa:</b><div class="fragment"><pre class="fragment"> {
+        103,    
+        51,             
+        34,             
+        16,             
+        246,    
+        107,    
+        37,             
+        24,             
+        53,             
+        19}
+</pre></div>
+</div>
+</div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pliki</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funkcje</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Zmienne</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Definicje</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Wygenerowano Fri Dec 30 2011 17:28:02 dla Minikombajn Pomiarowy programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
+</body>
+</html>

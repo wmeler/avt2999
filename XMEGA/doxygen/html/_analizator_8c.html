@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>Minikombajn Pomiarowy: Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/Analizator.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Wygenerowano przez Doxygen 1.7.3 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+--></script>
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minikombajn Pomiarowy&#160;<span id="projectnumber">1.0</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definicje</a> &#124;
+<a href="#func-members">Funkcje</a> &#124;
+<a href="#var-members">Zmienne</a>  </div>
+  <div class="headertitle">
+<h1>Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/Analizator.c</h1>  </div>
+</div>
+<div class="contents">
+
+<p>Plik podprogramu analizatora.  
+<a href="#_details">Więcej...</a></p>
+<div class="textblock"><code>#include &lt;avr/io.h&gt;</code><br/>
+<code>#include &lt;avr/pgmspace.h&gt;</code><br/>
+<code>#include &lt;avr/interrupt.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="_a_d_c_8h_source.html">ADC.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_keyboard_8h_source.html">Keyboard.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="lcd132x64_8h_source.html">lcd132x64.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_grafika_8h_source.html">Grafika.h</a>&quot;</code><br/>
+</div><table class="memberdecls">
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Definicje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#ab465685ee803958b856f6da624ae8102">USE_ANALIZATOR_MODULE</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a8c52da8c97a06db14def80ba3f9cc8bc">Np</a>&#160;&#160;&#160;1024</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a2b8958e1cffa603d2fda395965ebb59c">log2_u32</a> (uint32_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja liczaca logarytm o podstawie 2 dla liczb 32-bitowych.  <a href="#a2b8958e1cffa603d2fda395965ebb59c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#ae4d650c00aa453b6513f99e5a27d26ec">log2_u16</a> (uint16_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja liczaca logarytm o podstawie 2 dla liczb 16-bitowych.  <a href="#ae4d650c00aa453b6513f99e5a27d26ec"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a85aa21d30c39c5d41fc012d75fa40e27">FFT2N</a> (int16_t *xwsk, int16_t *tmp_w)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja liczaca 512-punktowe Real-FFT.  <a href="#a85aa21d30c39c5d41fc012d75fa40e27"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a647d05d0f773bef53bbb5ebc7731d047">FFT2N128</a> (int16_t *xwsk)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja liczaca 128-punktowe Real-FFT.  <a href="#a647d05d0f773bef53bbb5ebc7731d047"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a01f7b9be1f610368c3e5b93caf400224">Analizator</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja glowna podprogramu analizatora.  <a href="#a01f7b9be1f610368c3e5b93caf400224"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Zmienne</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a1156c1c2861a3a001c9c669890a650f2">kan1_in</a> [512]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a72b278c98e4f0f2326725a7bf09fb2e3">kan2_in</a> [512]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#aad60abec7b32489d6849a2e8a7232b29">kan1_lcd</a> [128]</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Bufor przechowujacy probki danych kanalu 1 do wyswietlenia na lcd.  <a href="#aad60abec7b32489d6849a2e8a7232b29"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a1640fe7fdee09e03458d7975c67c17"></a><!-- doxytag: member="Analizator.c::Gain_tab" ref="a0a1640fe7fdee09e03458d7975c67c17" args="[10]" -->
+prog_uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>Gain_tab</b> [10]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa0250aff2136dced876652a1bc225253"></a><!-- doxytag: member="Analizator.c::Time_tab" ref="aa0250aff2136dced876652a1bc225253" args="[14]" -->
+prog_uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#aa0250aff2136dced876652a1bc225253">Time_tab</a> [14]</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tablica dzielnikow dla wyboru podstawy czasu. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43f307fc745d464cb73dcbdd4870f067"></a><!-- doxytag: member="Analizator.c::sin_tab" ref="a43f307fc745d464cb73dcbdd4870f067" args="[640]" -->
+prog_int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a43f307fc745d464cb73dcbdd4870f067">sin_tab</a> [640]</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tablica funkcji sin [0, 2.5PI]. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#add32b41b0ad28c400ed2f5cd08c17bd5">Xpos</a> = 0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a9c4ccecb58db4c69aab53e02f63c0422">Ypos</a> = 0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#a4b21c3b3eccbe5284e8f4b74f03b2385">Zoom</a> = 1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_analizator_8c.html#ae1dbe2d39fc4308c5d8816190d4b0906">Cursor</a> = 70</td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Opis szczegółowy</h2>
+<div class="textblock"><p>Plik podprogramu analizatora. </p>
+<dl class="author"><dt><b>Autor:</b></dt><dd>Arkadiusz Hudzikowski </dd></dl>
+<dl class="version"><dt><b>Wersja:</b></dt><dd>1.0 </dd></dl>
+<dl class="date"><dt><b>Data:</b></dt><dd>22.11.2011 </dd></dl>
+</div><hr/><h2>Dokumentacja definicji</h2>
+<a class="anchor" id="a8c52da8c97a06db14def80ba3f9cc8bc"></a><!-- doxytag: member="Analizator.c::Np" ref="a8c52da8c97a06db14def80ba3f9cc8bc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define Np&#160;&#160;&#160;1024</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>liczba probek wejsciowych FFT </p>
+
+</div>
+</div>
+<a class="anchor" id="ab465685ee803958b856f6da624ae8102"></a><!-- doxytag: member="Analizator.c::USE_ANALIZATOR_MODULE" ref="ab465685ee803958b856f6da624ae8102" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USE_ANALIZATOR_MODULE</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Uzyj tego podprogramu </p>
+
+</div>
+</div>
+<hr/><h2>Dokumentacja funkcji</h2>
+<a class="anchor" id="a01f7b9be1f610368c3e5b93caf400224"></a><!-- doxytag: member="Analizator.c::Analizator" ref="a01f7b9be1f610368c3e5b93caf400224" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Analizator </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja glowna podprogramu analizatora. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a85aa21d30c39c5d41fc012d75fa40e27"></a><!-- doxytag: member="Analizator.c::FFT2N" ref="a85aa21d30c39c5d41fc012d75fa40e27" args="(int16_t *xwsk, int16_t *tmp_w)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FFT2N </td>
+          <td>(</td>
+          <td class="paramtype">int16_t *&#160;</td>
+          <td class="paramname"><em>xwsk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t *&#160;</td>
+          <td class="paramname"><em>tmp_w</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja liczaca 512-punktowe Real-FFT. </p>
+<p>Rzeczywista szybka transformata Fouriera. Sygnal zostaje rozdzielony na probki parzyste, ktore traktowane sa jako rzeczywiste i nieparzyste, ktore zostaja zapisane do czesci urojonej. Nastepnie zostaje obliczona zespolona transformata Fouriera oraz zostaja rozdzielone widma wejsciowych probek parzystych i nieparzystych. Na koncu nastepuje synteza tych widm tworzac jedno 512 punktowe. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*xwsk</td><td>inout: wskaznik do bufora 1024 wejsciowych probek 16-bitowych, 512 probek wyjsciowych </td></tr>
+    <tr><td class="paramname">*tmp_w</td><td>: adres bufora pomocniczego 64 probek 16-bitowych </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a647d05d0f773bef53bbb5ebc7731d047"></a><!-- doxytag: member="Analizator.c::FFT2N128" ref="a647d05d0f773bef53bbb5ebc7731d047" args="(int16_t *xwsk)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FFT2N128 </td>
+          <td>(</td>
+          <td class="paramtype">int16_t *&#160;</td>
+          <td class="paramname"><em>xwsk</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja liczaca 128-punktowe Real-FFT. </p>
+<p>Rzeczywista szybka transformata Fouriera. Sygnal zostaje rozdzielony na probki parzyste, ktore traktowane sa jako rzeczywiste i nieparzyste, ktore zostaja zapisane do czesci urojonej. Nastepnie zostaje obliczona zespolona transformata Fouriera oraz zostaja rozdzielone widma wejsciowych probek parzystych i nieparzystych. Na koncu nastepuje synteza tych widm tworzac jedno 128 punktowe. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*xwsk</td><td>inout: wskaznik do bufora 256 wejsciowych probek 16-bitowych, 128 probek wyjsciowych bufor wykorzystuje dodatkowo 128 probek pomocniczych, calkowita dlugosc bufora wynosi 384 probki 16-bitowe </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae4d650c00aa453b6513f99e5a27d26ec"></a><!-- doxytag: member="Analizator.c::log2_u16" ref="ae4d650c00aa453b6513f99e5a27d26ec" args="(uint16_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t log2_u16 </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja liczaca logarytm o podstawie 2 dla liczb 16-bitowych. </p>
+<p>Wartosc wyjsciowa wyrazona jest wzorem: 4*log2(n). Wartosci wynikowe pomiedzy wielokrotnosciami 4 sa podawane z przyblizeniem. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna wejsciowa </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>uint8_t : wartosc wyjsciowa (logarytm) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2b8958e1cffa603d2fda395965ebb59c"></a><!-- doxytag: member="Analizator.c::log2_u32" ref="a2b8958e1cffa603d2fda395965ebb59c" args="(uint32_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t log2_u32 </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja liczaca logarytm o podstawie 2 dla liczb 32-bitowych. </p>
+<p>Wartosc wyjsciowa wyrazona jest wzorem: 4*log2(n). Wartosci wynikowe pomiedzy wielokrotnosciami 4 sa podawane z przyblizeniem. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna wejsciowa </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>uint8_t : wartosc wyjsciowa (logarytm) </dd></dl>
+
+</div>
+</div>
+<hr/><h2>Dokumentacja zmiennych</h2>
+<a class="anchor" id="ae1dbe2d39fc4308c5d8816190d4b0906"></a><!-- doxytag: member="Analizator.c::Cursor" ref="ae1dbe2d39fc4308c5d8816190d4b0906" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t <a class="el" href="_analizator_8c.html#ae1dbe2d39fc4308c5d8816190d4b0906">Cursor</a> = 70</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>kursor czestotliwosci </p>
+
+</div>
+</div>
+<a class="anchor" id="a1156c1c2861a3a001c9c669890a650f2"></a><!-- doxytag: member="Analizator.c::kan1_in" ref="a1156c1c2861a3a001c9c669890a650f2" args="[512]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t <a class="el" href="_analizator_8c.html#a1156c1c2861a3a001c9c669890a650f2">kan1_in</a>[512]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Bufor kanalu 1 </p>
+
+</div>
+</div>
+<a class="anchor" id="aad60abec7b32489d6849a2e8a7232b29"></a><!-- doxytag: member="Analizator.c::kan1_lcd" ref="aad60abec7b32489d6849a2e8a7232b29" args="[128]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="_analizator_8c.html#aad60abec7b32489d6849a2e8a7232b29">kan1_lcd</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Bufor przechowujacy probki danych kanalu 1 do wyswietlenia na lcd. </p>
+<p>Bufor oscylogramu 1 </p>
+
+</div>
+</div>
+<a class="anchor" id="a72b278c98e4f0f2326725a7bf09fb2e3"></a><!-- doxytag: member="Analizator.c::kan2_in" ref="a72b278c98e4f0f2326725a7bf09fb2e3" args="[512]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t <a class="el" href="_analizator_8c.html#a72b278c98e4f0f2326725a7bf09fb2e3">kan2_in</a>[512]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Bufor kanalu 2 </p>
+
+</div>
+</div>
+<a class="anchor" id="add32b41b0ad28c400ed2f5cd08c17bd5"></a><!-- doxytag: member="Analizator.c::Xpos" ref="add32b41b0ad28c400ed2f5cd08c17bd5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t <a class="el" href="_analizator_8c.html#add32b41b0ad28c400ed2f5cd08c17bd5">Xpos</a> = 0</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>przesuwanie w poziomie </p>
+
+</div>
+</div>
+<a class="anchor" id="a9c4ccecb58db4c69aab53e02f63c0422"></a><!-- doxytag: member="Analizator.c::Ypos" ref="a9c4ccecb58db4c69aab53e02f63c0422" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="_analizator_8c.html#a9c4ccecb58db4c69aab53e02f63c0422">Ypos</a> = 0</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>przesuwanie w pionie </p>
+
+</div>
+</div>
+<a class="anchor" id="a4b21c3b3eccbe5284e8f4b74f03b2385"></a><!-- doxytag: member="Analizator.c::Zoom" ref="a4b21c3b3eccbe5284e8f4b74f03b2385" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t <a class="el" href="_analizator_8c.html#a4b21c3b3eccbe5284e8f4b74f03b2385">Zoom</a> = 1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>zoom sygnalu (do implementacji) </p>
+
+</div>
+</div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pliki</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funkcje</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Zmienne</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Definicje</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Wygenerowano Fri Dec 30 2011 17:28:02 dla Minikombajn Pomiarowy programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
+</body>
+</html>

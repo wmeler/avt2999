@@ -1,0 +1,722 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>Minikombajn Pomiarowy: Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/Grafika.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Wygenerowano przez Doxygen 1.7.3 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+--></script>
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minikombajn Pomiarowy&#160;<span id="projectnumber">1.0</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funkcje</a> &#124;
+<a href="#var-members">Zmienne</a>  </div>
+  <div class="headertitle">
+<h1>Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/Grafika.c</h1>  </div>
+</div>
+<div class="contents">
+
+<p>Plik funkcji graficznych.  
+<a href="#_details">Więcej...</a></p>
+<div class="textblock"><code>#include &lt;avr/io.h&gt;</code><br/>
+<code>#include &lt;avr/pgmspace.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="lcd132x64_8h_source.html">lcd132x64.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_grafika_8h_source.html">Grafika.h</a>&quot;</code><br/>
+</div><table class="memberdecls">
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a2bdc212ec35fafba7f0e3e2671b7b1a1">LCDU8</a> (uint8_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca zmienna 8-bitowa bez znaku.  <a href="#a2bdc212ec35fafba7f0e3e2671b7b1a1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#ac41700ca4483e658ae8ba43b1ce3ca3c">LCDI8</a> (int8_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca zmienna 8-bitowa ze znakiem.  <a href="#ac41700ca4483e658ae8ba43b1ce3ca3c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a250e2319feb77186f3347cce257d518c">LCDI10</a> (int16_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca zmienna 16-bitowa ze znakiem w zakresie do |999|.  <a href="#a250e2319feb77186f3347cce257d518c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#aadb9d586aad6817e57535a75dd539530">LCDU16</a> (uint16_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca zmienna 16-bitowa bez znaku.  <a href="#aadb9d586aad6817e57535a75dd539530"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a147a1ea551ec0dcf4d94bbf6c00c0bc7">LCDI16</a> (int16_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca zmienna 16-bitowa ze znakiem.  <a href="#a147a1ea551ec0dcf4d94bbf6c00c0bc7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a5a5f1f733af828a39c322c4e6550117d">LCDU32</a> (uint32_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca zmienna 32-bitowa bez znaku.  <a href="#a5a5f1f733af828a39c322c4e6550117d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a33ddbe42b93314405d2668ba2bf66a6a">LCDI32</a> (int32_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca zmienna 32-bitowa ze znakiem.  <a href="#a33ddbe42b93314405d2668ba2bf66a6a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a21517059d1d798c64920c6b03b135820">LCDUF6</a> (uint8_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca 6-cio bitowa czesc ulamkowa.  <a href="#a21517059d1d798c64920c6b03b135820"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a972af68417142141db6f81553ad0f567">LCDU16mV</a> (uint16_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca zmienna 16-bitowa bez znaku wyrazona w mV.  <a href="#a972af68417142141db6f81553ad0f567"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a98bb3308e4cfd2ada8785be877bf3c03">LCDI16mV</a> (int16_t n)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca zmienna 16-bitowa ze znakiem, wyrazona w mV.  <a href="#a98bb3308e4cfd2ada8785be877bf3c03"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a4e9c9599656c5f4bfe6785234340e552">LCDosc</a> (uint8_t *wsk, uint8_t *wsk2, uint8_t xpos, uint8_t ypos1, uint8_t ypos2, uint8_t cur1, uint8_t cur2)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca oscylogramy oraz kursory i wskazniki.  <a href="#a4e9c9599656c5f4bfe6785234340e552"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a1c5001f2b2ee4f06e0ad719629ecdaa5">LCDWriteScaleLine</a> (uint8_t s, uint8_t v)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca informacje o podstawie czasu i wzmocnienie.  <a href="#a1c5001f2b2ee4f06e0ad719629ecdaa5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a0325084d45fc892af5d7f599dc89d4fa">LCDWriteAnScaleLine</a> (uint8_t s, uint8_t v)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca informacje o podstawie czestotliwosci i wzmocnienie.  <a href="#a0325084d45fc892af5d7f599dc89d4fa"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#adbefad46e866a995065cac3e614fc62e">LCDWritePositionLine</a> (int16_t x, int8_t y)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca informacje o przesunieciu przebiegu.  <a href="#adbefad46e866a995065cac3e614fc62e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#a3f1bad58096f4644d98587eaed0c4330">LCDWriteTriggerLine</a> (uint8_t trig, int16_t lev)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca informacje o wyzwalaniu.  <a href="#a3f1bad58096f4644d98587eaed0c4330"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#ae43d279880e4f0604ded024022e4e893">LCDWriteTimeCursorLine</a> (int16_t cur, uint8_t sd)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca informacje o kursorach czasu.  <a href="#ae43d279880e4f0604ded024022e4e893"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_grafika_8c.html#ade64d82b776e78be47c7d2949195be1c">LCDWriteFreqCursorLine</a> (uint32_t freq, int8_t db)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wyswietlajaca informacje o kursorze czestotliwosci.  <a href="#ade64d82b776e78be47c7d2949195be1c"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Zmienne</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7928cd77043c260f2dd4e239a37bd0a6"></a><!-- doxytag: member="Grafika.c::Gain_lcd" ref="a7928cd77043c260f2dd4e239a37bd0a6" args="[10][5]" -->
+prog_char&#160;</td><td class="memItemRight" valign="bottom"><b>Gain_lcd</b> [10][5] = {{&quot; 5&quot;},{&quot; 2&quot;},{&quot; 1&quot;},{&quot;500m&quot;},{&quot;200m&quot;},{&quot;100m&quot;},{&quot; 50m&quot;},{&quot; 20m&quot;},{&quot; 10m&quot;},{&quot; 5m&quot;},}</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afcecc8cb2b4dc4b014550964af2d7474"></a><!-- doxytag: member="Grafika.c::Time_lcd" ref="afcecc8cb2b4dc4b014550964af2d7474" args="[15][5]" -->
+prog_char&#160;</td><td class="memItemRight" valign="bottom"><b>Time_lcd</b> [15][5] = {{&quot; 2u&quot;},{&quot; 5u&quot;},{&quot; 8u&quot;},{&quot; 10u&quot;},{&quot; 20u&quot;},{&quot; 50u&quot;},{&quot;100u&quot;},{&quot;200u&quot;},{&quot;500u&quot;},{&quot; 1m&quot;},{&quot; 2m&quot;},{&quot; 5m&quot;},{&quot; 10m&quot;},{&quot; 20m&quot;},{&quot; 50m&quot;}}</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa69e92b95854aa33c00fee39d4765b57"></a><!-- doxytag: member="Grafika.c::Trig_type" ref="aa69e92b95854aa33c00fee39d4765b57" args="[4]" -->
+prog_char&#160;</td><td class="memItemRight" valign="bottom"><b>Trig_type</b> [4] = {'-', 'N', 'A', 'S'}</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4761c2508905db54efa198a349ebea4"></a><!-- doxytag: member="Grafika.c::An_time_lcd" ref="ac4761c2508905db54efa198a349ebea4" args="[13][5]" -->
+prog_char&#160;</td><td class="memItemRight" valign="bottom"><b>An_time_lcd</b> [13][5] = {&quot;31k2&quot;, &quot; 25k&quot;, &quot;12k5&quot;, &quot; 5k&quot;, &quot; 2k5&quot;, &quot;1k25&quot;, &quot; 500&quot;, &quot; 250&quot;, &quot; 125&quot;, &quot; 50&quot;, &quot; 25&quot;, &quot;12.5&quot;, &quot; 5&quot;}</td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Opis szczegółowy</h2>
+<div class="textblock"><p>Plik funkcji graficznych. </p>
+<dl class="author"><dt><b>Autor:</b></dt><dd>Arkadiusz Hudzikowski </dd></dl>
+<dl class="version"><dt><b>Wersja:</b></dt><dd>1.0 </dd></dl>
+<dl class="date"><dt><b>Data:</b></dt><dd>22.11.2011 </dd></dl>
+</div><hr/><h2>Dokumentacja funkcji</h2>
+<a class="anchor" id="a250e2319feb77186f3347cce257d518c"></a><!-- doxytag: member="Grafika.c::LCDI10" ref="a250e2319feb77186f3347cce257d518c" args="(int16_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDI10 </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca zmienna 16-bitowa ze znakiem w zakresie do |999|. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna do wyswietlenia (-999 - 999) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a147a1ea551ec0dcf4d94bbf6c00c0bc7"></a><!-- doxytag: member="Grafika.c::LCDI16" ref="a147a1ea551ec0dcf4d94bbf6c00c0bc7" args="(int16_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDI16 </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca zmienna 16-bitowa ze znakiem. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna do wyswietlenia (-32768 - 32767) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a98bb3308e4cfd2ada8785be877bf3c03"></a><!-- doxytag: member="Grafika.c::LCDI16mV" ref="a98bb3308e4cfd2ada8785be877bf3c03" args="(int16_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDI16mV </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca zmienna 16-bitowa ze znakiem, wyrazona w mV. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna do wyswietlenia (-32768 - 32767) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a33ddbe42b93314405d2668ba2bf66a6a"></a><!-- doxytag: member="Grafika.c::LCDI32" ref="a33ddbe42b93314405d2668ba2bf66a6a" args="(int32_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDI32 </td>
+          <td>(</td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca zmienna 32-bitowa ze znakiem. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna do wyswietlenia (-999999 - 999999) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac41700ca4483e658ae8ba43b1ce3ca3c"></a><!-- doxytag: member="Grafika.c::LCDI8" ref="ac41700ca4483e658ae8ba43b1ce3ca3c" args="(int8_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDI8 </td>
+          <td>(</td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca zmienna 8-bitowa ze znakiem. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna do wyswietlenia (-128 - 127) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4e9c9599656c5f4bfe6785234340e552"></a><!-- doxytag: member="Grafika.c::LCDosc" ref="a4e9c9599656c5f4bfe6785234340e552" args="(uint8_t *wsk, uint8_t *wsk2, uint8_t xpos, uint8_t ypos1, uint8_t ypos2, uint8_t cur1, uint8_t cur2)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDosc </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>wsk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>wsk2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>xpos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>ypos1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>ypos2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>cur1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>cur2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca oscylogramy oraz kursory i wskazniki. </p>
+<p>Struktura bufora wyswietlacza: <br/>
+ B0.0 B8.0 ... B1048.0 <br/>
+ B0.1 B8.1 <br/>
+ B0.2 B8.2 <br/>
+ B0.3 B8.3 <br/>
+ B0.4 B8.4 <br/>
+ B0.5 B8.5 <br/>
+ B0.6 B8.6 <br/>
+ B0.7 B8.7 <br/>
+ B1.0 B8.0 <br/>
+ B1.1 B8.1 <br/>
+ ... ... <br/>
+ B7.7 B15.7 ... B1055.7 <br/>
+ </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*wsk</td><td>: adres bufora kanalu 1 </td></tr>
+    <tr><td class="paramname">*wsk2</td><td>: adres bufora kanalu 2 </td></tr>
+    <tr><td class="paramname">xpos</td><td>: pozycja przebiegow w poziomie (0 - 255), pozycja zerowa - 62 </td></tr>
+    <tr><td class="paramname">ypos1</td><td>: pozycja przebiegu 1 w pionie (0 - 255), pozycja zerowa - 128 </td></tr>
+    <tr><td class="paramname">ypos2</td><td>: pozycja przebiegu 2 w pionie (0 - 254), pozycja zerowa - 128, wartosc 255 powoduje wygaszenie przebiegu 2 </td></tr>
+    <tr><td class="paramname">cur1</td><td>: pozycja kursora 1 (0 - 255) </td></tr>
+    <tr><td class="paramname">cur2</td><td>: pozycja kursora 2 (0 - 255) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aadb9d586aad6817e57535a75dd539530"></a><!-- doxytag: member="Grafika.c::LCDU16" ref="aadb9d586aad6817e57535a75dd539530" args="(uint16_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDU16 </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca zmienna 16-bitowa bez znaku. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna do wyswietlenia (0 - 65535) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a972af68417142141db6f81553ad0f567"></a><!-- doxytag: member="Grafika.c::LCDU16mV" ref="a972af68417142141db6f81553ad0f567" args="(uint16_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDU16mV </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca zmienna 16-bitowa bez znaku wyrazona w mV. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna do wyswietlenia (0 - 65535) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5a5f1f733af828a39c322c4e6550117d"></a><!-- doxytag: member="Grafika.c::LCDU32" ref="a5a5f1f733af828a39c322c4e6550117d" args="(uint32_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDU32 </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca zmienna 32-bitowa bez znaku. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna do wyswietlenia (0 - 999999) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2bdc212ec35fafba7f0e3e2671b7b1a1"></a><!-- doxytag: member="Grafika.c::LCDU8" ref="a2bdc212ec35fafba7f0e3e2671b7b1a1" args="(uint8_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDU8 </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca zmienna 8-bitowa bez znaku. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: zmienna do wyswietlenia (0 - 255) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a21517059d1d798c64920c6b03b135820"></a><!-- doxytag: member="Grafika.c::LCDUF6" ref="a21517059d1d798c64920c6b03b135820" args="(uint8_t n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDUF6 </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca 6-cio bitowa czesc ulamkowa. </p>
+<p>Wartosc wyswietlana wynosi: 1/n z dokladnoscia 2 cyfr po przecinku </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>: 6-cio bitowa czesc ulamkowa (0 - 63)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0325084d45fc892af5d7f599dc89d4fa"></a><!-- doxytag: member="Grafika.c::LCDWriteAnScaleLine" ref="a0325084d45fc892af5d7f599dc89d4fa" args="(uint8_t s, uint8_t v)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDWriteAnScaleLine </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca informacje o podstawie czestotliwosci i wzmocnienie. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>: podstawa czestotliwosci (0 - 14) </td></tr>
+    <tr><td class="paramname">v</td><td>: wzmocnienie (0 - 6 lub 0 - 9 z programowym wzmocnieniem) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ade64d82b776e78be47c7d2949195be1c"></a><!-- doxytag: member="Grafika.c::LCDWriteFreqCursorLine" ref="ade64d82b776e78be47c7d2949195be1c" args="(uint32_t freq, int8_t db)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDWriteFreqCursorLine </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>freq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>db</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca informacje o kursorze czestotliwosci. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">freq</td><td>: czestotliwosc wskazywana przez kursor </td></tr>
+    <tr><td class="paramname">db</td><td>: sila sygnalu w miejscu wskazywanym przez kursor </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="adbefad46e866a995065cac3e614fc62e"></a><!-- doxytag: member="Grafika.c::LCDWritePositionLine" ref="adbefad46e866a995065cac3e614fc62e" args="(int16_t x, int8_t y)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDWritePositionLine </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca informacje o przesunieciu przebiegu. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>: przesuniecie w poziomie </td></tr>
+    <tr><td class="paramname">y</td><td>: przesuniecie w pionie </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1c5001f2b2ee4f06e0ad719629ecdaa5"></a><!-- doxytag: member="Grafika.c::LCDWriteScaleLine" ref="a1c5001f2b2ee4f06e0ad719629ecdaa5" args="(uint8_t s, uint8_t v)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDWriteScaleLine </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca informacje o podstawie czasu i wzmocnienie. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>: podstawa czasu (0 - 14) </td></tr>
+    <tr><td class="paramname">v</td><td>: wzmocnienie (0 - 6 lub 0 - 9 z programowym wzmocnieniem) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae43d279880e4f0604ded024022e4e893"></a><!-- doxytag: member="Grafika.c::LCDWriteTimeCursorLine" ref="ae43d279880e4f0604ded024022e4e893" args="(int16_t cur, uint8_t sd)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDWriteTimeCursorLine </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>cur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>sd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca informacje o kursorach czasu. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cur</td><td>: odleglosc kursora / miedzy kursorami </td></tr>
+    <tr><td class="paramname">sd</td><td>: podstawa czasu </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3f1bad58096f4644d98587eaed0c4330"></a><!-- doxytag: member="Grafika.c::LCDWriteTriggerLine" ref="a3f1bad58096f4644d98587eaed0c4330" args="(uint8_t trig, int16_t lev)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LCDWriteTriggerLine </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>trig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>lev</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja wyswietlajaca informacje o wyzwalaniu. </p>
+<p>bity odpowiadajace za ustawienie triggera<br/>
+ 7 - --- <br/>
+ [6 5] - zaznacz: typ, zbocze, filtr, --- <br/>
+ 4 - --- <br/>
+ 3 - filtr: 'LF', 'HF' <br/>
+ 2 - zbocze: '\', '/' <br/>
+ [1 0] - typ: '-', 'N', 'A', 'S' <br/>
+ </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">trig</td><td>: sposob wyzwalania jak wyzej </td></tr>
+    <tr><td class="paramname">lev</td><td>: poziom wyzwalania </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pliki</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funkcje</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Zmienne</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Definicje</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Wygenerowano Fri Dec 30 2011 17:28:02 dla Minikombajn Pomiarowy programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
+</body>
+</html>

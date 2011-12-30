@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>Minikombajn Pomiarowy: Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/Oscyloskop.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Wygenerowano przez Doxygen 1.7.3 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+--></script>
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minikombajn Pomiarowy&#160;<span id="projectnumber">1.0</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definicje</a> &#124;
+<a href="#func-members">Funkcje</a> &#124;
+<a href="#var-members">Zmienne</a>  </div>
+  <div class="headertitle">
+<h1>Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/Oscyloskop.c</h1>  </div>
+</div>
+<div class="contents">
+
+<p>Plik podprogramu oscyloskopu.  
+<a href="#_details">Więcej...</a></p>
+<div class="textblock"><code>#include &lt;avr/io.h&gt;</code><br/>
+<code>#include &lt;util/delay.h&gt;</code><br/>
+<code>#include &lt;avr/pgmspace.h&gt;</code><br/>
+<code>#include &lt;avr/interrupt.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="_grafika_8h_source.html">Grafika.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_a_d_c_8h_source.html">ADC.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_keyboard_8h_source.html">Keyboard.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="lcd132x64_8h_source.html">lcd132x64.h</a>&quot;</code><br/>
+</div><table class="memberdecls">
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Definicje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afab50955487d23e097195fdb8adada88"></a><!-- doxytag: member="Oscyloskop.c::Sinc_tab0" ref="afab50955487d23e097195fdb8adada88" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_tab0</b>&#160;&#160;&#160;1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02b2982f6f0e50e8c8ed21b493208c4e"></a><!-- doxytag: member="Oscyloskop.c::Sinc_tab2" ref="a02b2982f6f0e50e8c8ed21b493208c4e" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_tab2</b>&#160;&#160;&#160;-6</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a497dc97eea69c28ba78fd26ecda7bc1d"></a><!-- doxytag: member="Oscyloskop.c::Sinc_tab4" ref="a497dc97eea69c28ba78fd26ecda7bc1d" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_tab4</b>&#160;&#160;&#160;38</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a8d742a7ce779ba93ab84db44ee525c"></a><!-- doxytag: member="Oscyloskop.c::Sinc_tab5" ref="a3a8d742a7ce779ba93ab84db44ee525c" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_tab5</b>&#160;&#160;&#160;64</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5413807db03ef97b95a2d095f074371a"></a><!-- doxytag: member="Oscyloskop.c::Sinc_2tab0" ref="a5413807db03ef97b95a2d095f074371a" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_2tab0</b>&#160;&#160;&#160;0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4bd3ab7e7ddc2b0b93bc05177ebc8c83"></a><!-- doxytag: member="Oscyloskop.c::Sinc_2tab2" ref="a4bd3ab7e7ddc2b0b93bc05177ebc8c83" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_2tab2</b>&#160;&#160;&#160;-1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f7fbdf392d6a7cf197e26a2cb1ec3bd"></a><!-- doxytag: member="Oscyloskop.c::Sinc_2tab3" ref="a6f7fbdf392d6a7cf197e26a2cb1ec3bd" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_2tab3</b>&#160;&#160;&#160;-4</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1d0e94751398be286a0265554e306e8"></a><!-- doxytag: member="Oscyloskop.c::Sinc_2tab4" ref="af1d0e94751398be286a0265554e306e8" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_2tab4</b>&#160;&#160;&#160;-5</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46608e06c1c6e4d36452926d61b232ef"></a><!-- doxytag: member="Oscyloskop.c::Sinc_2tab6" ref="a46608e06c1c6e4d36452926d61b232ef" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_2tab6</b>&#160;&#160;&#160;14</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51d6a433bc8d58095283b58e9da4439c"></a><!-- doxytag: member="Oscyloskop.c::Sinc_2tab7" ref="a51d6a433bc8d58095283b58e9da4439c" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_2tab7</b>&#160;&#160;&#160;36</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3261e7a7788a68e3265fa921eee0baa"></a><!-- doxytag: member="Oscyloskop.c::Sinc_2tab8" ref="aa3261e7a7788a68e3265fa921eee0baa" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_2tab8</b>&#160;&#160;&#160;56</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2efffb7a4259060c45c50e0187914169"></a><!-- doxytag: member="Oscyloskop.c::Sinc_2tab9" ref="a2efffb7a4259060c45c50e0187914169" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Sinc_2tab9</b>&#160;&#160;&#160;64</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a166613f5910d31597aa58a80c8c1b223"></a><!-- doxytag: member="Oscyloskop.c::ISR" ref="a166613f5910d31597aa58a80c8c1b223" args="(DMA_CH1_vect)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>ISR</b> (DMA_CH1_vect)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2e9f6fb997e3cce7c1600d4cb7bff27"></a><!-- doxytag: member="Oscyloskop.c::ISR" ref="ab2e9f6fb997e3cce7c1600d4cb7bff27" args="(DMA_CH2_vect)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>ISR</b> (DMA_CH2_vect)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_oscyloskop_8c.html#a1a97b39a23329f25c93cf065278916e4">Oscyloskop</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja glowna oscyloskopu.  <a href="#a1a97b39a23329f25c93cf065278916e4"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Zmienne</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ede7cf1c91635cdf549f6eb1062b4bf"></a><!-- doxytag: member="Oscyloskop.c::kan1_lcd" ref="a1ede7cf1c91635cdf549f6eb1062b4bf" args="[]" -->
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>kan1_lcd</b> []</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a757d78d29d895efbbe0cff8b0f2da4b9"></a><!-- doxytag: member="Oscyloskop.c::kan2_lcd" ref="a757d78d29d895efbbe0cff8b0f2da4b9" args="[]" -->
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_oscyloskop_8c.html#a757d78d29d895efbbe0cff8b0f2da4b9">kan2_lcd</a> []</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Bufor przechowujacy probki danych kanalu 2 do wyswietlenia na lcd. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1156c1c2861a3a001c9c669890a650f2"></a><!-- doxytag: member="Oscyloskop.c::kan1_in" ref="a1156c1c2861a3a001c9c669890a650f2" args="[512]" -->
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kan1_in</b> [512]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72b278c98e4f0f2326725a7bf09fb2e3"></a><!-- doxytag: member="Oscyloskop.c::kan2_in" ref="a72b278c98e4f0f2326725a7bf09fb2e3" args="[512]" -->
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kan2_in</b> [512]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa04da05055f2392e7d929b04723a5b19"></a><!-- doxytag: member="Oscyloskop.c::Time_tab" ref="aa04da05055f2392e7d929b04723a5b19" args="[15]" -->
+prog_uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_oscyloskop_8c.html#aa04da05055f2392e7d929b04723a5b19">Time_tab</a> [15]</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tablica dzielnikow dla wyboru podstawy czasu. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6bc9d207caa8194db2ce2c0b55c2904"></a><!-- doxytag: member="Oscyloskop.c::ypos2" ref="af6bc9d207caa8194db2ce2c0b55c2904" args="" -->
+static int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>ypos2</b> = 128</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e0e96f29b68dadf560e2cdbfc11c981"></a><!-- doxytag: member="Oscyloskop.c::Vdiv2" ref="a1e0e96f29b68dadf560e2cdbfc11c981" args="" -->
+static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>Vdiv2</b> = 0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12d3045c7232cc4c7fa4ac0c451d6e1d"></a><!-- doxytag: member="Oscyloskop.c::Sdiv" ref="a12d3045c7232cc4c7fa4ac0c451d6e1d" args="" -->
+static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>Sdiv</b> = 7</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">prog_uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>Gain_tab</b> [10]</td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Opis szczegółowy</h2>
+<div class="textblock"><p>Plik podprogramu oscyloskopu. </p>
+<dl class="author"><dt><b>Autor:</b></dt><dd>Arkadiusz Hudzikowski </dd></dl>
+<dl class="version"><dt><b>Wersja:</b></dt><dd>1.0 </dd></dl>
+<dl class="date"><dt><b>Data:</b></dt><dd>22.11.2011 </dd></dl>
+</div><hr/><h2>Dokumentacja funkcji</h2>
+<a class="anchor" id="a1a97b39a23329f25c93cf065278916e4"></a><!-- doxytag: member="Oscyloskop.c::Oscyloskop" ref="a1a97b39a23329f25c93cf065278916e4" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Oscyloskop </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja glowna oscyloskopu. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<hr/><h2>Dokumentacja zmiennych</h2>
+<a class="anchor" id="a0a1640fe7fdee09e03458d7975c67c17"></a><!-- doxytag: member="Oscyloskop.c::Gain_tab" ref="a0a1640fe7fdee09e03458d7975c67c17" args="[10]" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">prog_uint8_t Gain_tab[10]</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<b>Wartość początkowa:</b><div class="fragment"><pre class="fragment">{
+        16,     
+        20,     
+        20,     
+        20,   
+        25,   
+        25,   
+        25,    
+        63,   
+        125,   
+        250}
+</pre></div>
+</div>
+</div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pliki</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funkcje</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Zmienne</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Definicje</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Wygenerowano Fri Dec 30 2011 17:28:02 dla Minikombajn Pomiarowy programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
+</body>
+</html>

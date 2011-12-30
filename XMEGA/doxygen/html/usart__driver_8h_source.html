@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>Minikombajn Pomiarowy: Plik źródłowy /home/arek/Dokumenty/AVRprograms/MKP_3_7/usart_driver.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Wygenerowano przez Doxygen 1.7.3 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+--></script>
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minikombajn Pomiarowy&#160;<span id="projectnumber">1.0</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+<div class="header">
+  <div class="headertitle">
+<h1>/home/arek/Dokumenty/AVRprograms/MKP_3_7/usart_driver.h</h1>  </div>
+</div>
+<div class="contents">
+<a href="usart__driver_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/* This file has been prepared for Doxygen automatic documentation generation.*/</span>
+<a name="l00059"></a>00059 <span class="preprocessor">#ifndef USART_DRIVER_H</span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span><span class="preprocessor">#define USART_DRIVER_H</span>
+<a name="l00061"></a>00061 <span class="preprocessor"></span>
+<a name="l00062"></a>00062 <span class="preprocessor">#include &quot;<a class="code" href="avr__compiler_8h.html" title="This file implements some macros that makes the IAR C-compiler and avr-gcc work with the same code ba...">avr_compiler.h</a>&quot;</span>
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064 <span class="comment">/* USART buffer defines. */</span>
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066 <span class="comment">/* \brief  Receive buffer size: 2,4,8,16,32,64,128 or 256 bytes. */</span>
+<a name="l00067"></a>00067 <span class="preprocessor">#define USART_RX_BUFFER_SIZE 4</span>
+<a name="l00068"></a>00068 <span class="preprocessor"></span><span class="comment">/* \brief Transmit buffer size: 2,4,8,16,32,64,128 or 256 bytes */</span>
+<a name="l00069"></a>00069 <span class="preprocessor">#define USART_TX_BUFFER_SIZE 4</span>
+<a name="l00070"></a>00070 <span class="preprocessor"></span><span class="comment">/* \brief Receive buffer mask. */</span>
+<a name="l00071"></a>00071 <span class="preprocessor">#define USART_RX_BUFFER_MASK ( USART_RX_BUFFER_SIZE - 1 )</span>
+<a name="l00072"></a>00072 <span class="preprocessor"></span><span class="comment">/* \brief Transmit buffer mask. */</span>
+<a name="l00073"></a>00073 <span class="preprocessor">#define USART_TX_BUFFER_MASK ( USART_TX_BUFFER_SIZE - 1 )</span>
+<a name="l00074"></a>00074 <span class="preprocessor"></span>
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 <span class="preprocessor">#if ( USART_RX_BUFFER_SIZE &amp; USART_RX_BUFFER_MASK )</span>
+<a name="l00077"></a>00077 <span class="preprocessor"></span><span class="preprocessor">#error RX buffer size is not a power of 2</span>
+<a name="l00078"></a>00078 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00079"></a>00079 <span class="preprocessor"></span><span class="preprocessor">#if ( USART_TX_BUFFER_SIZE &amp; USART_TX_BUFFER_MASK )</span>
+<a name="l00080"></a>00080 <span class="preprocessor"></span><span class="preprocessor">#error TX buffer size is not a power of 2</span>
+<a name="l00081"></a>00081 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
+<a name="l00082"></a>00082 <span class="preprocessor"></span>
+<a name="l00083"></a>00083 <span class="comment">/* Macros. */</span>
+<a name="l00084"></a>00084 
+<a name="l00094"></a><a class="code" href="usart__driver_8h.html#acb44ea0800b644f2b62ffdc98bb2a20d">00094</a> <span class="preprocessor">#define USART_Format_Set(_usart, _charSize, _parityMode, _twoStopBits)         \</span>
+<a name="l00095"></a>00095 <span class="preprocessor">        (_usart)-&gt;CTRLC = (uint8_t) _charSize | _parityMode |                      \</span>
+<a name="l00096"></a>00096 <span class="preprocessor">                          (_twoStopBits ? USART_SBMODE_bm : 0)</span>
+<a name="l00097"></a>00097 <span class="preprocessor"></span>
+<a name="l00098"></a>00098 
+<a name="l00121"></a><a class="code" href="usart__driver_8h.html#aa3579b0bb442accdc655f578ba2b98a6">00121</a> <span class="preprocessor">#define USART_Baudrate_Set(_usart, _bselValue, _bScaleFactor)                  \</span>
+<a name="l00122"></a>00122 <span class="preprocessor">        (_usart)-&gt;BAUDCTRLA =(uint8_t)_bselValue;                                           \</span>
+<a name="l00123"></a>00123 <span class="preprocessor">        (_usart)-&gt;BAUDCTRLB =(_bScaleFactor &lt;&lt; USART_BSCALE0_bp)|(_bselValue &gt;&gt; 8)</span>
+<a name="l00124"></a>00124 <span class="preprocessor"></span>
+<a name="l00125"></a>00125 
+<a name="l00130"></a><a class="code" href="usart__driver_8h.html#a00e17fdbc093dda5612b7f78f3cbd00a">00130</a> <span class="preprocessor">#define USART_Rx_Enable(_usart) ((_usart)-&gt;CTRLB |= USART_RXEN_bm)</span>
+<a name="l00131"></a>00131 <span class="preprocessor"></span>
+<a name="l00132"></a>00132 
+<a name="l00137"></a><a class="code" href="usart__driver_8h.html#af128d0543a7ef2942896c11cb7a355ef">00137</a> <span class="preprocessor">#define USART_Rx_Disable(_usart) ((_usart)-&gt;CTRLB &amp;= ~USART_RXEN_bm)</span>
+<a name="l00138"></a>00138 <span class="preprocessor"></span>
+<a name="l00139"></a>00139 
+<a name="l00144"></a><a class="code" href="usart__driver_8h.html#acc94677022e0a8113e12f494d6b47027">00144</a> <span class="preprocessor">#define USART_Tx_Enable(_usart) ((_usart)-&gt;CTRLB |= USART_TXEN_bm)</span>
+<a name="l00145"></a>00145 <span class="preprocessor"></span>
+<a name="l00146"></a>00146 
+<a name="l00151"></a><a class="code" href="usart__driver_8h.html#a8653dc89f054cffe36dab3717f05d793">00151</a> <span class="preprocessor">#define USART_Tx_Disable(_usart) ((_usart)-&gt;CTRLB &amp;= ~USART_TXEN_bm)</span>
+<a name="l00152"></a>00152 <span class="preprocessor"></span>
+<a name="l00153"></a>00153 
+<a name="l00162"></a><a class="code" href="usart__driver_8h.html#a7f0150e28b00e9b57b3725e03c8ae845">00162</a> <span class="preprocessor">#define USART_RxdInterruptLevel_Set(_usart, _rxdIntLevel)                      \</span>
+<a name="l00163"></a>00163 <span class="preprocessor">        ((_usart)-&gt;CTRLA = ((_usart)-&gt;CTRLA &amp; ~USART_RXCINTLVL_gm) | _rxdIntLevel)</span>
+<a name="l00164"></a>00164 <span class="preprocessor"></span>
+<a name="l00165"></a>00165 
+<a name="l00174"></a><a class="code" href="usart__driver_8h.html#aa3eac7b49352a7439830a3f3d58cf4f4">00174</a> <span class="preprocessor">#define USART_TxdInterruptLevel_Set(_usart, _txdIntLevel)                      \</span>
+<a name="l00175"></a>00175 <span class="preprocessor">        (_usart)-&gt;CTRLA = ((_usart)-&gt;CTRLA &amp; ~USART_TXCINTLVL_gm) | _txdIntLevel</span>
+<a name="l00176"></a>00176 <span class="preprocessor"></span>
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178 
+<a name="l00187"></a><a class="code" href="usart__driver_8h.html#a9feab6c03a53a35274e3993b9db42453">00187</a> <span class="preprocessor">#define USART_DreInterruptLevel_Set(_usart, _dreIntLevel)                      \</span>
+<a name="l00188"></a>00188 <span class="preprocessor">        (_usart)-&gt;CTRLA = ((_usart)-&gt;CTRLA &amp; ~USART_DREINTLVL_gm) | _dreIntLevel</span>
+<a name="l00189"></a>00189 <span class="preprocessor"></span>
+<a name="l00190"></a>00190 
+<a name="l00204"></a><a class="code" href="usart__driver_8h.html#a0d2169dba1444c4abc4352868f9134e0">00204</a> <span class="preprocessor">#define USART_SetMode(_usart, _usartMode)                                      \</span>
+<a name="l00205"></a>00205 <span class="preprocessor">        ((_usart)-&gt;CTRLC = ((_usart)-&gt;CTRLC &amp; (~USART_CMODE_gm)) | _usartMode)</span>
+<a name="l00206"></a>00206 <span class="preprocessor"></span>
+<a name="l00207"></a>00207 
+<a name="l00208"></a>00208 
+<a name="l00213"></a><a class="code" href="usart__driver_8h.html#a73f335fabf259c7dd976ba1821346a63">00213</a> <span class="preprocessor">#define USART_IsTXDataRegisterEmpty(_usart) (((_usart)-&gt;STATUS &amp; USART_DREIF_bm) != 0)</span>
+<a name="l00214"></a>00214 <span class="preprocessor"></span>
+<a name="l00215"></a>00215 
+<a name="l00216"></a>00216 
+<a name="l00225"></a><a class="code" href="usart__driver_8h.html#a09861522526fb7156f91d80366237557">00225</a> <span class="preprocessor">#define USART_PutChar(_usart, _data) ((_usart)-&gt;DATA = _data)</span>
+<a name="l00226"></a>00226 <span class="preprocessor"></span>
+<a name="l00227"></a>00227 
+<a name="l00228"></a>00228 
+<a name="l00235"></a><a class="code" href="usart__driver_8h.html#a248d1e978ccc59ab18b22576cf105caf">00235</a> <span class="preprocessor">#define USART_IsRXComplete(_usart) (((_usart)-&gt;STATUS &amp; USART_RXCIF_bm) != 0)</span>
+<a name="l00236"></a>00236 <span class="preprocessor"></span>
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239 
+<a name="l00249"></a><a class="code" href="usart__driver_8h.html#a07265567505916d3b9578b476222e5ae">00249</a> <span class="preprocessor">#define USART_GetChar(_usart)  ((_usart)-&gt;DATA)</span>
+<a name="l00250"></a>00250 <span class="preprocessor"></span>
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252 <span class="preprocessor">#endif</span>
+</pre></div></div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pliki</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funkcje</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Zmienne</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Definicje</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Wygenerowano Fri Dec 30 2011 17:28:02 dla Minikombajn Pomiarowy programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>Minikombajn Pomiarowy: Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/Generator.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Wygenerowano przez Doxygen 1.7.3 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Szukaj');
+--></script>
+<div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minikombajn Pomiarowy&#160;<span id="projectnumber">1.0</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Strona&#160;główna</span></a></li>
+      <li class="current"><a href="files.html"><span>Pliki</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Szukaj" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;plików</span></a></li>
+      <li><a href="globals.html"><span>Globalne</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definicje</a> &#124;
+<a href="#func-members">Funkcje</a> &#124;
+<a href="#var-members">Zmienne</a>  </div>
+  <div class="headertitle">
+<h1>Dokumentacja pliku /home/arek/Dokumenty/AVRprograms/MKP_3_7/Generator.c</h1>  </div>
+</div>
+<div class="contents">
+
+<p>Plik podprogramu generatora.  
+<a href="#_details">Więcej...</a></p>
+<div class="textblock"><code>#include &lt;avr/io.h&gt;</code><br/>
+<code>#include &lt;util/delay.h&gt;</code><br/>
+<code>#include &lt;avr/pgmspace.h&gt;</code><br/>
+<code>#include &lt;avr/eeprom.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="_d_a_c_8h_source.html">DAC.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_a_d_c_8h_source.html">ADC.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_keyboard_8h_source.html">Keyboard.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="lcd132x64_8h_source.html">lcd132x64.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_grafika_8h_source.html">Grafika.h</a>&quot;</code><br/>
+</div><table class="memberdecls">
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Definicje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#a042479a57f3e9ccae47725292f6b8088">USE_GENERATOR_MODULE</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#a2ea8acdc0c0efeb4898ee8970eebc7d7">F_clk</a>&#160;&#160;&#160;2048000000</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#a9629196f0145203d9f7641f8e42c75b2">F_max</a>&#160;&#160;&#160;32000000</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#a9602c612da287e3705e07c2d94c410d4">EepromTabRead</a> (uint8_t *wsk, uint8_t *e_wsk)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja odczytujaca sygnal z pamieci EEPROM.  <a href="#a9602c612da287e3705e07c2d94c410d4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#ac73ba6676cb2779fd727dbbe1f54fc50">EepromTabWrite</a> (uint8_t *e_wsk, uint8_t *wsk)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja zapisujaca sygnal do pamieci EEPROM.  <a href="#ac73ba6676cb2779fd727dbbe1f54fc50"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#a527435b66d429c647a4d2ab959fdd3cf">GenSetParam</a> (uint16_t per, uint16_t tab, uint16_t gain, uint16_t duty, int16_t dc_shift, uint8_t type)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja ustawiajaca parametry generatora sygnalu (synteza)  <a href="#a527435b66d429c647a4d2ab959fdd3cf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#a35144cdd94257cc6489a66b798d01805">Generator</a> (void)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja glowna podprogramu generatora.  <a href="#a35144cdd94257cc6489a66b798d01805"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Zmienne</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af423a976158fe538fe98fca1e1172951"></a><!-- doxytag: member="Generator.c::kan_out" ref="af423a976158fe538fe98fca1e1172951" args="[512]" -->
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>kan_out</b> [512]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a72446b5d039156d1ee57fad11f897788"></a><!-- doxytag: member="Generator.c::kan1_lcd" ref="a72446b5d039156d1ee57fad11f897788" args="[128]" -->
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>kan1_lcd</b> [128]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adac0f622fb87d238b7b779eb01b6184b"></a><!-- doxytag: member="Generator.c::e_kan_out" ref="adac0f622fb87d238b7b779eb01b6184b" args="[768]" -->
+EEMEM uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>e_kan_out</b> [768]</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5312935445512974ca029d995484c001"></a><!-- doxytag: member="Generator.c::mod_tab" ref="a5312935445512974ca029d995484c001" args="[3][3]" -->
+prog_char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#a5312935445512974ca029d995484c001">mod_tab</a> [3][3] = {&quot;FM&quot;, &quot;AM&quot;, &quot;SW&quot;}</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tablice napisow. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c3cb5fcea911fc3d6ed4cc7c7688a53"></a><!-- doxytag: member="Generator.c::Wave_tab" ref="a0c3cb5fcea911fc3d6ed4cc7c7688a53" args="[7][11]" -->
+prog_char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#a0c3cb5fcea911fc3d6ed4cc7c7688a53">Wave_tab</a> [7][11] = {&quot;sine &quot;, &quot;square &quot;, &quot;triangle &quot;, &quot;pink noise&quot;, &quot;white nois&quot;, &quot;arbitrary &quot;, &quot;none (off)&quot;}</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tablice napisow. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43f307fc745d464cb73dcbdd4870f067"></a><!-- doxytag: member="Generator.c::sin_tab" ref="a43f307fc745d464cb73dcbdd4870f067" args="[640]" -->
+prog_int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_generator_8c.html#a43f307fc745d464cb73dcbdd4870f067">sin_tab</a> [640]</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tablica funkcji sin [0, 2.5PI]. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4255bc40baa51c0382a77ccb055d72ff"></a><!-- doxytag: member="Generator.c::Freq" ref="a4255bc40baa51c0382a77ccb055d72ff" args="" -->
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>Freq</b> = 64516</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb2d977a9c033d7f232db95bc9c03d53"></a><!-- doxytag: member="Generator.c::Gain" ref="aeb2d977a9c033d7f232db95bc9c03d53" args="" -->
+uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>Gain</b> = 2000</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a21c9377b3d0acd77bed1feff2b850ed6"></a><!-- doxytag: member="Generator.c::Duty" ref="a21c9377b3d0acd77bed1feff2b850ed6" args="" -->
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>Duty</b> = 50</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeff746a68ed515a1d9f0c40a38dd200b"></a><!-- doxytag: member="Generator.c::Type" ref="aeff746a68ed515a1d9f0c40a38dd200b" args="" -->
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> = 0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac017c4cc0a345bb50d5a3aebcd719831"></a><!-- doxytag: member="Generator.c::Dc_shift" ref="ac017c4cc0a345bb50d5a3aebcd719831" args="" -->
+int16_t&#160;</td><td class="memItemRight" valign="bottom"><b>Dc_shift</b> = 0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aabd59a46ef400d6d9e4ed4f8cf66ae63"></a><!-- doxytag: member="Generator.c::per_c" ref="aabd59a46ef400d6d9e4ed4f8cf66ae63" args="" -->
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>per_c</b> = 62</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c918748d55b2900579a63f2e86c66df"></a><!-- doxytag: member="Generator.c::tab_c" ref="a1c918748d55b2900579a63f2e86c66df" args="" -->
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>tab_c</b> = 512</td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Opis szczegółowy</h2>
+<div class="textblock"><p>Plik podprogramu generatora. </p>
+<dl class="author"><dt><b>Autor:</b></dt><dd>Arkadiusz Hudzikowski </dd></dl>
+<dl class="version"><dt><b>Wersja:</b></dt><dd>1.0 </dd></dl>
+<dl class="date"><dt><b>Data:</b></dt><dd>22.11.2011 </dd></dl>
+</div><hr/><h2>Dokumentacja definicji</h2>
+<a class="anchor" id="a2ea8acdc0c0efeb4898ee8970eebc7d7"></a><!-- doxytag: member="Generator.c::F_clk" ref="a2ea8acdc0c0efeb4898ee8970eebc7d7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define F_clk&#160;&#160;&#160;2048000000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>czestotliwosc taktowania timera x64 (rozdzielczosc 1/64Hz) </p>
+
+</div>
+</div>
+<a class="anchor" id="a9629196f0145203d9f7641f8e42c75b2"></a><!-- doxytag: member="Generator.c::F_max" ref="a9629196f0145203d9f7641f8e42c75b2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define F_max&#160;&#160;&#160;32000000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>maksymalna wyjsciowa czestotliowsc x64 (0.5MHz) </p>
+
+</div>
+</div>
+<a class="anchor" id="a042479a57f3e9ccae47725292f6b8088"></a><!-- doxytag: member="Generator.c::USE_GENERATOR_MODULE" ref="a042479a57f3e9ccae47725292f6b8088" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USE_GENERATOR_MODULE</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Uzyj tego podprogramu </p>
+
+</div>
+</div>
+<hr/><h2>Dokumentacja funkcji</h2>
+<a class="anchor" id="a9602c612da287e3705e07c2d94c410d4"></a><!-- doxytag: member="Generator.c::EepromTabRead" ref="a9602c612da287e3705e07c2d94c410d4" args="(uint8_t *wsk, uint8_t *e_wsk)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EepromTabRead </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>wsk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>e_wsk</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja odczytujaca sygnal z pamieci EEPROM. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*wsk</td><td>: wkaznik adresu bufora docelowego </td></tr>
+    <tr><td class="paramname">*e_wsk</td><td>: wkaznik adresu bufora w pamieci EEPROM </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac73ba6676cb2779fd727dbbe1f54fc50"></a><!-- doxytag: member="Generator.c::EepromTabWrite" ref="ac73ba6676cb2779fd727dbbe1f54fc50" args="(uint8_t *e_wsk, uint8_t *wsk)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EepromTabWrite </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>e_wsk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>wsk</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja zapisujaca sygnal do pamieci EEPROM. </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">*e_wsk</td><td>: wkaznik adresu bufora w pamieci EEPROM </td></tr>
+    <tr><td class="paramname">*wsk</td><td>: wkaznik adresu bufora wejsciowego </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a35144cdd94257cc6489a66b798d01805"></a><!-- doxytag: member="Generator.c::Generator" ref="a35144cdd94257cc6489a66b798d01805" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Generator </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja glowna podprogramu generatora. </p>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a527435b66d429c647a4d2ab959fdd3cf"></a><!-- doxytag: member="Generator.c::GenSetParam" ref="a527435b66d429c647a4d2ab959fdd3cf" args="(uint16_t per, uint16_t tab, uint16_t gain, uint16_t duty, int16_t dc_shift, uint8_t type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GenSetParam </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>per</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>tab</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>gain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>duty</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>dc_shift</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Funkcja ustawiajaca parametry generatora sygnalu (synteza) </p>
+<dl><dt><b>Parametry:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">per</td><td>: period - okres probkowania w (1/32M)s (okres timera taktowanego 32MHz) (32 - 65535) </td></tr>
+    <tr><td class="paramname">tab</td><td>: table - dlugosc bufora sygnalu </td></tr>
+    <tr><td class="paramname">gain</td><td>: wzmocnienie sygnalu (0 - 2047, do 10000 z przesterowaniem) </td></tr>
+    <tr><td class="paramname">duty</td><td>: wypelnienie (symetria) sygnalu (prostokat, trojkat) (1 - 99) </td></tr>
+    <tr><td class="paramname">dc_shift</td><td>: przesunienie (skladowa stala) sygnalu (-2000 - 2000) </td></tr>
+    <tr><td class="paramname">type</td><td>: typ sygnalu: 0 - sin, 1 - prost., 2 - trojkat, 3 - szum b., 4 - szum r., 5 - arb., 6 - brak </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Zwraca:</b></dt><dd>none </dd></dl>
+
+</div>
+</div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Pliki</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funkcje</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Zmienne</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Definicje</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Wygenerowano Fri Dec 30 2011 17:28:02 dla Minikombajn Pomiarowy programem&#160;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
+</body>
+</html>

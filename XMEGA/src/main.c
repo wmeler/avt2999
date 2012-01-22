@@ -2,8 +2,8 @@
  * @brief	Plik glowny programu.
  * @file	main.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.0
- * @date	22.11.2011
+ * @version 1.1
+ * @date	20.01.2012
  * 
  * First version:	02.01.2008
  * 		ATMega32 + ATMega8 + LCD Nokia3510i	

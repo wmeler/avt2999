@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Grafika.h
  * @author  Arkadiusz Hudzikowski
- * @version 1.0
- * @date	22.11.2011
+ * @version 1.1
+ * @date	20.01.2012
  * @brief Plik naglowkowy funkcji graficznych.
  *********************************************************************/
 
@@ -20,6 +20,8 @@ void LCDWriteTriggerLine(uint8_t trig, int16_t lev);
 void LCDWriteTimeCursorLine(int16_t cur, uint8_t sd);
 void LCDWriteFreqCursorLine(uint32_t freq, int8_t db);
 
+void LCDU32F(uint32_t n, uint8_t z);
+void LCDU16F(uint16_t n, uint8_t z);
 void LCDU32(uint32_t n);
 void LCDI32(int32_t n);
 void LCDU16(uint16_t n);
@@ -27,7 +29,7 @@ void LCDI16(int16_t n);
 void LCDU8(uint8_t n);
 void LCDI8(int8_t n);
 void LCDI10(int16_t n);
-void LCDUF6(uint8_t n);
+void LCDUF6(uint8_t n, uint8_t z);
 void LCDU16mV(uint16_t n);
 void LCDI16mV(int16_t n);
 

@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Grafika.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.0
- * @date	22.11.2011
+ * @version 1.1
+ * @date	20.01.2012
  * @brief Plik funkcji graficznych.
  *********************************************************************/
 
@@ -225,30 +225,201 @@ void LCDI32(int32_t n)
 }
 
 /********************************************//**
- * @brief Funkcja wyswietlajaca 6-cio bitowa czesc ulamkowa
+ * @brief Funkcja wyswietlajaca zmienna 16-bitowa bez znaku z mozliwoscia zanczanienia cyfry
  * 
- * Wartosc wyswietlana wynosi: 1/n z dokladnoscia 2 cyfr po przecinku
- * @param n : 6-cio bitowa czesc ulamkowa (0 - 63)
- * 
+ * Format wyswietlanej cyfry xxxx.x
+ * @param n : zmienna do wyswietlenia (0 - 65535)
+ * @param z : numer zaznaczonej cyfry
  * @return none
  ***********************************************/
-void LCDUF6(uint8_t n)
+void LCDU16F(uint16_t n, uint8_t z)
 {
-	uint8_t tmp=0;
-	if(n&32)tmp=50;
-	if(n&16)tmp+=25;
-	if(n&8)tmp+=12;
-	if(n&4)tmp+=6;
-	if(n&2)tmp+=3;
-	if(n&1)tmp+=2;
-	n='0';
-	while(tmp>9)
+	uint8_t rej='0';
+	uint8_t zero=0;
+	while(n>9999)
 	{
-		tmp-=10;
-		n++;
+		n-=10000;
+		rej++;
+		zero++;
 	}
-	LCDWriteChar(n);
-	LCDWriteChar(tmp+'0');
+	if(z == 1)
+	{
+		if(zero)LCDWriteCharNeg(rej);else LCDWriteCharNeg(' ');
+	}else
+	{
+		if(zero)LCDWriteChar(rej);else LCDWriteChar(' ');
+	}
+	rej='0';
+	while(n>999)
+	{
+		n-=1000;
+		rej++;
+		zero++;
+	}
+	if(z == 2)
+	{
+		if(zero)LCDWriteCharNeg(rej);else LCDWriteCharNeg(' ');
+	}else
+	{
+		if(zero)LCDWriteChar(rej);else LCDWriteChar(' ');
+	}
+	rej='0';
+	while(n>99)
+	{
+		n-=100;
+		rej++;
+		zero++;
+	}
+	if(z == 3)
+	{
+		if(zero)LCDWriteCharNeg(rej);else LCDWriteCharNeg(' ');
+	}else
+	{
+		if(zero)LCDWriteChar(rej);else LCDWriteChar(' ');
+	}
+	rej='0';
+	while(n>9)
+	{
+		n-=10;
+		rej++;
+		zero++;
+	}
+	if(z == 4)
+	{
+		if(zero)LCDWriteCharNeg(rej);else LCDWriteCharNeg(' ');
+	}else
+	{
+		if(zero)LCDWriteChar(rej);else LCDWriteChar(' ');
+	}
+	LCDWriteChar('.');
+	if(z == 5)
+	{
+		LCDWriteCharNeg(n+'0');
+	}else
+	{
+		LCDWriteChar(n+'0');
+	}
+	
+}
+
+/********************************************//**
+ * @brief Funkcja wyswietlajaca zmienna 32-bitowa bez znaku z mozliwoscia zanczanienia cyfry
+ * 
+ * Format wyswietlanej cyfry xxxxxx.xx
+ * @param n : zmienna do wyswietlenia (0 - 99999999)
+ * @param z : numer zaznaczonej cyfry
+ * @return none
+ ***********************************************/
+void LCDU32F(uint32_t n, uint8_t z)
+{
+	uint8_t rej='0';
+	uint8_t zero=0;
+	while(n>9999999)
+	{
+		n-=10000000;
+		rej++;
+		zero++;
+	}
+	if(z == 1)
+	{
+		if(zero)LCDWriteCharNeg(rej);else LCDWriteCharNeg(' ');
+	}else
+	{
+		if(zero)LCDWriteChar(rej);else LCDWriteChar(' ');
+	}
+	rej='0';
+	while(n>999999)
+	{
+		n-=1000000;
+		rej++;
+		zero++;
+	}
+	if(z == 2)
+	{
+		if(zero)LCDWriteCharNeg(rej);else LCDWriteCharNeg(' ');
+	}else
+	{
+		if(zero)LCDWriteChar(rej);else LCDWriteChar(' ');
+	}
+	rej='0';
+	while(n>99999)
+	{
+		n-=100000;
+		rej++;
+		zero++;
+	}
+	if(z == 3)
+	{
+		if(zero)LCDWriteCharNeg(rej);else LCDWriteCharNeg(' ');
+	}else
+	{
+		if(zero)LCDWriteChar(rej);else LCDWriteChar(' ');
+	}
+	rej='0';
+	while(n>9999)
+	{
+		n-=10000;
+		rej++;
+		zero++;
+	}
+	if(z == 4)
+	{
+		if(zero)LCDWriteCharNeg(rej);else LCDWriteCharNeg(' ');
+	}else
+	{
+		if(zero)LCDWriteChar(rej);else LCDWriteChar(' ');
+	}
+	rej='0';
+	while(n>999)
+	{
+		n-=1000;
+		rej++;
+		zero++;
+	}
+	if(z == 5)
+	{
+		if(zero)LCDWriteCharNeg(rej);else LCDWriteCharNeg(' ');
+	}else
+	{
+		if(zero)LCDWriteChar(rej);else LCDWriteChar(' ');
+	}
+	rej='0';
+	while(n>99)
+	{
+		n-=100;
+		rej++;
+		zero++;
+	}
+	if(z == 6)
+	{
+		LCDWriteCharNeg(rej);
+	}else
+	{
+		LCDWriteChar(rej);
+	}
+	rej='0';
+	while(n>9)
+	{
+		n-=10;
+		rej++;
+		zero++;
+	}
+	LCDWriteChar('.');
+	if(z == 7)
+	{
+		LCDWriteCharNeg(rej);
+	}else
+	{
+		LCDWriteChar(rej);
+	}
+	if(z == 8)
+	{
+		LCDWriteCharNeg(n+'0');
+	}else
+	{
+		LCDWriteChar(n+'0');
+	}
+	
 }
 
 /********************************************//**

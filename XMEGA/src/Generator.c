@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Generator.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.0
- * @date	22.11.2011
+ * @version 1.1
+ * @date	20.01.2012
  * @brief Plik podprogramu generatora.
  *********************************************************************/
 
@@ -78,10 +78,10 @@ prog_int16_t sin_tab[640] = {0,
 30378,	30527,	30671,	30810,	30944,	31074,	31199,	31320,	31436,	31547,	31653,	31755,	31851,	31943,	32030,	32113,	
 32190,	32263,	32331,	32394,	32452,	32505,	32553,	32597,	32635,	32669,	32698,	32721,	32740,	32754,	32763,	};
 
-/**czestotliwosc taktowania timera x64 (rozdzielczosc 1/64Hz)*/
-#define F_clk 2048000000  //x64
-/**maksymalna wyjsciowa czestotliowsc x64 (0.5MHz)*/
-#define F_max 32000000    //x64
+/**czestotliwosc taktowania timera x100 (rozdzielczosc 1/100Hz)*/
+#define F_clk 3200000000  //x100
+/**maksymalna wyjsciowa czestotliowsc x100 (0.5MHz)*/
+#define F_max 50000000    //x100
 
 #ifdef USE_GENERATOR_MODULE
 
@@ -506,16 +506,35 @@ void GenSetParam(uint16_t per, uint16_t tab, uint16_t gain, uint16_t duty, int16
 			break;
 		}
 		tmp*=gain;
-		kan_out[i]=(tmp/32768)+2048 + dc_shift;
+		kan_out[i]=(tmp/200000)+2048 + dc_shift;
 		if(kan_out[i]>32000)kan_out[i]=0;
 		else if(kan_out[i]>4095)kan_out[i]=4095;
 	}
 }
 
+/********************************************//**
+ * @brief Funkcja zwracajaca potege liczby 10
+ * 
+ * Wartosc zwracana wyraza sie wzorem:
+ * 10^(8 - step) 	dla 0 < step < 9
+ * 0				dla pozostalych
+ * @param step : wykladnik potegi 
+ * @return potega liczby 10
+ ***********************************************/
+uint32_t shiftStep(uint8_t step)
+{
+	uint32_t shift = 1;
+	if(step == 0 || step > 8)
+		return 0;
+	while(++step < 9)
+		shift*=10;
+	return shift;
+}
+
 #ifdef USE_GENERATOR_MODULE
 
-uint32_t Freq=64516; //czestotliwosc (x64), domyslnie 1,00806kHz
-uint16_t Gain=2000; //wzmocnienie, domyslnie 2000
+uint32_t Freq=100806; //czestotliwosc (x100), domyslnie 1,00806kHz
+uint16_t Gain=12500; //wzmocnienie, domyslnie 1,25V
 uint8_t Duty=50; //wypelnienie
 uint8_t Type=0; //typ przebiegu, domyslnie sin
 int16_t Dc_shift = 0; //skladowa stala
@@ -590,88 +609,60 @@ void Generator(void)
 		if(set_type==0) //ustawianie czestotliwosci i amplitudy
 		{
 			LCDText(PSTR("F="));
-			LCDU32(Freq>>6);
-			LCDWriteChar('.');
-			LCDUF6((uint8_t)Freq);
+			LCDU32F(Freq, step);
 			LCDText(PSTR(" G="));
-			LCDU16(Gain>>4);
-			LCDWriteChar('.');
-			LCDUF6(Gain<<2);
+			LCDU16F(Gain, step-8);
+			LCDText(PSTR("mV"));
 			if(keys)
 			{
-				//wybor czestotliwosci, koniecznie do poprawy!
-				if(Freq<1)Freq=1;
-				uint32_t Freq_set=Freq;
-				if(keys&P_OK)
+				step = ShiftValue(keys, step, 0, 13, 2, P_LEFT, P_RIGHT);
+				int8_t value_set = 0;
+				value_set = ShiftValue(keys, value_set, -10, 10, 4, P_DOWN, P_UP);
+				if(step > 8)
 				{
-					if(Freq>100000)
-						step=50000;
-					if(Freq>10000)
-						step=5000;
-					else if(Freq>6000)
-						step=3000;
-					else if(Freq>700)
-						step=200;
-					else
-						step=50;
+					Gain+=value_set*shiftStep(step-5);
 				}else
-					step=3;
-				if(keys&P_RIGHT)
 				{
-					for(uint32_t Freq_c=Freq; Freq_set==Freq; Freq_c+=step)
-					{
-						tab_c=F_max/Freq_c; //wyznaczenie dzielnika
-						tab_c<<=1; //dzielnik musi byc parzysty
-						if(tab_c>511)tab_c=512;
-						per_c=F_clk/tab_c;
-						per_c/=Freq_c;
+					Freq+=value_set*shiftStep(step);
+				}
+				if(Gain > 50000)
+					Gain = 0;
+				else if(Gain > 40000)
+					Gain = 40000;
+				
+				if(Freq > F_max + 10000000 || Freq < 50)
+					Freq = 50;
+				if(Freq > F_max)
+					Freq = F_max;
 
-						Freq_set=F_clk/per_c;
-						Freq_set/=tab_c;
-					}
-					if(Freq_set>32000000)
+				if(step < 9)
+				{
+					uint32_t Freq_set=Freq;
+					uint32_t Freq_c=Freq;
+					tab_c=F_max/Freq_c; //wyznaczenie dzielnika
+					tab_c<<=1; //dzielnik musi byc parzysty
+					if(tab_c>511)tab_c=512;
+					per_c=(uint32_t)F_clk/tab_c;
+					per_c/=Freq_c;
+
+					Freq_set=(uint32_t)F_clk/per_c;
+					Freq_set/=tab_c;
+					if(Freq_set>F_max)
 					{
-						Freq_set=32000000;
+						Freq_set=F_max;
 						per_c=32;
 						tab_c=2;
 					}
-					Freq=Freq_set;
 					if(per_c>65535)
 					{
 						per_c/=2;
 						TCD0.CTRLA = 0x02;
 					}else TCD0.CTRLA = 0x01;
+					
+					LCDGoTo(0,6);
+					LCDText(PSTR("F="));
+					LCDU32F(Freq_set, step);
 				}
-				if(keys&P_LEFT)
-				{
-					//trzeba sprobowac rozwiazac problem zaokraglen
-					for(uint32_t Freq_c=Freq; Freq_set==Freq; Freq_c-=step)
-					{
-						if(Freq_c>5000000)Freq_c-=10000; //konieczne ze wzglêdu na zaokr¹glenia, aby wykonaæ szybciej
-						else if(Freq_c>1000000)Freq_c-=500;
-						else if(Freq_c>100000)Freq_c-=100;
-						else if(Freq_c>10000)Freq_c-=20;
-						else if(Freq_c>3000)Freq_c-=10;
-						//else if(Freq_c>100)Freq_c-=2;
-						tab_c=F_max/Freq_c; //wyznaczenie dzielnika
-						tab_c<<=1; //dzielnik musi byæ parzysty
-						if(tab_c>511)tab_c=512;
-						per_c=F_clk/tab_c;
-						per_c/=Freq_c;
-
-						Freq_set=F_clk/per_c;
-						Freq_set/=tab_c;
-					}
-					if(Freq_set<64)Freq_set=64;
-					Freq=Freq_set;
-					if(per_c>65535)
-					{
-						per_c/=2;
-						TCD0.CTRLA = 0x02;
-					}else TCD0.CTRLA = 0x01;
-
-				}
-				Gain = ShiftValue(keys, Gain, 0, 10000, 40, P_DOWN, P_UP);
 				GenSetParam(per_c, tab_c, Gain, Duty, Dc_shift, Type);
 			}
 		}else if(set_type ==1) //ustawianie wypelnienia i skladowej stalej sygnalu, lub ksztaltu przebiegu arbitralnego
@@ -708,22 +699,24 @@ void Generator(void)
 			LCDText(mod_tab[mod_type]);
 			LCDText(PSTR(" Deep="));
 			LCDU8((uint16_t)Deep*100/128);
-			LCDText(PSTR("% G="));
-			LCDU16(Gain>>4);
-			LCDWriteChar('.');
-			LCDUF6(Gain<<2);
+			LCDText(PSTR("%  G="));
+			LCDU16F(Gain, 0);
 			while(!keys)
 			{
 				keys=Keyboard();
 				int32_t temp;
 				if(mod_type == 0)
 				{
+					uint16_t per_c_temp = per_c;
 					if(per_c <= 32 + 32*(uint16_t)Deep/128 && tab_c >3)
+					{
 						GenSetParam(per_c*2, tab_c/2, Gain, Duty, Dc_shift, Type);
-						
+						per_c_temp = per_c*2;
+					}
+					
 					while(!Keyboard())
 					{
-						temp = per_c+(((int32_t)per_c*(int32_t)ADCGetCh0()*Deep)>>18);
+						temp = per_c_temp+(((int32_t)per_c_temp*(int32_t)ADCGetCh0()*Deep)>>18);
 						if(temp >65535)temp=65535;
 						else if(temp<32)temp =32;
 						TCD0.PER = temp;
@@ -732,8 +725,8 @@ void Generator(void)
 				{
 					while(!Keyboard())
 					{
-						temp = Gain+(((int32_t)Gain*(int32_t)ADCGetCh0()*Deep)>>18);
-						if(temp > 10000)temp = 10000;
+						temp = Gain+((((int32_t)Gain*(int32_t)ADCGetCh0()>>3)*Deep)>>15);
+						if(temp > 40000)temp = 40000;
 						else if(temp < 0) temp = 0;
 						GenSetParam(per_c, tab_c, temp, Duty, Dc_shift, Type);
 					}

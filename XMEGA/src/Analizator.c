@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Analizator.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.1
- * @date	20.01.2012
+ * @version 1.2
+ * @date	18.02.2012
  * @brief Plik podprogramu analizatora.
  *********************************************************************/
 
@@ -348,11 +348,12 @@ void Analizator(void)
 	uint8_t type=0;
 	//int8_t Vcal=0;
 	uint8_t make_fft=0;
+	uint8_t stop_trig = 0;
 	DMA.CH1.TRFCNT = 2048; //set 2048Byte block
 	while(!(keys==P_EXIT))
 	{
 		
-		if(!(keys && Sdiv>6))
+		if(!(keys && Sdiv>6) && stop_trig == 0)
 		{
 			DMA.CH1.CTRLA |= 1<<7; //enable DMA ch1
 			sei();
@@ -418,6 +419,7 @@ void Analizator(void)
 			db=(kan1_lcd[Cursor]-128 + Ypos)*3>>2;
 			LCDWriteFreqCursorLine(tmp, db);
 		}
+		if(keys == P_TRIG)stop_trig^=1;
 	}
 #endif
 }

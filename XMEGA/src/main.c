@@ -2,8 +2,8 @@
  * @brief	Plik glowny programu.
  * @file	main.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.1
- * @date	20.01.2012
+ * @version 1.2
+ * @date	18.02.2012
  * 
  * First version:	02.01.2008
  * 		ATMega32 + ATMega8 + LCD Nokia3510i	
@@ -108,6 +108,8 @@ void PrintMainMenu(uint8_t menu)
 	LCDText(PSTR("Kombajn"));
 	LCDGoTo(0,4);
 	LCDText(PSTR("Pomiarowy"));
+	LCDGoTo(15,5);
+	LCDText(PSTR("V1.2"));
 	for(uint8_t i=0; i<8; i++)
 	{
 		LCDGoTo(64, i);

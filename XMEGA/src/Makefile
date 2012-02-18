@@ -56,7 +56,7 @@ FORMAT = ihex
 
 
 # Target file name (without extension).
-TARGET = SMC
+TARGET = MKP_1_2
 
 
 # List C source files here. (C dependencies are automatically generated.)

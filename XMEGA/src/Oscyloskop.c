@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	Oscyloskop.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.1
- * @date	20.01.2012
+ * @version 1.2
+ * @date	18.02.2012
  * @brief Plik podprogramu oscyloskopu.
  ***********************************************/
 
@@ -88,6 +88,7 @@ void Oscyloskop(void)
 	uint8_t loop_count=0;
 	uint8_t cursor[4]={0,0,0,0};
 	uint8_t cur_nr=0;
+	uint8_t stop_trig = 0;
 	//trig_type bity: | 7 | 6  5 | 4 | 3 | 2 | 1  0 |
 	//                |   | POS  |   |HL |/\ | -NAS |
 	//POS - wybor jendej z ponizszych pozycji do zmiany:
@@ -100,7 +101,7 @@ void Oscyloskop(void)
 	while(!(keys==P_EXIT))
 	{
 
-		if(!(keys && Sdiv>6))
+		if((!(keys && Sdiv>6)) && stop_trig == 0)
 		{
 			if(channel)DMA.CH2.CTRLA |= 1<<7; //uaktywnij DMA kanalu 2
 			DMA.CH1.CTRLA |= 1<<7; //uaktywnij DMA kanalu 1
@@ -252,6 +253,7 @@ void Oscyloskop(void)
 		//wyswietl oscylogramy i kursory
 		LCDosc(kan1_lcd, kan2_lcd, xpos+2, ypos1, (channel)? ypos2 : 255, cursor[0], cursor[1]);
 		LCDGoTo(0,7);
+		if(keys == P_TRIG && type == 2 && (trig_type&3) != 3)stop_trig^=1; //zamrozenie przebiegu
 		if(keys == P_DIV)type=0; //ustawienia podstawy czasu i wzmocnienia
 		else if(keys == P_XY)type=1; //ustawienia polozenia XY
 		else if(keys == P_TRIG)type=2; //ustawienia wyzwalania
@@ -326,14 +328,14 @@ void Oscyloskop(void)
 			LCDWriteTriggerLine(trig_type, (int16_t)tmp_lev);
 			if(keys&P_RIGHT)if(trig_type<64)trig_type+=32;
 			if(keys&P_LEFT)if(trig_type>31)trig_type-=32;
-			if(keys&P_OK)
+			if(keys == P_OK)
 			{
 				if(trig_type&64)
 					trig_type^=8;
 				else if(trig_type&32)
 					trig_type^=4;
 				else
-					trig_type = (trig_type+1)&3;
+					trig_type = ((trig_type+1)&3) | (trig_type&(~3));
 			}
 			if(keys&P_DOWN)if(lev>-127)lev--;
 			if(keys&P_UP)if(lev<127)lev++;
@@ -355,8 +357,13 @@ void Oscyloskop(void)
 				tmp>>=1;
 			LCDWriteTimeCursorLine(tmp, Sdiv);
 		}
+		
 		LCDText((channel&1)? PSTR(" CH2 ") : PSTR(" CH1 "));
-		LCDWriteChar((wzw)? 'G' : 'R');
+		if(stop_trig)
+			LCDWriteChar('S');
+		else
+			LCDWriteChar((wzw)? 'G' : 'R');
+		
 		
 	}
 }

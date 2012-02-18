@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Grafika.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.1
- * @date	20.01.2012
+ * @version 1.2
+ * @date	18.02.2012
  * @brief Plik funkcji graficznych.
  *********************************************************************/
 
@@ -715,7 +715,6 @@ void LCDWriteTriggerLine(uint8_t trig, int16_t lev)
 		LCDTextNeg((trig&8)? PSTR("HF") : PSTR("LF"));
 	else
 		LCDText((trig&8)? PSTR("HF") : PSTR("LF"));
-	LCDText(PSTR(" "));
 	LCDI16mV(lev);
 		
 }

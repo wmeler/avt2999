@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	Multimetr.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.1
- * @date	20.01.2012
+ * @version 1.2
+ * @date	18.02.2012
  * @brief Plik podprogramu multimetru.
  ***********************************************/
  
@@ -114,6 +114,7 @@ void Multimetr(void)
 {
 #ifdef USE_MULTIMETR_MODULE
 	uint8_t keys=0;
+	uint8_t stop_trig=0;
 
 	while(keys != P_EXIT)
 	{
@@ -170,7 +171,7 @@ void Multimetr(void)
 		max_val = ((int32_t)max_val*19)>>Vdiv;
 
 		static uint8_t refresh;
-		if(++refresh>12) //wyswietl wyniki
+		if(++refresh>12 && stop_trig == 0) //wyswietl wyniki
 		{
 			LCDGoTo(0,0);
 			LCDText(PSTR("RMS="));
@@ -203,6 +204,7 @@ void Multimetr(void)
 			refresh=0;
 			index = 1;
 		}
+		if(keys == P_TRIG)stop_trig^=1;
 		//dostosuj probkowanie do czestotliwosci sygnalu
 		if(index<1)if(Sdiv<14)Sdiv++;
 		if(index>30000)if(Sdiv>2)Sdiv--;

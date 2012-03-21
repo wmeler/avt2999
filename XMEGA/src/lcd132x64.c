@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	lcd132x64.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.1
- * @date	20.01.2012
+ * @version 1.3
+ * @date	12.03.2012
  * @brief Plik obslugi wyswietlacza.
  * 
  * Wyswietlacz 132x64 pikseli ze sterownikiem SPLC501C.

@@ -35,9 +35,9 @@ prog_uint8_t Gain_tab[10]={
 	20,     //1V   4x
 	20,   //500mV  8x
 	25,   //200mV 16x
-	25,   //100mV 32x
-	25,    //50mV 64x
-	63,   //20mV 64x
+	50,   //100mV 16x //25 - 32x
+	100,   //50mV 64x //25 - 64x
+	63,    //20mV 64x
 	125,   //10mV 64x
 	250}; //5mV   64x
 
@@ -108,7 +108,7 @@ void Oscyloskop(void)
 			sei();
 			SLEEP.CTRL=1; //idle mode
 			asm volatile("SLEEP");
-			ADCOffsetCorrect(kan1_in, channel,Vdiv1, Vdiv2);
+			ADCOffsetCorrect(kan1_in, channel,(Vdiv1>4)?4:Vdiv1, (Vdiv2>4)?4:Vdiv2);
 		}
 		keys = Keyboard();
 		
@@ -305,7 +305,7 @@ void Oscyloskop(void)
 					ADCA.CH0.CTRL = (Vdiv1<<2) | 0x3; //gain
 				//else
 					//ADCA.CH0.CTRL = (6<<2) | 0x3; //const gain 64x*/
-				ADCSetGain(Vdiv1, Vdiv2);
+				ADCSetGain((Vdiv1>4)?4:Vdiv1, (Vdiv2>4)?4:Vdiv2); //max wzmocnienie 16x
 			}
 		}else if(type==1)
 		{

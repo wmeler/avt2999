@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Generator.h
  * @author  Arkadiusz Hudzikowski
- * @version 1.1
- * @date	20.01.2012
+ * @version 1.3
+ * @date	12.03.2012
  * @brief plik naglowkowy podprogramu generatora
  *********************************************************************/
 

@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	Ustawienia.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.1
- * @date	20.01.2012
+ * @version 1.3
+ * @date	12.03.2012
  * @brief Plik funkcji ustawień.
  ***********************************************/
 
@@ -11,6 +11,7 @@
 #include "lcd132x64.h"
 #include "Grafika.h"
 #include "ADC.h"
+#include "DAC.h"
 #include "Oscyloskop.h"
 #include "TransmisjaPC.h"
 #include <util/delay.h>
@@ -40,7 +41,7 @@ prog_uint8_t rsSpeedTab[10][8]=
 	"2500000",
 };
 
-static uint8_t dac_gain_cal=1, dac_offset_cal=1;
+static uint8_t dac_gain_cal=1;
 
 /********************************************//**
  * @brief Funkcja wyswietlajaca menu wyboru
@@ -71,6 +72,7 @@ void Kalibracja(void)
 	LCDGoTo(0,0);
 	LCDText(PSTR(" KALIBRACJA"));
 	uint8_t keys=0;
+	uint8_t dac_offset_cal = DACOffsetCalib(0);
 	while(keys!=P_EXIT)
 	{
 		keys=Keyboard();
@@ -89,10 +91,15 @@ void Kalibracja(void)
 			ADCRunOffsetCal();
 			LCDText(PSTR(" ok"));
 		}
-		dac_gain_cal=ShiftValue(keys, dac_gain_cal, 0, 255, 1, P_LEFT, P_RIGHT);
-		dac_offset_cal=ShiftValue(keys, dac_offset_cal, 0, 255, 1, P_DOWN, P_UP);
-		DACB.GAINCAL=dac_gain_cal;
-		DACB.OFFSETCAL=dac_offset_cal;
+		if(keys&P_UP)
+			dac_offset_cal = DACOffsetCalib(1);
+		else if(keys&P_DOWN)
+			dac_offset_cal = DACOffsetCalib(-1);
+		if(keys&P_RIGHT)
+			dac_gain_cal = DACGainCalib(1);
+		else if(keys&P_LEFT)
+			dac_gain_cal = DACGainCalib(-1);
+
 	}
 }
 

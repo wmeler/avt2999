@@ -62,6 +62,34 @@ uint32_t sqrt32(uint32_t x)
 }
 #endif
 
+void LPF(int16_t* buf)
+{
+	uint16_t i;
+	for(i = 0; i < 1023; i++)
+	{
+		buf[i] = (buf[i] + buf[i+1])>>1;
+	}
+}
+
+int32_t inertia(int32_t val, int32_t in)
+{
+	if(in > val*2 || in*2 < val)
+		val = in;
+	else
+		val = ((uint32_t)val*3 + in)>>2;
+	return val;
+}
+
+int32_t averageCalc(int32_t* buf, uint8_t q)
+{
+	int32_t val = 0;
+	uint8_t i;
+	for(i=0; i<q; i++)
+		val += buf[i];
+	return val/q;
+}
+
+
 /********************************************//**
  * @brief Funkcja obliczajaca pierwiastek kwadratowy 32-bitowej liczby
  * @param *buf : adres bufora danych
@@ -113,6 +141,9 @@ static inline uint32_t getFreq(int16_t* buf, int16_t min, int16_t max, uint16_t*
 void Multimetr(void)
 {
 #ifdef USE_MULTIMETR_MODULE
+	int32_t* buffer = (int32_t*)kan1_lcd;
+	uint8_t incr=0;
+	uint8_t maxAverage = 2;
 	uint8_t keys=0;
 	uint8_t stop_trig=0;
 
@@ -129,6 +160,7 @@ void Multimetr(void)
 		int32_t average=0; //wartosc srednia sygnalu
 		uint16_t min_index=1023; //ostatni inkeks bufora danych
 		uint16_t max_index=0; //pierwszy indes bufora danych
+		LPF(kan1_in);
 		int16_t offset_cal1 = eeprom_read_byte((uint8_t*)&e_offset_cal[Vdiv])<<2; //uwzglednienie danych kalibracyjnych
 		for(i=0; i<1024; i++) //szukanie wartosci minimalnej i maksymalnej sygnalu
 		{
@@ -138,7 +170,9 @@ void Multimetr(void)
 		}
 		//dostosuj zakres do mierzonej wartosci
 		if(max_val>2040 || min_val<-2040)if(Vdiv>0)Vdiv--;
-		if(max_val<800 && min_val>-800)if(Vdiv<6)Vdiv++;
+		if(max_val<800 && min_val>-800)if(Vdiv<4)Vdiv++;
+		//if(keys == P_UP)if(Vdiv>0)Vdiv--;
+		//if(keys == P_DOWN)if(Vdiv<6)Vdiv++;
 		ADCA.CH0.CTRL = (Vdiv<<2) | 0x3; //gain
 		
 		uint32_t index=0;
@@ -173,40 +207,67 @@ void Multimetr(void)
 		static uint8_t refresh;
 		if(++refresh>12 && stop_trig == 0) //wyswietl wyniki
 		{
-			LCDGoTo(0,0);
-			LCDText(PSTR("RMS="));
-			LCDU16mV(rms);
-			LCDGoTo(0,1);
-			LCDText(PSTR("Avg="));
-			LCDI16mV(average);
-			LCDGoTo(0,2);
-			LCDText(PSTR("Max="));
-			LCDI16mV(max_val);
-			LCDText(PSTR(" Min="));
-			LCDI16mV(min_val);
-			LCDGoTo(0,3);
-			LCDText(PSTR("Vpp="));
-			LCDU16mV(max_val - min_val);
-			
-			LCDGoTo(0,4);
-			LCDText(PSTR("Freq="));
+			buffer[incr] = rms;
+			buffer[incr+4] = average;
+			buffer[incr+8] = max_val;
+			buffer[incr+12] = min_val;
 			index = index*2/pgm_read_word(&Time_tab[Sdiv]);
-			if(index > 100000)
+			buffer[incr+16] = index;
+			if(++incr>=maxAverage)
 			{
-				LCDU16(index/1000);
-				LCDText(PSTR("kHz"));
-			}else
-			{
-			LCDU32(index);
-			LCDText(PSTR("Hz"));
+				incr = 0;
+				LCDGoTo(0,0);
+				LCDText(PSTR("RMS="));
+				LCDU16mV(averageCalc(buffer, maxAverage));
+				LCDU16mV(Sdiv);
+				
+				LCDGoTo(0,1);
+				LCDText(PSTR("Avg="));
+				LCDI16mV(averageCalc(buffer+4, maxAverage));
+				
+				LCDGoTo(0,2);
+				LCDText(PSTR("Max="));
+				LCDI16mV(max_val = averageCalc(buffer+8, maxAverage));
+				LCDText(PSTR(" Min="));
+				LCDI16mV(min_val = averageCalc(buffer+12, maxAverage));
+				LCDGoTo(0,3);
+				LCDText(PSTR("Vpp="));
+				LCDU16mV(max_val - min_val);
+				
+				LCDGoTo(0,4);
+				LCDText(PSTR("Freq="));
+				index = averageCalc(buffer+16, maxAverage);
+				if(index > 100000)
+				{
+					LCDU16(index/1000);
+					LCDText(PSTR("kHz"));
+				}else
+				{
+					LCDU32(index);
+					LCDText(PSTR("Hz"));
+				}
+				
+				LCDGoTo(0,6);
+				LCDText(PSTR("WORK"));
+			
+				if(Sdiv < 5) maxAverage = 4;
+				else if(Sdiv == 5) maxAverage = 3;
+				else if(Sdiv < 8) maxAverage = 2;
+				else maxAverage = 1;
 			}
+			
 			Sdiv=2;
 			refresh=0;
 			index = 1;
 		}
+		else if(stop_trig == 1)
+		{
+			LCDGoTo(0,6);
+			LCDText(PSTR("HOLD"));
+		}
 		if(keys == P_TRIG)stop_trig^=1;
 		//dostosuj probkowanie do czestotliwosci sygnalu
-		if(index<1)if(Sdiv<14)Sdiv++;
+		if(index<1)if(Sdiv<12)Sdiv++;
 		if(index>30000)if(Sdiv>2)Sdiv--;
 		ADCSetPeroid(Sdiv);
 	}

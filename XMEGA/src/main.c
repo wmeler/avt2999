@@ -109,7 +109,7 @@ void PrintMainMenu(uint8_t menu)
 	LCDGoTo(0,4);
 	LCDText(PSTR("Pomiarowy"));
 	LCDGoTo(15,5);
-	LCDText(PSTR("V1.2"));
+	LCDText(PSTR("V1.3"));
 	for(uint8_t i=0; i<8; i++)
 	{
 		LCDGoTo(64, i);

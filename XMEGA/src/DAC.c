@@ -1,14 +1,18 @@
 /******************************************************************//**
  * @file	DAC.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.1
- * @date	20.01.2012
+ * @version 1.3
+ * @date	12.03.2012
  * @brief Plik obslugi przetwornika DAC.
  *********************************************************************/
 #include<avr/io.h>
+#include <avr/eeprom.h>
 
 //globalny bufor
 extern uint16_t kan_out[512];
+
+EEMEM uint8_t e_offset;
+EEMEM uint8_t e_gain;
 
 /********************************************//**
  * @brief Funkcja inicjujaca DAC
@@ -60,4 +64,35 @@ void DACOff(void)
 void DACWriteCh0(uint16_t val)
 {
 	DACB.CH0DATA = val;
+}
+
+
+/********************************************//**
+ * @brief Funkcja kalibrujaca offset DAC
+ * @param speed : wartosc zmiany (-128 - 127)
+ * @return uint8_t : aktualna wartosc (0 - 255)
+ ***********************************************/
+uint8_t DACOffsetCalib(int8_t val)
+{
+	uint8_t offset = eeprom_read_byte(&e_offset);
+	if((uint16_t)offset + val < 256 && offset + val >= 0)
+		offset+= val;
+	eeprom_write_byte(&e_offset, offset);
+	DACB.OFFSETCAL=offset;
+	return offset;
+}
+
+/********************************************//**
+ * @brief Funkcja kalibrujaca wzmocnienie DAC
+ * @param speed : wartosc zmiany (-128 - 127)
+ * @return uint8_t : aktualna wartosc (0 - 255)
+ ***********************************************/
+uint8_t DACGainCalib(int8_t val)
+{
+	uint8_t gain = eeprom_read_byte(&e_gain);
+	if((uint16_t)gain + val < 256 && gain + val >= 0)
+		gain+= val;
+	eeprom_write_byte(&e_gain, gain);
+	DACB.GAINCAL=gain;
+	return gain;
 }

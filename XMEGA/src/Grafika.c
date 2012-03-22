@@ -1,7 +1,7 @@
 /******************************************************************//**
  * @file	Grafika.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.2
+ * @version 1.3
  * @date	18.02.2012
  * @brief Plik funkcji graficznych.
  *********************************************************************/

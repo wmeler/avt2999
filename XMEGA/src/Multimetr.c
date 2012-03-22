@@ -1,7 +1,7 @@
 /********************************************//**
  * @file	Multimetr.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.2
+ * @version 1.3
  * @date	18.02.2012
  * @brief Plik podprogramu multimetru.
  ***********************************************/
@@ -219,7 +219,6 @@ void Multimetr(void)
 				LCDGoTo(0,0);
 				LCDText(PSTR("RMS="));
 				LCDU16mV(averageCalc(buffer, maxAverage));
-				LCDU16mV(Sdiv);
 				
 				LCDGoTo(0,1);
 				LCDText(PSTR("Avg="));

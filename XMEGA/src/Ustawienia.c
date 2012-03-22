@@ -41,7 +41,6 @@ prog_uint8_t rsSpeedTab[10][8]=
 	"2500000",
 };
 
-static uint8_t dac_gain_cal=1;
 
 /********************************************//**
  * @brief Funkcja wyswietlajaca menu wyboru
@@ -73,6 +72,7 @@ void Kalibracja(void)
 	LCDText(PSTR(" KALIBRACJA"));
 	uint8_t keys=0;
 	uint8_t dac_offset_cal = DACOffsetCalib(0);
+	uint8_t dac_gain_cal = DACGainCalib(0);
 	while(keys!=P_EXIT)
 	{
 		keys=Keyboard();

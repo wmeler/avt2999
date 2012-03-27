@@ -16,6 +16,8 @@
 #include "TransmisjaPC.h"
 #include <util/delay.h>
 
+static uint8_t scale = 0;
+
 /**Liczba pozycji w menu ustawień*/
 #define MENU_UST_TAB_I 3
 /**Napisy menu ustawień*/
@@ -84,6 +86,8 @@ void Kalibracja(void)
 		LCDU8(dac_offset_cal);
 		LCDGoTo(0,3);
 		LCDText(PSTR("ADC offset: "));
+		LCDGoTo(0,4);
+		LCDText(scale? PSTR("/1.6") : PSTR("1.00"));
 		
 		if(keys&P_OK)
 		{
@@ -99,6 +103,13 @@ void Kalibracja(void)
 			dac_gain_cal = DACGainCalib(1);
 		else if(keys&P_LEFT)
 			dac_gain_cal = DACGainCalib(-1);
+			
+		if(keys==P_DIV)
+			scale^=1;
+		if(scale)
+			ADCA.REFCTRL = 1<<4 | 0x02; //00 - ref =1.00V  01 - VCC/1.6
+		else
+			ADCA.REFCTRL = 0<<4 | 0x02; //00 - ref =1.00V  01 - VCC/1.6
 
 	}
 }

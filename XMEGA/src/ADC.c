@@ -74,7 +74,7 @@ void ADCInit(void)
 	ADCA.CTRLA = (0<<6) | 0x1; //enable ADC DMA on CH0, CH1
 	ADCA.CTRLB = (0<<1) |(1<<4); //12 bit res, signed
 	ADCA.CTRLB |= 0<<3; //Free running
-	ADCA.REFCTRL = 0x02; //ref =1.00V
+	ADCA.REFCTRL = 0<<4 | 0x02; //00 - ref =1.00V  01 - VCC/1.6
 	ADCA.EVCTRL = (1<<6) | 1; //two channels -5, one channels - 1
 	ADCA.PRESCALER = 0x2; //divided by 16 -2
 	ADCA.CH0.CTRL = (0<<2) | 0x3; //differential input with gain

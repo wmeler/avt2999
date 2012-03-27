@@ -185,6 +185,8 @@ int main(void)
 	uint8_t menu=0;
 	PrintMainMenu(menu);
 	sei();
+	
+	uint8_t iter = 0;
 	//petla glowna
 	while(1)
 	{
@@ -246,6 +248,20 @@ int main(void)
 			while(Keyboard());
 			_delay_loop_1(0xff);
 		}
+		kan1_lcd[iter]=ADCGetCh2()/4;
+		if(++iter>117)
+		{
+			LCDGoTo(0,7);
+			uint8_t i;
+			uint16_t vz = 0;
+			for(i=0; i<118; i++)
+			{
+				vz += kan1_lcd[i];
+			}
+			vz/=6;
+			LCDU16mV(vz);
+		}
+		_delay_loop_1(0xff);
 	}
 	return 0;
 }

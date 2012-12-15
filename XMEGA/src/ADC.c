@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	ADC.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	12.03.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik obslugi przetwornika ADC.
  *********************************************************************/
 
@@ -22,7 +22,7 @@ EEMEM int8_t e_offset_cal[14]; //eeprom table, contain voltage offset
 /********************************************//**
  * @brief Tablica dzielnikow dla wyboru podstawy czasu
  ***********************************************/
-prog_uint16_t Time_tab[15]={
+const uint16_t Time_tab[15] PROGMEM={
 	4,   //2us 4x interpolacja
 	5,   //5us 2x interpolacja
 	4,   //8us

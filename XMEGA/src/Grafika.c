@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Grafika.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	18.02.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik funkcji graficznych.
  *********************************************************************/
 
@@ -12,11 +12,11 @@
 #include "Grafika.h"
 
 
-prog_char Gain_lcd[10][5]={{"   5"},{"   2"},{"   1"},{"500m"},{"200m"},{"100m"},{" 50m"},{" 20m"},{" 10m"},{"  5m"},};
-prog_char Time_lcd[15][5]={{"  2u"},{"  5u"},{"  8u"},{" 10u"},{" 20u"},{" 50u"},{"100u"},{"200u"},{"500u"},{"  1m"},{"  2m"},{"  5m"},{" 10m"},{" 20m"},{" 50m"}};
-prog_char Trig_type[4]={'-', 'N', 'A', 'S'};
+const char Gain_lcd[10][5] PROGMEM ={{"   5"},{"   2"},{"   1"},{"500m"},{"200m"},{"100m"},{" 50m"},{" 20m"},{" 10m"},{"  5m"},};
+const char Time_lcd[15][5] PROGMEM ={{"  2u"},{"  5u"},{"  8u"},{" 10u"},{" 20u"},{" 50u"},{"100u"},{"200u"},{"500u"},{"  1m"},{"  2m"},{"  5m"},{" 10m"},{" 20m"},{" 50m"}};
+const char Trig_type[4] PROGMEM ={'-', 'N', 'A', 'S'};
 
-prog_char An_time_lcd[13][5]={"31k2", " 25k", "12k5", "  5k", " 2k5", "1k25", " 500", " 250", " 125", "  50", "  25", "12.5", "   5"};
+const char An_time_lcd[13][5] PROGMEM ={"31k2", " 25k", "12k5", "  5k", " 2k5", "1k25", " 500", " 250", " 125", "  50", "  25", "12.5", "   5"};
 
 /********************************************//**
  * @brief Funkcja wyswietlajaca zmienna 8-bitowa bez znaku
@@ -650,10 +650,10 @@ void LCDosc(uint8_t* wsk, uint8_t* wsk2, uint8_t xpos, uint8_t ypos1, uint8_t yp
  ***********************************************/
 void LCDWriteScaleLine(uint8_t s, uint8_t v)
 {
-	LCDText((prog_char*)Time_lcd[s]);
-	LCDText(PSTR("s/d"));
-	LCDText((prog_char*)Gain_lcd[v]);
-	LCDText(PSTR("V/d"));
+	LCDText_p((const char*)Time_lcd[s]);
+	LCDText_p(PSTR("s/d"));
+	LCDText_p((const char*)Gain_lcd[v]);
+	LCDText_p(PSTR("V/d"));
 }
 
 /********************************************//**
@@ -665,10 +665,10 @@ void LCDWriteScaleLine(uint8_t s, uint8_t v)
 void LCDWriteAnScaleLine(uint8_t s, uint8_t v)
 {
 	s-=2;
-	LCDText((prog_char*)An_time_lcd[s]);
-	LCDText(PSTR("Hz/d"));
-	LCDText((prog_char*)Gain_lcd[v]);
-	LCDText(PSTR("dBW"));
+	LCDText_p((const char*)An_time_lcd[s]);
+	LCDText_p(PSTR("Hz/d"));
+	LCDText_p((const char*)Gain_lcd[v]);
+	LCDText_p(PSTR("dBW"));
 }
 
 /********************************************//**
@@ -679,9 +679,9 @@ void LCDWriteAnScaleLine(uint8_t s, uint8_t v)
  ***********************************************/
 void LCDWritePositionLine(int16_t x, int8_t y)
 {
-	LCDText(PSTR("X="));
+	LCDText_p(PSTR("X="));
 	LCDI10(x);
-	LCDText(PSTR(" Y="));
+	LCDText_p(PSTR(" Y="));
 	LCDI10(y);
 	LCDWriteChar(' ');
 }
@@ -702,7 +702,7 @@ void LCDWritePositionLine(int16_t x, int8_t y)
  ***********************************************/
 void LCDWriteTriggerLine(uint8_t trig, int16_t lev)
 {
-	LCDText(PSTR("T: "));
+	LCDText_p(PSTR("T: "));
 	if((trig&96) == 0)
 		LCDWriteCharNeg(pgm_read_byte(&Trig_type[trig&3]));
 	else
@@ -712,9 +712,9 @@ void LCDWriteTriggerLine(uint8_t trig, int16_t lev)
 	else
 		LCDWriteChar((trig&4)? '/' : 92); // '\'
 	if((trig&96) == 64)
-		LCDTextNeg((trig&8)? PSTR("HF") : PSTR("LF"));
+		LCDTextNeg_p((trig&8)? PSTR("HF") : PSTR("LF"));
 	else
-		LCDText((trig&8)? PSTR("HF") : PSTR("LF"));
+		LCDText_p((trig&8)? PSTR("HF") : PSTR("LF"));
 	LCDI16mV(lev);
 		
 }
@@ -727,14 +727,14 @@ void LCDWriteTriggerLine(uint8_t trig, int16_t lev)
  ***********************************************/
 void LCDWriteTimeCursorLine(int16_t cur, uint8_t sd)
 {
-	LCDText(PSTR("dt="));
+	LCDText_p(PSTR("dt="));
 	LCDI16(cur);
 	if(sd<5)
-		LCDText(PSTR("00ns "));
+		LCDText_p(PSTR("00ns "));
 	else if(sd<10)
-		LCDText(PSTR("us   "));
+		LCDText_p(PSTR("us   "));
 	else
-		LCDText(PSTR("0us  "));
+		LCDText_p(PSTR("0us  "));
 }
 
 /********************************************//**
@@ -745,9 +745,9 @@ void LCDWriteTimeCursorLine(int16_t cur, uint8_t sd)
  ***********************************************/
 void LCDWriteFreqCursorLine(uint32_t freq, int8_t db)
 {
-	LCDText(PSTR("F="));
+	LCDText_p(PSTR("F="));
 	LCDU32(freq);
-	LCDText(PSTR("Hz A="));
+	LCDText_p(PSTR("Hz A="));
 	LCDI8(db);
-	LCDText(PSTR("dB "));
+	LCDText_p(PSTR("dB "));
 }

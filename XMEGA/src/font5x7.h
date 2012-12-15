@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	font5x7.h
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	18.02.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik zawieracjacy tablice czcionek.
  *********************************************************************/
 
@@ -15,7 +15,7 @@
  ***********************************************/
 #define FONT_OFFSET 32
 #define FONT_WIDTH	5
-prog_uint8_t font5x7[] = {
+const uint8_t font5x7[] PROGMEM = {
 0x00, 0x00, 0x00, 0x00, 0x00,// (spacja)
 0x00, 0x00, 0x5F, 0x00, 0x00,// !
 0x00, 0x07, 0x00, 0x07, 0x00,// "

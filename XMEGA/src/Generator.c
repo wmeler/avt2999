@@ -1,14 +1,14 @@
 /******************************************************************//**
  * @file	Generator.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	12.03.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik podprogramu generatora.
  *********************************************************************/
 
-#include<avr/io.h>
-#include<util/delay.h>
-#include<avr/pgmspace.h>
+#include <avr/io.h>
+#include <util/delay.h>
+#include <avr/pgmspace.h>
 #include <avr/eeprom.h>
 #include "DAC.h"
 #include "ADC.h"
@@ -29,14 +29,14 @@ EEMEM uint8_t e_kan_out[768];
 /********************************************//**
  * @brief Tablice napisow
  ***********************************************/
-prog_char mod_tab[3][3]={"FM", "AM", "SW"};
+const char mod_tab[3][3] PROGMEM ={"FM", "AM", "SW"};
 /** @brief Tablice napisow*/
-prog_char Wave_tab[7][11]={"sine      ", "square    ", "triangle  ", "pink noise", "white nois", "arbitrary ", "none (off)"};
+const char Wave_tab[7][11] PROGMEM ={"sine      ", "square    ", "triangle  ", "pink noise", "white nois", "arbitrary ", "none (off)"};
 
 /********************************************//**
  * @brief Tablica funkcji sin [0, 2.5PI]
  ***********************************************/
-prog_int16_t sin_tab[640] = {0,	
+const int16_t sin_tab[640] PROGMEM = {0,	
 401,	803,	1205,	1607,	2008,	2409,	2809,	3210,	3609,	4009,	4407,	4805,	5202,	5599,	5994,	6389,	
 6783,	7175,	7567,	7958,	8347,	8735,	9122,	9507,	9891,	10273,	10654,	11033,	11411,	11787,	12161,	12533,	
 12904,	13272,	13639,	14003,	14365,	14725,	15083,	15439,	15792,	16143,	16492,	16838,	17181,	17522,	17861,	18196,	
@@ -442,15 +442,16 @@ void GenSetParam(uint16_t per, uint16_t tab, uint16_t gain, uint16_t duty, int16
 	static uint16_t tabs;
 	if(tabs != tab)
 	{
-	DMA.CH0.CTRLA &= ~(1<<7); //disable ch1
-	DMA.CH0.TRFCNT = tab<<1;
-	DMA.CH0.SRCADDR0  =(((uint16_t)(&kan_out))>>0*8) & 0xFF;
-	DMA.CH0.SRCADDR1  =(((uint16_t)(&kan_out))>>1*8) & 0xFF;
-	//DMA.CH0.SRCADDR2  = 0;//(((uint32_t)(&kan_out))>>2*8) & 0xFF;
-	DMA.CH0.DESTADDR0 =(((uint16_t)(&DACB.CH0DATAL))>>0*8)&0xFF;
-	DMA.CH0.DESTADDR1 =(((uint16_t)(&DACB.CH0DATAL))>>1*8)&0xFF;
-	//DMA.CH0.DESTADDR2 = 0;//(((uint32_t)(&DACB.CH0DATAH))>>2*8)&0xFF;
-	DMA.CH0.CTRLA |= 1<<7; //enable ch1
+		/*DMA.CH0.CTRLA &= ~(1<<7); //disable ch1
+		DMA.CH0.TRFCNT = tab<<1;
+		DMA.CH0.SRCADDR0  =(((uint16_t)(&kan_out))>>0*8) & 0xFF;
+		DMA.CH0.SRCADDR1  =(((uint16_t)(&kan_out))>>1*8) & 0xFF;
+		//DMA.CH0.SRCADDR2  = 0;//(((uint32_t)(&kan_out))>>2*8) & 0xFF;
+		DMA.CH0.DESTADDR0 =(((uint16_t)(&DACB.CH0DATAL))>>0*8)&0xFF;
+		DMA.CH0.DESTADDR1 =(((uint16_t)(&DACB.CH0DATAL))>>1*8)&0xFF;
+		//DMA.CH0.DESTADDR2 = 0;//(((uint32_t)(&DACB.CH0DATAH))>>2*8)&0xFF;
+		DMA.CH0.CTRLA |= 1<<7; //enable ch1*/
+		DACResizeDMA(tab);
 	}
 	
 	tabs = tab;
@@ -590,7 +591,7 @@ void Generator(void)
 		if(keys == (P_XY + P_OK)) //zapisz przebieg w pamieci EEPROM
 		{
 			LCDGoTo(0,7);
-			LCDText(PSTR("Write..."));
+			LCDText_p(PSTR("Write..."));
 			EepromTabWrite(e_kan_out, (uint8_t*)kan_out);
 		}
 		
@@ -608,11 +609,11 @@ void Generator(void)
 		
 		if(set_type==0) //ustawianie czestotliwosci i amplitudy
 		{
-			LCDText(PSTR("F="));
+			LCDText_p(PSTR("F="));
 			LCDU32F(Freq, step);
-			LCDText(PSTR(" G="));
+			LCDText_p(PSTR(" G="));
 			LCDU16F(Gain, step-8);
-			LCDText(PSTR("mV"));
+			LCDText_p(PSTR("mV"));
 			if(keys)
 			{
 				step = ShiftValue(keys, step, 0, 13, 2, P_LEFT, P_RIGHT);
@@ -660,7 +661,7 @@ void Generator(void)
 					}else TCD0.CTRLA = 0x01;
 					
 					LCDGoTo(0,6);
-					LCDText(PSTR("F="));
+					LCDText_p(PSTR("F="));
 					LCDU32F(Freq_set, step);
 				}
 				GenSetParam(per_c, tab_c, Gain, Duty, Dc_shift, Type);
@@ -669,9 +670,9 @@ void Generator(void)
 		{
 			if(Type == 5) //przebieg arbitralny
 			{
-				LCDText(PSTR("Arbitr X="));
+				LCDText_p(PSTR("Arbitr X="));
 				LCDI10(arb_x);
-				LCDText(PSTR(" V="));
+				LCDText_p(PSTR(" V="));
 				LCDI16(arb_v-2048);
 				arb_x = ShiftValue(keys, arb_x, 0, tab_c, 1, P_LEFT, P_RIGHT);
 				if(!(keys&P_OK))arb_v=kan_out[arb_x];
@@ -681,9 +682,9 @@ void Generator(void)
 				cursory = arb_v>>6;
 			}else //wypelnienie i offset
 			{
-				LCDText(PSTR("Duty="));
+				LCDText_p(PSTR("Duty="));
 				LCDU8(Duty);
-				LCDText(PSTR("     DC="));
+				LCDText_p(PSTR("     DC="));
 				LCDI16(Dc_shift);
 				if(keys)
 				{
@@ -696,10 +697,10 @@ void Generator(void)
 			}
 		}else if(set_type==2) //ustawienia modulacji
 		{
-			LCDText(mod_tab[mod_type]);
-			LCDText(PSTR(" Deep="));
+			LCDText_p(mod_tab[mod_type]);
+			LCDText_p(PSTR(" Deep="));
 			LCDU8((uint16_t)Deep*100/128);
-			LCDText(PSTR("%  G="));
+			LCDText_p(PSTR("%  G="));
 			LCDU16F(Gain, 0);
 			while(!keys)
 			{
@@ -748,16 +749,16 @@ void Generator(void)
 			
 		}else if(set_type==3) //wybor przebiegu oraz liczby wyswietlanych okresow
 		{
-			LCDText(PSTR("Wave: "));
-			LCDText((prog_char*)Wave_tab[Type]);
-			LCDText(PSTR(" Z="));
+			LCDText_p(PSTR("Wave: "));
+			LCDText_p((const char*)Wave_tab[Type]);
+			LCDText_p(PSTR(" Z="));
 			LCDU8(zoom);
 			if(keys & P_UP)
 			{
 				if(Type-- < 1)
 					Type = 6;
-				if(Type == 5)
-					DACInit(); //przy zmnianie ze stanu 6 trzeba wlaczyc DAC
+				//if(Type == 5)
+					//DACInit(); //przy zmnianie ze stanu 6 trzeba wlaczyc DAC
 				enable_noise = 0;
 			}
 			if(keys & P_DOWN)
@@ -765,12 +766,17 @@ void Generator(void)
 				if(Type++ > 5)
 				{
 					Type = 0;
-					DACInit(); //przy zmnianie ze stanu 6 trzeba wlaczyc DAC
+					//DACInit(); //przy zmnianie ze stanu 6 trzeba wlaczyc DAC
 				}
 				enable_noise = 0;
 			}
 			if(keys & P_OK)
 			{
+				if(Type != 6 && !DACCheckOn())
+				{
+					DACOn();
+					DACResizeDMA(tab_c);
+				}
 				GenSetParam(per_c, tab_c, Gain, Duty, Dc_shift, Type);
 				enable_noise = 1;
 			}

@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	Oscyloskop.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	18.02.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik podprogramu oscyloskopu.
  ***********************************************/
 
@@ -14,13 +14,14 @@
 #include "ADC.h"
 #include "Keyboard.h"
 #include "lcd132x64.h"
+#include "Multimetr.h" //pozniej wywalic
 
 //wykorzystaj zewnetrzne bufory
 extern uint8_t kan1_lcd[];
 extern uint8_t kan2_lcd[];
 extern int16_t kan1_in[512];
 extern int16_t kan2_in[512];
-extern prog_uint16_t Time_tab[15];
+extern const uint16_t Time_tab[15] PROGMEM;
 
 static int16_t ypos1 = 128, ypos2 = 128; //pozycja oscylogramow w pionie
 static int16_t xpos=62; //62 //wycentrowanie wyzwalania, gdy xpos=0 to wyzwalanie na œrodku ekranu
@@ -29,7 +30,7 @@ static uint8_t trig_type = 2; //wyzwalanie
 static int8_t lev = 0; //poziom wyzwalania
 static uint8_t type = 0; //rodzaj wyswietlanych parametrow, 0 - podstawa czasu i wzmocnienie, 1 - pozycja x,y, 2 - wyzwalanie, 3 - kursory
 
-prog_uint8_t Gain_tab[10]={
+const uint8_t Gain_tab[10] PROGMEM ={
 	16,     //5V   1x
 	20,     //2V   2x
 	20,     //1V   4x
@@ -89,6 +90,8 @@ void Oscyloskop(void)
 	uint8_t cursor[4]={0,0,0,0};
 	uint8_t cur_nr=0;
 	uint8_t stop_trig = 0;
+	uint8_t autoset = 0;
+	
 	//trig_type bity: | 7 | 6  5 | 4 | 3 | 2 | 1  0 |
 	//                |   | POS  |   |HL |/\ | -NAS |
 	//POS - wybor jendej z ponizszych pozycji do zmiany:
@@ -279,6 +282,27 @@ void Oscyloskop(void)
 			channel|=128;
 		}else if(keys == 0)
 			channel&=127;
+		else if(keys == P_OK)//(P_TRIG + P_OK))
+			autoset = 1;
+			
+		if(autoset && keys ==0)
+		{
+			autoset = 0;
+			int16_t v_min = 32000;
+			int16_t v_max = -32000;
+			uint32_t rms = 0;
+			int32_t avg = 0;
+			uint32_t index = getMeas(kan1_in, &v_min, &v_max, &rms, &avg);
+			v_max = ((int32_t)v_max*Gain1)/256;
+			v_min = ((int32_t)v_min*Gain1)/256;
+			if(v_max>40 || v_min<-40)if(Vdiv1>0){Vdiv1--; autoset = 1;}
+			if(v_max<15 && v_min>-15)if(Vdiv1<6){Vdiv1++; autoset = 1;}
+			if(index<40000)if(Sdiv<12){Sdiv++; autoset = 1;}
+			if(index>100000)if(Sdiv>2){Sdiv--; autoset = 1;}
+			Gain1 = pgm_read_byte(&Gain_tab[Vdiv1]);
+			ADCSetGain((Vdiv1>4)?4:Vdiv1, (Vdiv2>4)?4:Vdiv2); //max wzmocnienie 16x
+			ADCSetPeroid(Sdiv);
+		}
 		if(type==0)
 		{
 			LCDWriteScaleLine(Sdiv, (channel&1)? Vdiv2 : Vdiv1);
@@ -306,6 +330,8 @@ void Oscyloskop(void)
 				//else
 					//ADCA.CH0.CTRL = (6<<2) | 0x3; //const gain 64x*/
 				ADCSetGain((Vdiv1>4)?4:Vdiv1, (Vdiv2>4)?4:Vdiv2); //max wzmocnienie 16x
+				if(!(keys&P_TRIG || keys&P_OK))
+					autoset = 0;
 			}
 		}else if(type==1)
 		{
@@ -358,7 +384,7 @@ void Oscyloskop(void)
 			LCDWriteTimeCursorLine(tmp, Sdiv);
 		}
 		
-		LCDText((channel&1)? PSTR(" CH2 ") : PSTR(" CH1 "));
+		LCDText_p((channel&1)? PSTR(" CH2 ") : PSTR(" CH1 "));
 		if(stop_trig)
 			LCDWriteChar('S');
 		else

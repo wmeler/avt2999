@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	TransmisjaPC.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	12.03.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik obslugi transmisji UART.
  ***********************************************/
  
@@ -40,7 +40,7 @@ static uint8_t Vdiv2=0;
 static uint8_t rsSpeed=3;
 EEMEM uint8_t e_rsSpeed;
 
-prog_uint8_t rsTab[10] = {
+const char rsTab[10] PROGMEM = {
 	103,	//19200
 	51,		//38400
 	34,		//57600
@@ -459,8 +459,8 @@ void TransmisjaPC(void)
 	USART_RxdInterruptLevel_Set(&USART, USART_RXCINTLVL_LO_gc);
 	_delay_loop_2(0xffff);
 	_delay_loop_2(0xffff);
-	uint8_t i;
-	i = 0;
+	//uint8_t i;
+	//i = 0;
 	//wyslij tekst powitalny przez UART
 	while((USART.STATUS & USART_DREIF_bm) == 0);
 	USART.DATA = 'M';
@@ -471,7 +471,7 @@ void TransmisjaPC(void)
 	while((USART.STATUS & USART_DREIF_bm) == 0);
 	USART.DATA = '>';
 	LCDGoTo(0,0);
-	LCDText(PSTR("MKP<--RS-232-->PC"));
+	LCDText_p(PSTR("MKP<--RS-232-->PC"));
 	LCDGoTo(0,1);
 
 	//petla glowna podprogramu komunikacji z PC

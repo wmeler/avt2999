@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	Ustawienia.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	12.03.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik funkcji ustawień.
  ***********************************************/
 
@@ -21,7 +21,7 @@ static uint8_t scale = 0;
 /**Liczba pozycji w menu ustawień*/
 #define MENU_UST_TAB_I 3
 /**Napisy menu ustawień*/
-prog_uint8_t menu_ust_tab[MENU_UST_TAB_I][11]=
+const uint8_t menu_ust_tab[MENU_UST_TAB_I][11] PROGMEM=
 {
 	"Kalibracja",
 	"RS232 - PC",
@@ -29,7 +29,7 @@ prog_uint8_t menu_ust_tab[MENU_UST_TAB_I][11]=
 };
 
 /**Napisy z predkosciami UART*/
-prog_uint8_t rsSpeedTab[10][8]=
+const uint8_t rsSpeedTab[10][8] PROGMEM=
 {
 	"19200  ",
 	"38400  ",
@@ -52,14 +52,14 @@ prog_uint8_t rsSpeedTab[10][8]=
 void PrintMenu_ust(uint8_t menu)
 {
 	LCDGoTo(0,0);
-	LCDText(PSTR(" USTAWIENIA "));
+	LCDText_p(PSTR(" USTAWIENIA "));
 	for(uint8_t i=0; i<MENU_UST_TAB_I; i++)
 	{
 		LCDGoTo(10, i+1);
 		if(i==menu)
-			LCDTextNeg((prog_char*)menu_ust_tab[i]);
+			LCDTextNeg_p((const char*)menu_ust_tab[i]);
 		else
-			LCDText((prog_char*)menu_ust_tab[i]);
+			LCDText_p((const char*)menu_ust_tab[i]);
 	}
 }
 
@@ -71,7 +71,7 @@ void Kalibracja(void)
 {
 	LCDClearScreen();
 	LCDGoTo(0,0);
-	LCDText(PSTR(" KALIBRACJA"));
+	LCDText_p(PSTR(" KALIBRACJA"));
 	uint8_t keys=0;
 	uint8_t dac_offset_cal = DACOffsetCalib(0);
 	uint8_t dac_gain_cal = DACGainCalib(0);
@@ -79,21 +79,21 @@ void Kalibracja(void)
 	{
 		keys=Keyboard();
 		LCDGoTo(0,1);
-		LCDText(PSTR("DAC wzmocn: "));
+		LCDText_p(PSTR("DAC wzmocn: "));
 		LCDU8(dac_gain_cal);
 		LCDGoTo(0,2);
-		LCDText(PSTR("DAC offset: "));
+		LCDText_p(PSTR("DAC offset: "));
 		LCDU8(dac_offset_cal);
 		LCDGoTo(0,3);
-		LCDText(PSTR("ADC offset: "));
+		LCDText_p(PSTR("ADC offset: "));
 		LCDGoTo(0,4);
-		LCDText(scale? PSTR("/1.6") : PSTR("1.00"));
+		LCDText_p(scale? PSTR("/1.6") : PSTR("1.00"));
 		
 		if(keys&P_OK)
 		{
-			LCDText(PSTR("kal"));
+			LCDText_p(PSTR("kal"));
 			ADCRunOffsetCal();
-			LCDText(PSTR(" ok"));
+			LCDText_p(PSTR(" ok"));
 		}
 		if(keys&P_UP)
 			dac_offset_cal = DACOffsetCalib(1);
@@ -122,15 +122,15 @@ void RS232(void)
 {
 	LCDClearScreen();
 	LCDGoTo(0,0);
-	LCDText(PSTR(" RS232 - PC"));
+	LCDText_p(PSTR(" RS232 - PC"));
 	uint8_t keys=0;
 	uint8_t speed=SetRsSpeed(0);
 	while(keys!=P_EXIT)
 	{
 		keys=Keyboard();
 		LCDGoTo(0,1);
-		LCDText(PSTR("Speed: "));
-		LCDText((prog_char*)rsSpeedTab[speed]);
+		LCDText_p(PSTR("Speed: "));
+		LCDText_p((const char*)rsSpeedTab[speed]);
 		if(keys == P_RIGHT)
 			speed = SetRsSpeed(1);
 		if(keys == P_LEFT)
@@ -147,7 +147,7 @@ void Wyswietlacz(void)
 {
 	LCDClearScreen();
 	LCDGoTo(0,0);
-	LCDText(PSTR(" WYSWIETLACZ"));
+	LCDText_p(PSTR(" WYSWIETLACZ"));
 	uint8_t keys=0;
 	uint8_t bright=LCDBright(0);
 	uint8_t contrast = LCDContrast(0);
@@ -156,10 +156,10 @@ void Wyswietlacz(void)
 	{
 		keys=Keyboard();
 		LCDGoTo(0,1);
-		LCDText(PSTR("Jasnosc: "));
+		LCDText_p(PSTR("Jasnosc: "));
 		LCDU8(bright);
 		LCDGoTo(0,2);
-		LCDText(PSTR("Kontrast: "));
+		LCDText_p(PSTR("Kontrast: "));
 		LCDU8(contrast);
 		if(keys == P_UP)
 			bright = LCDBright(1);

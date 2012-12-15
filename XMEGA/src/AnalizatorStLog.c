@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	AnalizatorStLog.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	12.03.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik podprogramu analizatora stanow logicznych.
  ***********************************************/
  
@@ -38,10 +38,13 @@ char Trig_type_tab[8]={'X','0','1','/',92}; //symbole informujace wyzwalaniu dla
 //X - dowolny, 0 - stan niski, 1 - stan wysoki, / - zbocze narastajace, \ (92) - zbocze opadajace
 
 //tablica czestotliowosci probkowania
-static prog_char Time_lcd[14][5]={"4M", "2M", "1M", "500k", "200k", "100k", "50k", "20k", "10k", "5k", "2k", "1k", "500", "200"};
-static prog_uint16_t Time_tab[14] = {0, 1, 4, 12, 36, 76, 156, 396, 796, 1596, 3996, 7996, 15996, 39996};
+static const char Time_lcd[14][5]  PROGMEM={"4M", "2M", "1M", "500k", "200k", "100k", "50k", "20k", "10k", "5k", "2k", "1k", "500", "200"};
 
 #endif
+
+static const uint16_t Time_tab[14]  PROGMEM= {0, 1, 4, 12, 36, 76, 156, 396, 796, 1596, 3996, 7996, 15996, 39996};
+
+
 
 /********************************************//**
  * @brief Funkcja wyswietlajaca przebiegi cyfrowe
@@ -82,10 +85,102 @@ void LCDStateGraph(uint8_t *wsk, uint8_t cursor) //wyswietlanie 8 kanalow
 ISR(PORTD_INT0_vect)__attribute((naked));
 ISR(PORTD_INT0_vect)
 {
-	//LCDText(PSTR("wzw"));
+	//LCDText_p(PSTR("wzw"));
 	asm volatile("reti");
 }
 #endif
+
+void GetLogicChannels(uint8_t trig_edge, uint8_t trig_mask, uint8_t trig_state, uint16_t delay)
+{
+	PORTCFG.MPCMASK = trig_edge & ~trig_state;//trig_fall_edge; //ustawienie pinow wyzwalanych zboczem opadajacym
+	PORTD.PIN0CTRL = (2<<3) | PORT_ISC_FALLING_gc; //pull up , falling edge interrupt
+	PORTCFG.MPCMASK = trig_edge & trig_state;//trig_rise_edge; //ustawienie pinow wyzwalanych zboczem narastajacym
+	PORTD.PIN0CTRL = (2<<3) | PORT_ISC_RISING_gc; //pull up , rising edge interrupt
+	PORTD.INTCTRL = ( PORTD.INTCTRL & ~PORT_INT0LVL_gm ) | PORT_INT0LVL_MED_gc;
+	PORTD.INT0MASK = trig_edge;
+	PMIC.CTRL |= PMIC_MEDLVLEN_bm;
+	if(trig_edge) //wykonaj jesli wystepuje wyzwalanie zboczami
+	{
+		SLEEP.CTRL=1; //idle mode
+		do{
+			asm volatile("SLEEP"); //czekanie na zbocze
+			if(!(PORTK1.IN&(1<<PINK1)))break; //sprawdzenie czy nacisnieto przycisk
+		}while(!((PORTD.IN&trig_mask) == (trig_state&trig_mask))); //sprawdzanie pinow wyzwalanych sygnalem
+	}else //wykonaj, jesli wyzwalanie tylko sygnalem
+	{
+		SLEEP.CTRL=1; //idle mode
+		while(!((PORTD.IN&trig_mask) == (trig_state&trig_mask))) //sprawdzanie pinow wyzwalanych sygnalem
+			if(!(PORTK1.IN&(1<<PINK1)))break; //sprawdzenie czy nacisnieto przycisk
+	}
+
+	uint16_t i = 2048;
+	if(delay == 0)
+	{
+		/*for(uint16_t i=0; i<2048; i++) //realizacja w C
+		{
+			buf[i] = PORTD.IN;
+		}*/
+		asm volatile(\
+			"push	r16"		"\n\t"
+			"push	r30"		"\n\t"
+			"push	r31"		"\n\t"
+			"ldi	r30, lo8(kan1_in)" "\n\t"
+			"ldi	r31, hi8(kan1_in)" "\n\t"
+			"for_loop:"			"\n\t" //8 taktow zegara na petle
+			"lds	r16, %[P]"	"\n\t"  //odczyt klawiatury
+			"st		Z+,	r16"	"\n\t"
+			"sbiw	%[i], 0x01"	"\n\t"
+			"brne	for_loop"	"\n\t" //wykonuj petle 2048 razy
+			"pop	r31"		"\n\t"
+			"pop	r30"		"\n\t"
+			"pop	r16"		"\n\t"
+			:[i]"+w" (i)
+			:[P] "n" (&PORTD.IN)
+			: "r16", "r30", "r31");
+	}else
+	{
+		/*for(uint16_t i=0; i<2048; i++) //realizacja w C
+		{
+			buf[i] = PORTD.IN;
+			_delay_loop_2(delay);
+		}*/
+		asm volatile(\
+			"push	r16"		"\n\t"
+			"push	r24"		"\n\t"
+			"push	r25"		"\n\t"
+			"push	r30"		"\n\t"
+			"push	r31"		"\n\t"
+			"ldi	r30, lo8(kan1_in)" "\n\t"
+			"ldi	r31, hi8(kan1_in)" "\n\t"
+			"for_loop2:"			"\n\t" //16 taktow zegara na petle
+			"lds	r16, %[P]"	"\n\t"  //odczyt klawiatury
+			"st		Z+,	r16"	"\n\t"
+			"nop"				"\n\t"
+			"nop"				"\n\t"
+			"nop"				"\n\t"
+			"movw	r24, %[d]"	"\n\t"
+			"delay_loop:"		"\n\t" //czekaj [d]*4takty
+			"sbiw	r24, 0x01"	"\n\t"
+			"brne	delay_loop"	"\n\t"
+			"sbiw	%[i], 0x01"	"\n\t"
+			"brne	for_loop2"	"\n\t" //wykonuj petle 2048 razy
+			"pop	r31"		"\n\t"
+			"pop	r30"		"\n\t"
+			"pop	r25"		"\n\t"
+			"pop	r24"		"\n\t"
+			"pop	r16"		"\n\t"
+			:[i]"+w" (i), [d]"+r" (delay)
+			:[P] "n" (&PORTD.IN)
+			: "r16", "r24", "r25", "r30", "r31");
+	}
+}
+
+uint16_t ASLGetTimebase(uint8_t timebase)
+{
+	if(timebase > 13)
+		timebase = 13;
+	return pgm_read_word(&Time_tab[timebase]);
+}
 
 /********************************************//**
  * @brief Funkcja glowna podprogramu analizatora stanow logicznych
@@ -127,7 +222,7 @@ void AnalizatorStLog(void)
 			LCDGoTo(0,7);
 			if(keys == P_DIV)
 			{
-				LCDText(PSTR("Base: "));
+				LCDText_p(PSTR("Base: "));
 				while(Keyboard());
 				keys=0;
 				_delay_loop_2(0xffff);
@@ -135,8 +230,8 @@ void AnalizatorStLog(void)
 				{
 					LCDGoTo(36,7);
 					keys = Keyboard();
-					LCDText((prog_char*)Time_lcd[Sdiv]);
-					LCDText(PSTR("S/s  "));
+					LCDText_p((const char*)Time_lcd[Sdiv]);
+					LCDText_p(PSTR("S/s  "));
 					if(keys == P_LEFT)
 						if(Sdiv>0)Sdiv--;
 					if(keys == P_RIGHT)
@@ -144,94 +239,14 @@ void AnalizatorStLog(void)
 					_delay_loop_2(0xffff);
 				}
 				//TCC0.PER = pgm_read_word(&Time_tab[Sdiv]);
-				LCDText(PSTR("Ready..."));
+				LCDText_p(PSTR("Ready..."));
 				while(Keyboard());
 				PORTC.OUTCLR = 0xff; 
 				_delay_loop_2(0xffff);
 				uint16_t delay = pgm_read_word(&Time_tab[Sdiv]);
-
-				PORTCFG.MPCMASK = trig_fall_edge; //ustawienie pinow wyzwalanych zboczem opadajacym
-				PORTD.PIN0CTRL = (2<<3) | PORT_ISC_FALLING_gc; //pull up , falling edge interrupt
-				PORTCFG.MPCMASK = trig_rise_edge; //ustawienie pinow wyzwalanych zboczem narastajacym
-				PORTD.PIN0CTRL = (2<<3) | PORT_ISC_RISING_gc; //pull up , rising edge interrupt
-				PORTD.INTCTRL = ( PORTD.INTCTRL & ~PORT_INT0LVL_gm ) | PORT_INT0LVL_MED_gc;
-				PORTD.INT0MASK = trig_fall_edge | trig_rise_edge;
-				PMIC.CTRL |= PMIC_MEDLVLEN_bm;
-				if(trig_rise_edge | trig_fall_edge) //wykonaj jesli wystepuje wyzwalanie zboczami
-				{
-					SLEEP.CTRL=1; //idle mode
-					do{
-						asm volatile("SLEEP"); //czekanie na zbocze
-						if(!(PORTK1.IN&(1<<PINK1)))break; //sprawdzenie czy nacisnieto przycisk
-					}while(!((PORTD.IN&trig_mask) == trig_state)); //sprawdzanie pinow wyzwalanych sygnalem
-				}else //wykonaj, jesli wyzwalanie tylko sygnalem
-				{
-					SLEEP.CTRL=1; //idle mode
-					while(!((PORTD.IN&trig_mask) == trig_state)) //sprawdzanie pinow wyzwalanych sygnalem
-						if(!(PORTK1.IN&(1<<PINK1)))break; //sprawdzenie czy nacisnieto przycisk
-				}
-
-				uint16_t i = 2048;
-				if(delay == 0)
-				{
-					/*for(uint16_t i=0; i<2048; i++) //realizacja w C
-					{
-						buf[i] = PORTD.IN;
-					}*/
-					asm volatile(\
-						"push	r16"		"\n\t"
-						"push	r30"		"\n\t"
-						"push	r31"		"\n\t"
-						"ldi	r30, lo8(kan1_in)" "\n\t"
-						"ldi	r31, hi8(kan1_in)" "\n\t"
-						"for_loop:"			"\n\t" //8 taktow zegara na petle
-						"lds	r16, %[P]"	"\n\t"  //odczyt klawiatury
-						"st		Z+,	r16"	"\n\t"
-						"sbiw	%[i], 0x01"	"\n\t"
-						"brne	for_loop"	"\n\t" //wykonuj petle 2048 razy
-						"pop	r31"		"\n\t"
-						"pop	r30"		"\n\t"
-						"pop	r16"		"\n\t"
-						:[i]"+w" (i)
-						:[P] "n" (&PORTD.IN)
-						: "r16", "r30", "r31");
-				}else
-				{
-					/*for(uint16_t i=0; i<2048; i++) //realizacja w C
-					{
-						buf[i] = PORTD.IN;
-						_delay_loop_2(delay);
-					}*/
-					asm volatile(\
-						"push	r16"		"\n\t"
-						"push	r24"		"\n\t"
-						"push	r25"		"\n\t"
-						"push	r30"		"\n\t"
-						"push	r31"		"\n\t"
-						"ldi	r30, lo8(kan1_in)" "\n\t"
-						"ldi	r31, hi8(kan1_in)" "\n\t"
-						"for_loop2:"			"\n\t" //16 taktow zegara na petle
-						"lds	r16, %[P]"	"\n\t"  //odczyt klawiatury
-						"st		Z+,	r16"	"\n\t"
-						"nop"				"\n\t"
-						"nop"				"\n\t"
-						"nop"				"\n\t"
-						"movw	r24, %[d]"	"\n\t"
-						"delay_loop:"		"\n\t" //czekaj [d]*4takty
-						"sbiw	r24, 0x01"	"\n\t"
-						"brne	delay_loop"	"\n\t"
-						"sbiw	%[i], 0x01"	"\n\t"
-						"brne	for_loop2"	"\n\t" //wykonuj petle 2048 razy
-						"pop	r31"		"\n\t"
-						"pop	r30"		"\n\t"
-						"pop	r25"		"\n\t"
-						"pop	r24"		"\n\t"
-						"pop	r16"		"\n\t"
-						:[i]"+w" (i), [d]"+r" (delay)
-						:[P] "n" (&PORTD.IN)
-						: "r16", "r24", "r25", "r30", "r31");
-				}
+				GetLogicChannels(trig_fall_edge | trig_rise_edge, trig_mask, (trig_state | trig_rise_edge)& ~trig_fall_edge, delay);
 			}
+				
 			else if(keys == P_XY)set_type=0;
 			else if(keys == P_CURS)set_type=1;
 			else if(keys == P_TRIG)set_type=2;
@@ -239,22 +254,22 @@ void AnalizatorStLog(void)
 			
 			if(set_type == 0) //przesuwanie i skalowanie wykresu
 			{
-				LCDText(PSTR("X="));
+				LCDText_p(PSTR("X="));
 				xpos=ShiftValue(keys, xpos, 0, 2048/zoom-125, 20, P_RIGHT, P_LEFT);
 				LCDU16(xpos);
-				LCDText(PSTR(" Z"));
+				LCDText_p(PSTR(" Z"));
 				zoom=ShiftValue(keys, zoom, 1, 16, 2, P_UP, P_DOWN);
 				LCDU8(zoom);
 			}else if(set_type == 1) //obsluga kursora
 			{
-				LCDText(PSTR("Cur="));
+				LCDText_p(PSTR("Cur="));
 				cursor=ShiftValue(keys, cursor, 0, 128, 4, P_LEFT, P_RIGHT);
 				LCDU16(cursor);
-				LCDText(PSTR(" V="));
+				LCDText_p(PSTR(" V="));
 				LCDU8(kan1_lcd[cursor]);
 			}else if(set_type == 2) //ustawianie wyzwalania
 			{
-				LCDText(PSTR("Trig="));
+				LCDText_p(PSTR("Trig="));
 				uint8_t mask=1;
 				for(uint8_t i=0; i<8; i++)
 				{

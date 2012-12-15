@@ -2,11 +2,11 @@
  * @brief	Plik glowny programu.
  * @file	main.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	18.02.2012
+ * @version 1.4
+ * @date	15.12.2012
  * 
  * First version:	02.01.2008
- * 		ATMega32 + ATMega8 + LCD Nokia3510i	
+ * 		ATMega32 + ATMega8 + LCD Nokia3510i
  * 		ADS830 2MS/s, DAC0808 5,33MS/s
  * 
  * Second version (full):	21.10.2009
@@ -57,33 +57,33 @@
  * dlatego deklaracja buforow musi byc umieszczona na poczatku programu
  * a plik main.c powinien byc linkowany jako pierwszy.
  * */
-/********************************************//**
- * @brief Bufor przechowujacy probki danych kanalu 1
+ /********************************************//**
+ * @brief Bufor przechowujacy probki danych kanalu 2 do wyswietlenia na lcd
  ***********************************************/
-int16_t kan1_in[512] __attribute__ ((section (" .data")));
-/********************************************//**
- * @brief Bufor przechowujacy probki danych kanalu 2
+uint8_t kan2_lcd[128] __attribute__ ((section (" .data")));
+ /********************************************//**
+ * @brief Bufor przechowujacy probki danych kanalu 1 do wyswietlenia na lcd
  ***********************************************/
-int16_t kan2_in[512] __attribute__ ((section (" .data")));
+uint8_t kan1_lcd[128] __attribute__ ((section (" .data")));
 /********************************************//**
  * @brief Bufor przechowujacy probki sygnalu wyjsciowego
  ***********************************************/
 uint16_t kan_out[512] __attribute__ ((section (" .data")));
 /********************************************//**
- * @brief Bufor przechowujacy probki danych kanalu 1 do wyswietlenia na lcd
+ * @brief Bufor przechowujacy probki danych kanalu 2
  ***********************************************/
-uint8_t kan1_lcd[128] __attribute__ ((section (" .data")));
+int16_t kan2_in[512] __attribute__ ((section (" .data")));
 /********************************************//**
- * @brief Bufor przechowujacy probki danych kanalu 2 do wyswietlenia na lcd
+ * @brief Bufor przechowujacy probki danych kanalu 1
  ***********************************************/
-uint8_t kan2_lcd[128] __attribute__ ((section (" .data")));
+int16_t kan1_in[512] __attribute__ ((section (" .data")));
 
 
 
 /********************************************//**
  * @brief Tablica napisow menu
  ***********************************************/
-prog_char menu_tab[8][11]=
+const char menu_tab[8][11] PROGMEM =
 {
 	"Oscyloskop",
 	"Generator ",
@@ -103,20 +103,20 @@ prog_char menu_tab[8][11]=
 void PrintMainMenu(uint8_t menu)
 {
 	LCDGoTo(15,2);
-	LCDText(PSTR("Mini"));
+	LCDText_p(PSTR("Mini"));
 	LCDGoTo(6,3);
-	LCDText(PSTR("Kombajn"));
+	LCDText_p(PSTR("Kombajn"));
 	LCDGoTo(0,4);
-	LCDText(PSTR("Pomiarowy"));
+	LCDText_p(PSTR("Pomiarowy"));
 	LCDGoTo(15,5);
-	LCDText(PSTR("V1.3"));
+	LCDText_p(PSTR("V1.4"));
 	for(uint8_t i=0; i<8; i++)
 	{
 		LCDGoTo(64, i);
 		if(i==menu)
-			LCDTextNeg((prog_char*)menu_tab[i]);
+			LCDTextNeg_p((const char*)menu_tab[i]);
 		else
-			LCDText((prog_char*)menu_tab[i]);
+			LCDText_p((const char*)menu_tab[i]);
 	}
 	
 }
@@ -165,6 +165,7 @@ void CLKIdle(void)
  ***********************************************/
 int main(void)
 {
+	//kan2_in = kan1_in + 512;
 	CLKInit();
 	//Oscylockop
 	ADCInit();
@@ -187,6 +188,7 @@ int main(void)
 	sei();
 	
 	uint8_t iter = 0;
+	uint16_t vz_old = 0;
 	//petla glowna
 	while(1)
 	{
@@ -259,7 +261,7 @@ int main(void)
 				vz += kan1_lcd[i];
 			}
 			vz/=6;
-			LCDU16mV(vz);
+			LCDU16mV(vz_old = (vz_old*7 + vz)/8);
 		}
 		_delay_loop_1(0xff);
 	}

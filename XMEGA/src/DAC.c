@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	DAC.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	12.03.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik obslugi przetwornika DAC.
  *********************************************************************/
 #include<avr/io.h>
@@ -51,9 +51,30 @@ void DACInit(void)
  ***********************************************/
 void DACOff(void)
 {
-	DACB.CTRLA = 0;
-	DMA.CH0.CTRLA = 0; //disable ch1
+	DMA.CH0.CTRLA &= ~(1<<7); //disable ch1 //disable ch1
+	DACB.CTRLB = 0; //trigger off
 	TCD0.CTRLA = 0;      // timer off state
+	DACB.CH0DATA = 2048; //set output to 0V
+}
+
+void DACOn(void)
+{
+	DACB.CTRLB = 1; //trigger on
+	TCD0.CTRLA = 1;      // timer on state
+	DMA.CH0.CTRLA |= 1<<7; //enable ch1
+}
+
+void DACResizeDMA(uint16_t tab)
+{
+	DMA.CH0.CTRLA &= ~(1<<7); //disable ch1
+	DMA.CH0.TRFCNT = tab<<1;
+	DMA.CH0.SRCADDR0  =(((uint16_t)(&kan_out))>>0*8) & 0xFF;
+	DMA.CH0.SRCADDR1  =(((uint16_t)(&kan_out))>>1*8) & 0xFF;
+	//DMA.CH0.SRCADDR2  = 0;//(((uint32_t)(&kan_out))>>2*8) & 0xFF;
+	DMA.CH0.DESTADDR0 =(((uint16_t)(&DACB.CH0DATAL))>>0*8)&0xFF;
+	DMA.CH0.DESTADDR1 =(((uint16_t)(&DACB.CH0DATAL))>>1*8)&0xFF;
+	//DMA.CH0.DESTADDR2 = 0;//(((uint32_t)(&DACB.CH0DATAH))>>2*8)&0xFF;
+	DMA.CH0.CTRLA |= 1<<7; //enable ch1
 }
 
 /********************************************//**

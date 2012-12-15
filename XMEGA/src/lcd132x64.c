@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	lcd132x64.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	12.03.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik obslugi wyswietlacza.
  * 
  * Wyswietlacz 132x64 pikseli ze sterownikiem SPLC501C.
@@ -223,7 +223,7 @@ for(y = 0; y < (SCREEN_HEIGHT/PIXELS_PER_PAGE); y++)
  ***********************************************/
 void LCDWriteChar(uint8_t charCode)
 {
-prog_uint8_t* wsk = &font5x7[(charCode-FONT_OFFSET)*FONT_WIDTH];
+const uint8_t* wsk = &font5x7[(charCode-FONT_OFFSET)*FONT_WIDTH];
 for (charCode=0; charCode<FONT_WIDTH; charCode++)
   LCDWriteData(pgm_read_byte(wsk++));
 LCDWriteData(0);
@@ -236,7 +236,7 @@ LCDWriteData(0);
  ***********************************************/
 void LCDWriteCharNeg(uint8_t charCode)
 {
-prog_uint8_t* wsk = &font5x7[(charCode-FONT_OFFSET)*FONT_WIDTH];
+const uint8_t* wsk = &font5x7[(charCode-FONT_OFFSET)*FONT_WIDTH];
 for (charCode=0; charCode<FONT_WIDTH; charCode++)
   LCDWriteData(255-pgm_read_byte(wsk++));
 LCDWriteData(255);
@@ -247,7 +247,7 @@ LCDWriteData(255);
  * @param *string : adres lancucha znakow z pamieci flash
  * @return none
  ***********************************************/
-void LCDText(prog_char* string)
+void LCDText_p(const char* string)
 {
 while(pgm_read_byte(string))
   LCDWriteChar(pgm_read_byte(string++));
@@ -258,7 +258,7 @@ while(pgm_read_byte(string))
  * @param *string : adres lancucha znakow z pamieci flash
  * @return none
  ***********************************************/
-void LCDTextNeg(prog_char* string)
+void LCDTextNeg_p(const char* string)
 {
 while(pgm_read_byte(string))
   LCDWriteCharNeg(pgm_read_byte(string++));

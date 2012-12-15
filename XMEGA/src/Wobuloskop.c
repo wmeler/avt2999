@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	Wobuloskop.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	12.03.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik podprogramu wobuloskopu.
  ***********************************************/
 
@@ -23,11 +23,14 @@ extern uint16_t kan_out[512];
 extern uint8_t kan1_lcd[128];
 extern uint8_t kan2_lcd[128];
 //tablica funkcji sinus
-extern prog_int16_t sin_tab[640];
+extern const int16_t sin_tab[640] PROGMEM;
 
 
 #define F_clk 2048000000  //x64 (dla wiêkszej rozdzielczoœci, regulacja +-(1/64)Hz)
 #define F_max 32000000    //x64
+
+static int16_t range = 200;
+static int16_t freq_start=100;
 
 /********************************************//**
  * @brief Funkcja obliczajaca charakterystyke badanego ukladu pobudzonego impulsem Diraca
@@ -149,7 +152,7 @@ void Sweep(float freqf, float step_freqf)
 		kan1_lcd[cycle]=95+rms_val;
 		LCDGoTo(12,7);
 		LCDU32(Freq/64);
-		LCDText(PSTR("       RMS="));
+		LCDText_p(PSTR("       RMS="));
 		LCDU8(rms_val);
 	}
 }
@@ -181,8 +184,6 @@ void Wobuloskop(void)
 	uint8_t type=0;
 	float step_freqf, freqf=200;
 		step_freqf=1.1;
-	int16_t range = 200;
-	int16_t freq_start=100;
 	uint8_t cursor=0;
 	uint8_t keys=0;
 
@@ -199,7 +200,7 @@ void Wobuloskop(void)
 		if(type==0) //przemiatanie
 		{
 			LCDGoTo(0,7);
-			LCDText(PSTR("SW "));
+			LCDText_p(PSTR("SW "));
 			if(keys == P_DIV)
 			{
 				while(Keyboard() == P_DIV);
@@ -208,10 +209,10 @@ void Wobuloskop(void)
 				{
 					LCDGoTo(18,7);
 					keys = Keyboard();
-					LCDText(PSTR("R "));
+					LCDText_p(PSTR("R "));
 					LCDU16(freq_start);
-					LCDText(PSTR("0Hz"));
-					LCDText(PSTR(" x "));
+					LCDText_p(PSTR("0Hz"));
+					LCDText_p(PSTR(" x "));
 					LCDU16(range);
 					freq_start = ShiftValue(keys, freq_start, 1, 32767, 20, P_DOWN, P_UP);
 					range = ShiftValue(keys, range, 1, 32767, 20, P_LEFT, P_RIGHT);
@@ -241,19 +242,19 @@ void Wobuloskop(void)
 					freqf*=step_freqf;
 				}
 				int16_t db;
-				db=kan1_lcd[cursor]-152;
+				db=kan1_lcd[cursor]-157;
 				LCDWriteFreqCursorLine(freqf, db*3>>2);
 				
 			}
 		}else if(type==1) //impuls Diraca
 		{
 			LCDGoTo(0,7);
-			LCDText(PSTR("DR"));
+			LCDText_p(PSTR("DR"));
 			Dirac();
 		}else            //szum bialy
 		{
 			LCDGoTo(0,7);
-			LCDText(PSTR("NS"));
+			LCDText_p(PSTR("NS"));
 			Noise();
 		}
 		LCDosc(kan1_lcd, 0, 0, 128, 255, cursor+2,129);

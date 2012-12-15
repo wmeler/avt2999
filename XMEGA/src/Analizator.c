@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Analizator.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	18.02.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik podprogramu analizatora.
  *********************************************************************/
 
@@ -25,9 +25,9 @@ extern int16_t kan2_in[512];
 extern uint8_t kan1_lcd[128];
 
 //wykorzystanie tablic wzmocnienia i podstawy czasu
-extern prog_uint8_t Gain_tab[10];
-extern prog_uint16_t Time_tab[14];
-extern prog_int16_t sin_tab[640];
+extern const uint8_t Gain_tab[10] PROGMEM;
+extern const uint16_t Time_tab[14] PROGMEM;
+extern const int16_t sin_tab[640] PROGMEM;
 
 #ifdef USE_ANALIZATOR_MODULE
 /**wzmocnienie*/
@@ -343,7 +343,7 @@ void FFT2N128(int16_t* xwsk) //algorytm 2N FFT 1024 probki wejsciowe, rzeczywist
 void Analizator(void)
 {
 #ifdef USE_ANALIZATOR_MODULE
-	uint8_t Gain=pgm_read_byte(&Gain_tab[Vdiv]);
+	//uint8_t Gain=0;pgm_read_byte(&Gain_tab[Vdiv]);
 	uint8_t keys=0;
 	uint8_t type=0;
 	//int8_t Vcal=0;
@@ -360,7 +360,7 @@ void Analizator(void)
 			SLEEP.CTRL=1; //idle mode
 			asm volatile("SLEEP");
 			make_fft=1;
-			ADCOffsetCorrect(kan1_in, 0, Vdiv, 0);
+			//ADCOffsetCorrect(kan1_in, 0, Vdiv, 0);
 		}
 		//Podczas nacisniecia przycisku procesor jest natychmiast wybudzany, pozwala to uplynnic prace przy wolnej akwizycji.
 		//Dlatego, aby zapobiec "zakloceniom" FFT jest wykonywane tylko po zebraniu wszystich probek sygnalu wejsciowego
@@ -397,7 +397,7 @@ void Analizator(void)
 						ADCA.PRESCALER = 0x4;
 					else
 						ADCA.PRESCALER = 0x2;
-					Gain=pgm_read_byte(&Gain_tab[Vdiv]);
+					//Gain=pgm_read_byte(&Gain_tab[Vdiv]);
 					//if(Vdiv<7)
 						ADCA.CH0.CTRL = (Vdiv<<2) | 0x3; //gain
 					//else

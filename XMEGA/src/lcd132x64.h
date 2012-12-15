@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	lcd132x64.h
  * @author  Arkadiusz Hudzikowski
- * @version 1.3
- * @date	12.03.2012
+ * @version 1.4
+ * @date	15.12.2012
  * @brief Plik naglowkowy obslugi wyswietlacza.
  * 
  * Wyswietlacz 132x64 pikseli ze sterownikiem SPLC501C.
@@ -72,8 +72,8 @@ void LCDGoTo(unsigned char, unsigned char);
 void LCDWriteChar(uint8_t charCode);
 void LCDWriteCharNeg(uint8_t charCode);
 //void LCDWriteString(char* string);
-void LCDText(prog_char* string);
-void LCDTextNeg(prog_char* string);
+void LCDText_p(const char* string);
+void LCDTextNeg_p(const char* string);
 void LCDInit(void);
 void LCDClearScreen(void);
 void lcd_String_neg(uint8_t val);

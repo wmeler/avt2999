@@ -1,0 +1,32 @@
+Komendy do komunikacji z MKP
+
+? - zakończ aktualne zadanie
+A - wysyłaj bufor oscyloskopu/analizatora (ciągle)
+C - tryb oscyloskopu 1 kanałowy
+E - tryb oscyloskopu 2 kanałowy
+G - włącz generator
+I - włacz analizator stanów logicznych
+K - przygotuj się na odebranie bufora generatora
+	bufor generatora: 1024 znaki (512 próbek)
+	kodowanie: wartości 0 - 4095 rozdzielone na dwa bajty i pomnożone przez 2
+	przykłady: 40 - 0 80, 2000 - 40 0, 1234 - 24 68
+
+Mxxxxxxx - częstotliwosć generatora
+	znak M i 7 znaków wartości
+	wysyłane wartości, 4 pierwsze pozycje preskaler 0 - 65535, ostatnie 3 pozycje długosć bufora 0 - 512
+	kodowanie: wartości wysyłane jako znaki hex rozpoczynające się od znaku ascii "0" pomnożone przez 2
+	przykłady: 34 - "0044", 1280 - "0:00", 512 - "400"(długość bufora)
+	przykład całej komendy "M0:00400"
+
+O, Q - rozpocznij oczekiwanie na wyzwolenie analizatora stanów logicznych
+Sx - podstawa czasu oscyloskopu/analizatora
+	x  - wartość od 0 - 13 kodowana jako powyżej
+	przykład wysłania wartości 7 - "S>"
+	znaczenie wartości: 0 - 2MSps, 1 - 1,6MSps, 2 - 2MSps, 3 - 1,6MSps, 4 - 1MSps, 5 - 500KSps....
+
+Ux - ustawnie amplitudy kanału 1
+	kodowanie jak powyżej, wartości 0 - 6, 0 - 5V/dz, 1 - 2V/dz....
+
+Wx - ustawnie amplitudy kanału 2
+
+Yx - ustawnie podstawy czasu analizatora stanów logicznych

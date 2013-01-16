@@ -15,18 +15,16 @@
 #include "Grafika.h"
 #include "Generator.h"
 #include "Analizator.h"
-
+#include "Trygonometria.h"
 //uzyj globalnych buforow
 extern int16_t kan1_in[512];
 extern int16_t kan2_in[512];
 extern uint16_t kan_out[512];
 extern uint8_t kan1_lcd[128];
 extern uint8_t kan2_lcd[128];
-//tablica funkcji sinus
-extern const int16_t sin_tab[640] PROGMEM;
 
 
-#define F_clk 2048000000  //x64 (dla wiêkszej rozdzielczoœci, regulacja +-(1/64)Hz)
+#define F_clk 2048000000  //x64 (dla wiekszej rozdzielczosci, regulacja +-(1/64)Hz)
 #define F_max 32000000    //x64
 
 static int16_t range = 200;
@@ -44,9 +42,9 @@ void Dirac(void)
 {
 	for(uint16_t i=0; i<1024; i++)
 		kan1_in[i]=0;
-	for(uint8_t lp=0; lp<8; lp++) //uœrednianie 4 impulsów, aby zmniejszyæ moc szumu
+	for(uint8_t lp=0; lp<8; lp++) //usrednianie 4 impulsow, aby zmniejszyc moc szumu
 	{
-		DACB.CH0DATA=4095; //wyœlij impuls na wyjœcie DAC
+		DACB.CH0DATA=4095; //wyslij impuls na wyjscie DAC
 		_delay_loop_1(2);
 		DACB.CH0DATA=0;
 		_delay_loop_1(50);
@@ -120,7 +118,7 @@ void Sweep(float freqf, float step_freqf)
 			freqf*=step_freqf;
 			Freq=freqf*64;
 			tab_c=F_max/Freq; //wyznaczenie dzielnika
-			tab_c<<=1; //dzielnik musi byæ parzysty
+			tab_c<<=1; //dzielnik musi byc parzysty
 			if(tab_c>256)tab_c=256;
 			per_c=F_clk/tab_c;
 			per_c/=Freq;
@@ -232,7 +230,7 @@ void Wobuloskop(void)
 			freqf=freq_start*10;
 			if(keys==P_DIV)
 			{
-				Sweep(freqf, step_freqf); //------------------to ma byæ
+				Sweep(freqf, step_freqf); //------------------to ma byc
 			}else
 			{
 				step_freqf*=step_freqf;

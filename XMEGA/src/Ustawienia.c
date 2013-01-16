@@ -28,19 +28,18 @@ const uint8_t menu_ust_tab[MENU_UST_TAB_I][11] PROGMEM=
 	"Wyswietlac"
 };
 
-/**Napisy z predkosciami UART*/
-const uint8_t rsSpeedTab[10][8] PROGMEM=
-{
-	"19200  ",
-	"38400  ",
-	"57600  ",
-	"115200 ",
-	"230400 ",
-	"460800 ",
-	"921600 ",
-	"1152000",
-	"1500000",
-	"2500000",
+/**hektoPredkosci UART*/
+const uint16_t rsHectoSpeedTab[] PROGMEM=
+{	192,
+	384,
+	576,
+	1152,
+	2304,
+	4608,
+	9216,
+	11520,
+	15000,
+	25000
 };
 
 
@@ -130,7 +129,7 @@ void RS232(void)
 		keys=Keyboard();
 		LCDGoTo(0,1);
 		LCDText_p(PSTR("Speed: "));
-		LCDText_p((const char*)rsSpeedTab[speed]);
+		LCDU32(((uint32_t)100)*rsHectoSpeedTab[speed]);
 		if(keys == P_RIGHT)
 			speed = SetRsSpeed(1);
 		if(keys == P_LEFT)

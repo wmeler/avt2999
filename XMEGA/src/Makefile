@@ -62,7 +62,7 @@ TARGET = MKP_1_4
 # List C source files here. (C dependencies are automatically generated.)
 SRC = main.c clksys_driver.c DAC.c Keyboard.c Grafika.c lcd132x64.c Generator.c \
 		Analizator.c AnalizatorStLog.c Oscyloskop.c ADC.c Multimetr.c Wobuloskop.c Ustawienia.c \
-		usart_driver.c TransmisjaPC.c
+		usart_driver.c TransmisjaPC.c Trygonometria.c
 
 	
 

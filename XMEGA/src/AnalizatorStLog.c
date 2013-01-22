@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	AnalizatorStLog.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.4
- * @date	15.12.2012
+ * @version 1.5
+ * @date	16.01.2013
  * @brief Plik podprogramu analizatora stanow logicznych.
  ***********************************************/
  
@@ -90,8 +90,10 @@ ISR(PORTD_INT0_vect)
 }
 #endif
 
-void GetLogicChannels(uint8_t trig_edge, uint8_t trig_mask, uint8_t trig_state, uint16_t delay)
+void GetLogicChannels(uint8_t trig_edge, uint8_t trig_mask, uint8_t trig_state, uint8_t timebase)
 {
+	uint16_t delay = pgm_read_word(&Time_tab[timebase]);
+	
 	PORTCFG.MPCMASK = trig_edge & ~trig_state;//trig_fall_edge; //ustawienie pinow wyzwalanych zboczem opadajacym
 	PORTD.PIN0CTRL = (2<<3) | PORT_ISC_FALLING_gc; //pull up , falling edge interrupt
 	PORTCFG.MPCMASK = trig_edge & trig_state;//trig_rise_edge; //ustawienie pinow wyzwalanych zboczem narastajacym
@@ -175,12 +177,13 @@ void GetLogicChannels(uint8_t trig_edge, uint8_t trig_mask, uint8_t trig_state, 
 	}
 }
 
+/*
 uint16_t ASLGetTimebase(uint8_t timebase)
 {
 	if(timebase > 13)
 		timebase = 13;
 	return pgm_read_word(&Time_tab[timebase]);
-}
+}*/
 
 /********************************************//**
  * @brief Funkcja glowna podprogramu analizatora stanow logicznych
@@ -243,8 +246,8 @@ void AnalizatorStLog(void)
 				while(Keyboard());
 				PORTC.OUTCLR = 0xff; 
 				_delay_loop_2(0xffff);
-				uint16_t delay = pgm_read_word(&Time_tab[Sdiv]);
-				GetLogicChannels(trig_fall_edge | trig_rise_edge, trig_mask, (trig_state | trig_rise_edge)& ~trig_fall_edge, delay);
+				//uint16_t delay = pgm_read_word(&Time_tab[Sdiv]);
+				GetLogicChannels(trig_fall_edge | trig_rise_edge, trig_mask, (trig_state | trig_rise_edge)& ~trig_fall_edge, Sdiv);
 			}
 				
 			else if(keys == P_XY)set_type=0;

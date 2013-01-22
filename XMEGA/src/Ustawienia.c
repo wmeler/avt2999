@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	Ustawienia.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.4
- * @date	15.12.2012
+ * @version 1.5
+ * @date	16.01.2013
  * @brief Plik funkcji ustawień.
  ***********************************************/
 
@@ -15,17 +15,34 @@
 #include "Oscyloskop.h"
 #include "TransmisjaPC.h"
 #include <util/delay.h>
+#include <avr/eeprom.h>
 
-static uint8_t scale = 0;
+extern uint8_t language;
+extern EEMEM uint8_t e_language;
+
+//static uint8_t scale = 0;
 
 /**Liczba pozycji w menu ustawień*/
-#define MENU_UST_TAB_I 3
+#define MENU_UST_TAB_I 4
 /**Napisy menu ustawień*/
-const uint8_t menu_ust_tab[MENU_UST_TAB_I][11] PROGMEM=
+const uint8_t menu_ust_tab[16][12] PROGMEM=
 {
-	"Kalibracja",
-	"RS232 - PC",
-	"Wyswietlac"
+	"Settings   ", //angielski
+	"Calibration",
+	"RS232 - PC ",
+	"Display    ",
+	"Language   ",
+	"Brightness ",
+	"Contrast   ",
+	"           ",
+	"Ustawienia ", //polski
+	"Kalibracja ",
+	"RS232 - PC ",
+	"Wyswietlac ",
+	"Jezyk      ",
+	"Jasnosc    ",
+	"Kontrast   ",
+	"           "
 };
 
 /**Napisy z predkosciami UART*/
@@ -52,14 +69,14 @@ const uint8_t rsSpeedTab[10][8] PROGMEM=
 void PrintMenu_ust(uint8_t menu)
 {
 	LCDGoTo(0,0);
-	LCDText_p(PSTR(" USTAWIENIA "));
+	LCDText_p((const char*)menu_ust_tab[language]);
 	for(uint8_t i=0; i<MENU_UST_TAB_I; i++)
 	{
 		LCDGoTo(10, i+1);
 		if(i==menu)
-			LCDTextNeg_p((const char*)menu_ust_tab[i]);
+			LCDTextNeg_p((const char*)menu_ust_tab[i+language+1]);
 		else
-			LCDText_p((const char*)menu_ust_tab[i]);
+			LCDText_p((const char*)menu_ust_tab[i+language+1]);
 	}
 }
 
@@ -71,7 +88,7 @@ void Kalibracja(void)
 {
 	LCDClearScreen();
 	LCDGoTo(0,0);
-	LCDText_p(PSTR(" KALIBRACJA"));
+	LCDText_p((const char*)menu_ust_tab[language+1]);
 	uint8_t keys=0;
 	uint8_t dac_offset_cal = DACOffsetCalib(0);
 	uint8_t dac_gain_cal = DACGainCalib(0);
@@ -79,19 +96,19 @@ void Kalibracja(void)
 	{
 		keys=Keyboard();
 		LCDGoTo(0,1);
-		LCDText_p(PSTR("DAC wzmocn: "));
+		LCDText_p(PSTR("DAC gain: "));
 		LCDU8(dac_gain_cal);
 		LCDGoTo(0,2);
 		LCDText_p(PSTR("DAC offset: "));
 		LCDU8(dac_offset_cal);
 		LCDGoTo(0,3);
 		LCDText_p(PSTR("ADC offset: "));
-		LCDGoTo(0,4);
-		LCDText_p(scale? PSTR("/1.6") : PSTR("1.00"));
+		//LCDGoTo(0,4);
+		//LCDText_p(scale? PSTR("/1.6") : PSTR("1.00"));
 		
 		if(keys&P_OK)
 		{
-			LCDText_p(PSTR("kal"));
+			LCDText_p(PSTR("cal"));
 			ADCRunOffsetCal();
 			LCDText_p(PSTR(" ok"));
 		}
@@ -104,12 +121,12 @@ void Kalibracja(void)
 		else if(keys&P_LEFT)
 			dac_gain_cal = DACGainCalib(-1);
 			
-		if(keys==P_DIV)
-			scale^=1;
-		if(scale)
-			ADCA.REFCTRL = 1<<4 | 0x02; //00 - ref =1.00V  01 - VCC/1.6
-		else
-			ADCA.REFCTRL = 0<<4 | 0x02; //00 - ref =1.00V  01 - VCC/1.6
+		//if(keys==P_DIV)
+		//	scale^=1;
+		//if(scale)
+		//	ADCA.REFCTRL = 1<<4 | 0x02; //00 - ref =1.00V  01 - VCC/1.6
+		//else
+		//	ADCA.REFCTRL = 0<<4 | 0x02; //00 - ref =1.00V  01 - VCC/1.6
 
 	}
 }
@@ -122,7 +139,7 @@ void RS232(void)
 {
 	LCDClearScreen();
 	LCDGoTo(0,0);
-	LCDText_p(PSTR(" RS232 - PC"));
+	LCDText_p((const char*)menu_ust_tab[language+2]);
 	uint8_t keys=0;
 	uint8_t speed=SetRsSpeed(0);
 	while(keys!=P_EXIT)
@@ -147,7 +164,7 @@ void Wyswietlacz(void)
 {
 	LCDClearScreen();
 	LCDGoTo(0,0);
-	LCDText_p(PSTR(" WYSWIETLACZ"));
+	LCDText_p((const char*)menu_ust_tab[language+3]);
 	uint8_t keys=0;
 	uint8_t bright=LCDBright(0);
 	uint8_t contrast = LCDContrast(0);
@@ -156,10 +173,10 @@ void Wyswietlacz(void)
 	{
 		keys=Keyboard();
 		LCDGoTo(0,1);
-		LCDText_p(PSTR("Jasnosc: "));
+		LCDText_p((const char*)menu_ust_tab[language+5]);
 		LCDU8(bright);
 		LCDGoTo(0,2);
-		LCDText_p(PSTR("Kontrast: "));
+		LCDText_p((const char*)menu_ust_tab[language+6]);
 		LCDU8(contrast);
 		if(keys == P_UP)
 			bright = LCDBright(1);
@@ -170,6 +187,34 @@ void Wyswietlacz(void)
 		if(keys == P_LEFT)
 			contrast = LCDContrast(-1);
 	}
+}
+
+/********************************************//**
+ * @brief Funkcja ustawiajaca jezyk
+ * @return none
+ ***********************************************/
+void Jezyk(void)
+{
+	LCDClearScreen();
+	LCDGoTo(0,0);
+	LCDText_p((const char*)menu_ust_tab[language+4]);
+	uint8_t keys=0;
+	
+	while(keys!=P_EXIT)
+	{
+		keys=Keyboard();
+		LCDGoTo(0,1);
+		if(language)
+			LCDText_p(PSTR("polski "));
+		else
+			LCDText_p(PSTR("English"));
+
+		if(keys == P_RIGHT)
+			language = 8;
+		if(keys == P_LEFT)
+			language = 0;
+	}
+	eeprom_write_byte(&e_language, language);
 }
 
 /********************************************//**
@@ -201,6 +246,8 @@ void Ustawienia(void)
 				RS232();
 			else if(menu==2)
 				Wyswietlacz();
+			else if(menu==3)
+				Jezyk();
 			LCDClearScreen();
 			PrintMenu_ust(menu);
 			while(Keyboard()==P_EXIT);

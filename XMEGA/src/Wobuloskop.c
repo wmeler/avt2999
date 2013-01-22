@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	Wobuloskop.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.4
- * @date	15.12.2012
+ * @version 1.5
+ * @date	16.01.2013
  * @brief Plik podprogramu wobuloskopu.
  ***********************************************/
 
@@ -52,8 +52,14 @@ void Dirac(void)
 		_delay_loop_1(50);
 		for(uint16_t i=0; i<1024; i++)
 		{
+			//if(i==0)
+			//	DACB.CH0DATA=4095;
+			//else if(i==1)
+			//	DACB.CH0DATA=0;
+			//else
 			kan1_in[i] += ADCGetCh0();//+calib;
 			_delay_loop_1(5);
+			
 		}
 	}
 	int32_t offset=0;
@@ -64,7 +70,7 @@ void Dirac(void)
 		kan1_in[i] -= offset;
 	FFT2N(kan1_in, (int16_t*)kan2_lcd);
 	for(uint8_t i=0; i<128; i++)
-		kan1_lcd[i]=(kan1_in[i*2] + kan1_in[i*2+1])+105;
+		kan1_lcd[i]=(kan1_in[i*2+1] + kan1_in[i*2+2])+105;
 }
 
 uint32_t war=0x1;
@@ -75,7 +81,7 @@ uint32_t war=0x1;
  * na ten szum i na tej podstawie liczona jest FFT. Na koniec wyniki FFT zostaja usredniowe.
  * @return none
  ***********************************************/
-void Noise(void)
+/*void Noise(void)
 {
 	for(uint8_t i=0; i<128; i++)
 			kan1_lcd[i] = 0;
@@ -94,7 +100,7 @@ void Noise(void)
 	}
 	for(uint8_t i=0; i<128; i++)
 			kan1_lcd[i] = (kan1_lcd[i]>>1) +105;
-}
+}*/
 
 /********************************************//**
  * @brief Funkcja obliczajaca charakterystyke badanego ukladu przemiataniem czestotliwosci
@@ -196,7 +202,7 @@ void Wobuloskop(void)
 
 		if(keys==P_DIV)type=0;
 		else if(keys==P_XY)type=1;
-		else if(keys==P_TRIG)type=2;
+		//else if(keys==P_TRIG)type=2;
 		if(type==0) //przemiatanie
 		{
 			LCDGoTo(0,7);
@@ -251,12 +257,12 @@ void Wobuloskop(void)
 			LCDGoTo(0,7);
 			LCDText_p(PSTR("DR"));
 			Dirac();
-		}else            //szum bialy
+		}/*else            //szum bialy
 		{
 			LCDGoTo(0,7);
 			LCDText_p(PSTR("NS"));
 			Noise();
-		}
+		}*/
 		LCDosc(kan1_lcd, 0, 0, 128, 255, cursor+2,129);
 		cursor = ShiftValue(keys, cursor, 0, 128, 4, P_LEFT, P_RIGHT);
 	}

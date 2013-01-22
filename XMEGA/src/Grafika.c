@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Grafika.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.4
- * @date	15.12.2012
+ * @version 1.5
+ * @date	16.01.2013
  * @brief Plik funkcji graficznych.
  *********************************************************************/
 
@@ -668,7 +668,7 @@ void LCDWriteAnScaleLine(uint8_t s, uint8_t v)
 	LCDText_p((const char*)An_time_lcd[s]);
 	LCDText_p(PSTR("Hz/d"));
 	LCDText_p((const char*)Gain_lcd[v]);
-	LCDText_p(PSTR("dBW"));
+	LCDText_p(PSTR("dBV "));
 }
 
 /********************************************//**

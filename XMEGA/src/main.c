@@ -2,8 +2,8 @@
  * @brief	Plik glowny programu.
  * @file	main.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.4
- * @date	15.12.2012
+ * @version 1.5
+ * @date	16.01.2013
  * 
  * First version:	02.01.2008
  * 		ATMega32 + ATMega8 + LCD Nokia3510i
@@ -21,6 +21,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/pgmspace.h>
+#include <avr/eeprom.h>
 #include "lcd132x64.h"
 #include "Grafika.h"
 #include "clksys_driver.h"
@@ -79,21 +80,32 @@ int16_t kan2_in[512] __attribute__ ((section (" .data")));
 int16_t kan1_in[512] __attribute__ ((section (" .data")));
 
 
+EEMEM uint8_t e_language;
+uint8_t language=0;
 
 /********************************************//**
  * @brief Tablica napisow menu
  ***********************************************/
-const char menu_tab[8][11] PROGMEM =
+const char menu_tab[16][13] PROGMEM =
 {
-	"Oscyloskop",
-	"Generator ",
-	"Analizator",
-	"An.st.log.",
-	"Wobuloskop",
-	"Multimetr ",
-	"RS232->PC ",
-	"Ustawienia"
+	"Oscilloscope", //angielski
+	"Generator   ",
+	"Spectrum an.",
+	"Log. st. an.",
+	"Wobuloscope ",
+	"Multimeter  ",
+	"RS232->PC   ",
+	"Settings    ",
+	"Oscyloskop  ", //polski
+	"Generator   ",
+	"Analizator  ",
+	"An.stan.log.",
+	"Wobuloskop  ",
+	"Multimetr   ",
+	"RS232->PC   ",
+	"Ustawienia  "
 };
+
 
 /********************************************//**
  * @brief Funkcja wyswietlajaca menu na ekranie
@@ -109,14 +121,14 @@ void PrintMainMenu(uint8_t menu)
 	LCDGoTo(0,4);
 	LCDText_p(PSTR("Pomiarowy"));
 	LCDGoTo(15,5);
-	LCDText_p(PSTR("V1.4"));
+	LCDText_p(PSTR("V1.5"));
 	for(uint8_t i=0; i<8; i++)
 	{
-		LCDGoTo(64, i);
+		LCDGoTo(60, i);
 		if(i==menu)
-			LCDTextNeg_p((const char*)menu_tab[i]);
+			LCDTextNeg_p((const char*)menu_tab[i+language]);
 		else
-			LCDText_p((const char*)menu_tab[i]);
+			LCDText_p((const char*)menu_tab[i+language]);
 	}
 	
 }
@@ -181,6 +193,13 @@ int main(void)
 	LCDInit();
 	LCDClearScreen();
 
+	language = eeprom_read_byte(&e_language);
+	if(language != 0 && language != 8)
+	{
+		language = 0;
+		eeprom_write_byte(&e_language, 0);
+	}
+	
 	uint8_t keys;
 	//wyswietl menu, wskaz pierwsza pozycje
 	uint8_t menu=0;
@@ -189,6 +208,7 @@ int main(void)
 	
 	uint8_t iter = 0;
 	uint16_t vz_old = 0;
+	
 	//petla glowna
 	while(1)
 	{

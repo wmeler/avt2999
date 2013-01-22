@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	lcd132x64.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.4
- * @date	15.12.2012
+ * @version 1.5
+ * @date	16.01.2013
  * @brief Plik obslugi wyswietlacza.
  * 
  * Wyswietlacz 132x64 pikseli ze sterownikiem SPLC501C.
@@ -10,10 +10,10 @@
  * http://en.radzio.dxp.pl/splc501c/
  * Autor bibioteki: Radoslaw Kwiecien 
  *********************************************************************/
-#include<avr/io.h>
-#include<util/delay.h>
-#include<avr/pgmspace.h>
-#include<avr/eeprom.h>
+#include <avr/io.h>
+#include <util/delay.h>
+#include <avr/pgmspace.h>
+#include <avr/eeprom.h>
 #include <inttypes.h>
 #include "lcd132x64.h"
 #include "font5x7.h"

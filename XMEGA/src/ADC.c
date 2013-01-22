@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	ADC.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.4
- * @date	15.12.2012
+ * @version 1.5
+ * @date	16.01.2013
  * @brief Plik obslugi przetwornika ADC.
  *********************************************************************/
 

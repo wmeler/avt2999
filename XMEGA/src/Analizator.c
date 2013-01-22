@@ -1,8 +1,8 @@
 /******************************************************************//**
  * @file	Analizator.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.4
- * @date	15.12.2012
+ * @version 1.5
+ * @date	16.01.2013
  * @brief Plik podprogramu analizatora.
  *********************************************************************/
 
@@ -240,7 +240,7 @@ void FFT2N(int16_t* xwsk, int16_t* tmp_w) //algorytm 2N FFT 1024 probki wejsciow
  * bufor wykorzystuje dodatkowo 128 probek pomocniczych, calkowita dlugosc bufora wynosi 384 probki 16-bitowe
  * @return none
  ***********************************************/
-void FFT2N128(int16_t* xwsk) //algorytm 2N FFT 1024 probki wejsciowe, rzeczywiste przekrzta³cenie z wykorzystaniem zespolonego FFT
+/*void FFT2N128(int16_t* xwsk) //algorytm 2N FFT 1024 probki wejsciowe, rzeczywiste przekrzta³cenie z wykorzystaniem zespolonego FFT
 {
 	//2N FFT
 	
@@ -334,7 +334,7 @@ void FFT2N128(int16_t* xwsk) //algorytm 2N FFT 1024 probki wejsciowe, rzeczywist
 		xwsk[Np/8-i1] = log2_u32(xp>>8);
 		//xwsk[Np/2-i1] = log2_u16(xp>>16);
 	}
-}
+}*/
 
 /********************************************//**
  * @brief Funkcja glowna podprogramu analizatora
@@ -416,7 +416,7 @@ void Analizator(void)
 			tmp = (uint32_t)(Cursor+Xpos)*7812/pgm_read_word(&Time_tab[Sdiv]);
 			int8_t db;
 			//db=(kan1_lcd[tmp_cur]-128)>>2;
-			db=(kan1_lcd[Cursor]-128 + Ypos)*3>>2;
+			db=(kan1_lcd[Cursor]-160 + Ypos)*3>>2;
 			LCDWriteFreqCursorLine(tmp, db);
 		}
 		if(keys == P_TRIG)stop_trig^=1;

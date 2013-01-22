@@ -1,8 +1,8 @@
 /********************************************//**
  * @file	Oscyloskop.c
  * @author  Arkadiusz Hudzikowski
- * @version 1.4
- * @date	15.12.2012
+ * @version 1.5
+ * @date	16.01.2013
  * @brief Plik podprogramu oscyloskopu.
  ***********************************************/
 
@@ -282,7 +282,7 @@ void Oscyloskop(void)
 			channel|=128;
 		}else if(keys == 0)
 			channel&=127;
-		else if(keys == P_OK)//(P_TRIG + P_OK))
+		else if(keys == P_OK && type == 0)
 			autoset = 1;
 			
 		if(autoset && keys ==0)
@@ -363,8 +363,7 @@ void Oscyloskop(void)
 				else
 					trig_type = ((trig_type+1)&3) | (trig_type&(~3));
 			}
-			if(keys&P_DOWN)if(lev>-127)lev--;
-			if(keys&P_UP)if(lev<127)lev++;
+			lev = ShiftValue(keys, lev, -127, 127, 4, P_DOWN, P_UP);
 		}else if(type==3)
 		{
 			cursor[cur_nr]=ShiftValue(keys, cursor[cur_nr], 0, 128, 4, P_LEFT, P_RIGHT);

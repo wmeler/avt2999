@@ -67,34 +67,6 @@ void Dirac(void)
 
 uint32_t war=0x1;
 /********************************************//**
- * @brief Funkcja obliczajaca charakterystyke badanego ukladu pobudzanego szumem bialym
- * 
- * Zostaje wygenerowany szym bialy, a nastepnie zapisywana jest reakcja badanego ukladu 
- * na ten szum i na tej podstawie liczona jest FFT. Na koniec wyniki FFT zostaja usredniowe.
- * @return none
- ***********************************************/
-void Noise(void)
-{
-	for(uint8_t i=0; i<128; i++)
-			kan1_lcd[i] = 0;
-	for(uint8_t lp=0; lp<32; lp++)
-	{
-		for(uint16_t i=0; i<256; i++)
-		{
-			DACB.CH0DATA=war;
-			war = (war >> 1) ^ (-(war & 1) & 0xd0000001); 
-			int16_t tmp = ADCA.CH0RES;
-			kan1_in[i] = tmp>>1;
-		}
-		FFT2N128(kan1_in);
-		for(uint8_t i=0; i<128; i++)
-			kan1_lcd[i]+=(kan1_in[i]);
-	}
-	for(uint8_t i=0; i<128; i++)
-			kan1_lcd[i] = (kan1_lcd[i]>>1) +105;
-}
-
-/********************************************//**
  * @brief Funkcja obliczajaca charakterystyke badanego ukladu przemiataniem czestotliwosci
  * 
  * Zostaje wygenerowany sygnal sinusoidalny o zmiennej czestotliwosci i stalej amplitudzie. 
@@ -194,7 +166,6 @@ void Wobuloskop(void)
 
 		if(keys==P_DIV)type=0;
 		else if(keys==P_XY)type=1;
-		else if(keys==P_TRIG)type=2;
 		if(type==0) //przemiatanie
 		{
 			LCDGoTo(0,7);
@@ -249,11 +220,6 @@ void Wobuloskop(void)
 			LCDGoTo(0,7);
 			LCDText_p(PSTR("DR"));
 			Dirac();
-		}else            //szum bialy
-		{
-			LCDGoTo(0,7);
-			LCDText_p(PSTR("NS"));
-			Noise();
 		}
 		LCDosc(kan1_lcd, 0, 0, 128, 255, cursor+2,129);
 		cursor = ShiftValue(keys, cursor, 0, 128, 4, P_LEFT, P_RIGHT);
